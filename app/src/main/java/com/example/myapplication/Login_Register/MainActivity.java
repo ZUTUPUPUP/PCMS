@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Login_Register;
 
 
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.MD5Utils;
+import com.example.myapplication.Manager.ManagerActivity;
+import com.example.myapplication.R;
+import com.example.myapplication.User.UserActivity;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
 

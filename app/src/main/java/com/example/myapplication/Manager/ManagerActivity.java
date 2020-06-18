@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Manager;
 
 
 import android.os.Bundle;
@@ -10,18 +10,23 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.myapplication.R;
 
 
-public class UserActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
+public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
 
     private TextView txt_topbar;
+    //底部框
     private RadioGroup rg_tab_bar;
-    private RadioButton rb_home;
-    private RadioButton rb_message;
-    private RadioButton rb_mine;
+    //编辑
+    private RadioButton rb_edit;
+    //管理
+    private RadioButton rb_manage;
+    //答疑
+    private RadioButton rb_reply;
     private ViewPager vpager;
 
-    private UserAdapter mAdapter;
+    private ManagerAdapter mAdapter;
 
     //几个代表页面的常量
     public static final int PAGE_ONE = 0;
@@ -31,18 +36,18 @@ public class UserActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
-        mAdapter = new UserAdapter(getSupportFragmentManager(),1);
+        setContentView(R.layout.activity_manager);
+        mAdapter = new ManagerAdapter(getSupportFragmentManager(),1);
         bindViews();
-        rb_home.setChecked(true);
+        rb_edit.setChecked(true);
     }
 
     private void bindViews() {
         txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
-        rb_home = (RadioButton) findViewById(R.id.rb_home);
-        rb_message = (RadioButton) findViewById(R.id.rb_message);
-        rb_mine = (RadioButton) findViewById(R.id.rb_mine);
+        rb_edit = (RadioButton) findViewById(R.id.rb_edit);
+        rb_manage = (RadioButton) findViewById(R.id.rb_manage);
+        rb_reply = (RadioButton) findViewById(R.id.rb_reply);
         rg_tab_bar.setOnCheckedChangeListener(this);
 
         vpager = (ViewPager) findViewById(R.id.vpager);
@@ -55,13 +60,13 @@ public class UserActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_home:
+            case R.id.rb_edit:
                 vpager.setCurrentItem(PAGE_ONE);
                 break;
-            case R.id.rb_message:
+            case R.id.rb_manage:
                 vpager.setCurrentItem(PAGE_TWO);
                 break;
-            case R.id.rb_mine:
+            case R.id.rb_reply:
                 vpager.setCurrentItem(PAGE_THREE);
                 break;
         }
@@ -83,13 +88,13 @@ public class UserActivity extends AppCompatActivity implements ViewPager.OnPageC
         if (state == 2) {
             switch (vpager.getCurrentItem()) {
                 case PAGE_ONE:
-                    rb_home.setChecked(true);
+                    rb_edit.setChecked(true);
                     break;
                 case PAGE_TWO:
-                    rb_message.setChecked(true);
+                    rb_manage.setChecked(true);
                     break;
                 case PAGE_THREE:
-                    rb_mine.setChecked(true);
+                    rb_reply.setChecked(true);
                     break;
             }
         }

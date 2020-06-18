@@ -1,26 +1,31 @@
-package com.example.myapplication;
+package com.example.myapplication.Manager;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.myapplication.Manager.Manager.AwardsAddFragment;
+import com.example.myapplication.Manager.Manager.AwardsDeleteFragment;
+import com.example.myapplication.Manager.Manager.AwardsQueryFragment;
+import com.example.myapplication.Manager.Manager.AwardsUpdateFragment;
+
 import java.util.ArrayList;
 
-public class EditFragmentController {
+public class ManageFragmentController {
     private int containerId;
     private FragmentManager fm;
     private ArrayList<Fragment> fragments;
 
-    private static EditFragmentController controller;
+    private static ManageFragmentController controller;
 
-    public static EditFragmentController getInstance(Fragment parentFragment, int containerId) {
+    public static ManageFragmentController getInstance(Fragment parentFragment, int containerId) {
         if (controller == null) {
-            controller = new EditFragmentController(parentFragment, containerId);
+            controller = new ManageFragmentController(parentFragment, containerId);
         }
         return controller;
     }
 
-    private EditFragmentController(Fragment fragment, int containerId) {
+    private ManageFragmentController(Fragment fragment, int containerId) {
         this.containerId = containerId;
         //fragment嵌套fragment，调用getChildFragmentManager
         fm = fragment.getChildFragmentManager();
@@ -30,8 +35,10 @@ public class EditFragmentController {
 
     private void initFragment() {
         fragments = new ArrayList<>();
-        fragments.add(new NewsFragment());
-        fragments.add(new NoticeFragment());
+        fragments.add(new AwardsAddFragment());
+        fragments.add(new AwardsDeleteFragment());
+        fragments.add(new AwardsUpdateFragment());
+        fragments.add(new AwardsQueryFragment());
 
         FragmentTransaction ft = fm.beginTransaction();
         for(Fragment fragment : fragments) {

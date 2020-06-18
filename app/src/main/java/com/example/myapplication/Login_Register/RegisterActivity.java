@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Login_Register;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 
 
 public class RegisterActivity extends AppCompatActivity {

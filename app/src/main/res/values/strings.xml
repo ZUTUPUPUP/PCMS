@@ -13,10 +13,10 @@
     <string name="tab_menu_notice">通知</string>
 
     <string name="tab_menu_manage">管理</string>
-    <string name="tab_menu_awards_add">添加</string>
-    <string name="tab_menu_awards_delete">删除</string>
-    <string name="tab_menu_awards_update">修改</string>
-    <string name="tab_menu_awards_query">查询</string>
+    <string name="tab_menu_manage_contest">竞赛管理</string>
+    <string name="tab_menu_manage_awards">获奖管理</string>
+    <string name="tab_menu_manage_user">用户管理</string>
+    <string name="tab_menu_manage_sign">报名管理</string>
 
     <string name="tab_menu_reply">答疑</string>
 

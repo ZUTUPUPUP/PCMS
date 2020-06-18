@@ -1,10 +1,14 @@
-package com.example.myapplication;
+package com.example.myapplication.User;
 
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.myapplication.User.Home.HomeFragment;
+import com.example.myapplication.User.Message.MessageFragment;
+import com.example.myapplication.User.Mine.MineFragment;
 
 public class UserAdapter extends FragmentPagerAdapter {
 

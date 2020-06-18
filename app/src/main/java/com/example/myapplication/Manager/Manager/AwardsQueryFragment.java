@@ -1,29 +1,30 @@
-package com.example.myapplication;
+package com.example.myapplication.Manager.Manager;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 
-public class MessageFragment extends Fragment {
+import com.example.myapplication.R;
 
 
-   public MessageFragment(){
+public class AwardsQueryFragment extends Fragment {
+
+
+
+    public AwardsQueryFragment() {
         // Required empty public constructor
-   }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fg_content, container, false);
         TextView txt_content = (TextView) view.findViewById(R.id.txt_content);
-        txt_content.setText("服务器比赛前给参赛者发通知\n恭喜你荣获优胜奖，请去辅导班领奖");
+        txt_content.setText("修改奖项");
         return view;
     }
 }
