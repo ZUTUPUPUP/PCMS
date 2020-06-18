@@ -1,23 +1,15 @@
 package com.example.myapplication;
 
 
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
-
-import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
         dao = new UserDao(this);
     }
 
+    //获取界面控件
+    private void bindUI() {
+        //从main_title_bar中获取的id
+        //从activity_login.xml中获取的
+        et_user_name = findViewById(R.id.et_user_name);
+        et_passWd = findViewById(R.id.et_psw);
+    }
+
     //登录点击事件
     public void Login(View v) {
         String userName = et_user_name.getText().toString();
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, UserActivity.class);
                 intent.putExtra("userName", user.getUserName());
             }
-            MainActivity.this.finish();
+            finish();
             startActivity(intent);
         } else {
             Toast.makeText(this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
@@ -61,24 +61,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //获取界面控件
-    private void bindUI() {
-        //从main_title_bar中获取的id
-        //从activity_login.xml中获取的
-        TextView tv_register = findViewById(R.id.tv_register);
-        Button btn_login = findViewById(R.id.btn_login);
-        et_user_name = findViewById(R.id.et_user_name);
-        et_passWd = findViewById(R.id.et_psw);
-        //立即注册控件的点击事件
-        tv_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //为了跳转到注册界面，并实现注册功能
-                Intent intent=new Intent(MainActivity.this,RegisterActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
+    //注册点击事件
+    public void Register(View v) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivityForResult(intent, 1);//带结果的返回
     }
+
     /**
      * 注册成功的数据返回至此
      * @param requestCode 请求码
@@ -93,16 +81,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        if(data != null){
-            //是获取注册界面回传过来的用户名
-            // getExtra().getString("***");
+        if(requestCode == 1 && resultCode == 2) {
             String userName = data.getStringExtra("userName");
-            if(!TextUtils.isEmpty(userName)){
-                //设置用户名到 et_user_name 控件
-                et_user_name.setText(userName);
-                //et_user_name控件的setSelection()方法来设置光标位置
-                et_user_name.setSelection(userName.length());
-            }
+            String passWd = data.getStringExtra("passWd");
+            et_user_name.setText(userName);
+            et_passWd.setText(passWd);
+            //setSelection()方法来设置光标位置
+            et_user_name.setSelection(userName.length());
         }
     }
 }

@@ -63,7 +63,7 @@ public class UserDao {
         ContentValues values = new ContentValues();
         values.put(UserTable.USER_NAME, user.getUserName().trim());
         values.put(UserTable.USER_PASSWD, user.getPasswd().trim());
-        values.put(UserTable.USER_NICKNAME, user.getNickName());
+        values.put(UserTable.USER_NICKNAME, user.getNickName().trim().isEmpty() ? user.getUserName():user.getNickName());
         values.put(UserTable.USER_GENDER, user.getGender());
         values.put(UserTable.USER_DEP, user.getDepartment());
         values.put(UserTable.USER_STATUS_ID, 1);
@@ -118,6 +118,8 @@ public class UserDao {
             int status_id = cursor.getInt(5);
             user = new User(name, passwd, nickName, gender, department, status_id);
         }
+        cursor.close();
+        database.close();
         return user;
     }
 }

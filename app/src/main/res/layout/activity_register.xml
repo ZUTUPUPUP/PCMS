@@ -3,102 +3,122 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
-    <RelativeLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="注 册"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:textSize="30sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="注册"
-            android:textSize="30sp"/>
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shap"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_register_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="用户名："
+                android:textSize="20sp" />
+
             <EditText
                 android:id="@+id/et_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingLeft="6dp"
-                android:hint="学号"
-                android:singleLine="true"
-                android:maxLength="15"
-                android:background="#ffffff"
-                android:textSize="18sp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="8dp"
+                android:hint="请输入学号"
+                android:maxLength="12"
+                android:background="@null"
+                android:textSize="20sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
 
         <LinearLayout
-            android:background="@drawable/shap"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_register_password1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="密    码："
+                android:textSize="20sp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingLeft="6dp"
-                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:padding="8dp"
                 android:hint="请输入密码"
                 android:inputType="textPassword"
-                android:maxLength="15"
-                android:background="#ffffff"
                 android:id="@+id/et_psw"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:background="@drawable/shap"
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_register_password2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="密    码："
+                android:textSize="20sp"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingLeft="6dp"
-                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:padding="8dp"
                 android:hint="请再次输入密码"
                 android:inputType="textPassword"
-                android:maxLength="15"
-                android:background="#ffffff"
                 android:id="@+id/et_psw_again"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
         <LinearLayout
-            android:background="@drawable/shap"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"
@@ -107,89 +127,92 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:paddingLeft="6dp"
-                android:gravity="left"
-                android:text="性别"
-                android:textSize="18sp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:text="性    别:"
+                android:textSize="20sp" />
             <RadioGroup
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="2.6"
+                android:layout_weight="4"
                 android:id="@+id/SexRadio"
                 android:paddingLeft="5dp">
-                <RadioButton
-                    android:id="@+id/mainRegisterRdBtnFemale"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="女生"/>
-                <RadioButton
-                    android:id="@+id/mainRegisterRdBtnMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="男生"/>
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/mainRegisterRdBtnFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:padding="1dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="女生"
+                        android:textSize="20sp"/>
+                    <RadioButton
+                        android:id="@+id/mainRegisterRdBtnMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:padding="1dp"
+                        android:text="男生"
+                        android:textSize="20sp"/>
+                </LinearLayout>
             </RadioGroup>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingLeft="6dp"
-                android:hint="学校"
-                android:singleLine="true"
-                android:maxLength="15"
-                android:background="#ffffff"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingLeft="6dp"
-                android:hint="学院"
-                android:singleLine="true"
-                android:maxLength="15"
-                android:background="#ffffff"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" >
-        <Button
-            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:text="注册"
-            android:textSize="24sp"
-            android:background="@color/colorPrimary" />
-    </RelativeLayout>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="学    院:"
+                android:textSize="20sp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:padding="8dp"
+                android:hint="请输入您的学院"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/btn_main_login"
+        android:textColor="#ffffff"
+        android:text="注 册"
+        android:textSize="20sp"/>
+
+
 
 </LinearLayout>
