@@ -3,9 +3,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_menu_home">主页</string>
+
     <string name="tab_menu_message">消息</string>
+
     <string name="tab_menu_mine">我的</string>
+
     <string name="tab_menu_edit">编辑</string>
+    <string name="tab_menu_news">新闻</string>
+    <string name="tab_menu_notice">通知</string>
+
     <string name="tab_menu_manage">管理</string>
+    <string name="tab_menu_awards_add">添加</string>
+    <string name="tab_menu_awards_delete">删除</string>
+    <string name="tab_menu_awards_update">修改</string>
+    <string name="tab_menu_awards_query">查询</string>
+
     <string name="tab_menu_reply">答疑</string>
+
+
 </resources>

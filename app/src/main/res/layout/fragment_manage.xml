@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ManageFragment">
 
+    <RadioGroup
+        android:id="@+id/rg_tab_bar_awards"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/bg_white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_awards_add"
+            style="@style/tab_menu_item"
+            android:text="@string/tab_menu_awards_add" />
+
+        <RadioButton
+            android:id="@+id/rb_awards_delete"
+            style="@style/tab_menu_item"
+            android:text="@string/tab_menu_awards_delete" />
+
+        <RadioButton
+            android:id="@+id/rb_awards_update"
+            style="@style/tab_menu_item"
+            android:text="@string/tab_menu_awards_update" />
+
+        <RadioButton
+            android:id="@+id/rb_awards_query"
+            style="@style/tab_menu_item"
+            android:text="@string/tab_menu_awards_query" />
 
 
-</FrameLayout>
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/manage_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

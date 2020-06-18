@@ -9,8 +9,15 @@ MainActivity(登录界面)->RegisterActivity(注册界面)+MD5Utils(MD5加密算
 (1)ManagerActivity(管理员界面) -->（账户：admin，密码：zut_acm54321）  
 一个适配器：ManagerAdapter  
 三个fragment: EditFragment(编辑) ManageFragment(管理) ReplyFragment(回复)  
-对应的layout：fragment_edit      fragment_manage      fragment_reply   
-  
+对应的layout：fragment_edit      fragment_manage      fragment_reply
+Fragment嵌套：*********  比葫芦画瓢可以直接套这个样式，如果你的模块也需要嵌套的话
+1.EditFragment(编辑) 下有两个fragment: NewsFragment(新闻)  NoticeFragment(通知)
+一个FragmentController管理：EditFragmentController
+一个Fragment负责执行：就是EditFragment本身，其对于的布局fragment_edit也做了相应修改
+2.ManageFragment(奖项管理) 下有四个fragment: AwardsAddFragment(添加)  AwardsDeleteFragment(删除) AwardsUpdateFragment(修改) AwardsQueryFragment(查询)
+一个FragmentController管理：ManageFragmentController
+一个Fragment负责执行：就是ManageFragment本身，其对于的布局fragment_manage也做了相应修改
+
 (2)UserActivity(用户界面)   --> (账户：user，密码：zut_acm54321)
 一个适配器：UserAdapter  
 三个fragment: HomeFragment(主页) MessageFragment(信息) MineFragment(我的)  
