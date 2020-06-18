@@ -148,6 +148,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:text="女生"
+                        android:onClick="sureFemale"
                         android:textSize="20sp"/>
                     <RadioButton
                         android:id="@+id/mainRegisterRdBtnMale"
@@ -157,6 +158,7 @@
                         android:layout_marginRight="5dp"
                         android:padding="1dp"
                         android:text="男生"
+                        android:onClick="sureMale"
                         android:textSize="20sp"/>
             </RadioGroup>
         </LinearLayout>
@@ -187,6 +189,7 @@
                 android:background="@null"
                 android:padding="8dp"
                 android:hint="请输入您的学院"
+                android:id="@+id/et_department"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -207,6 +210,7 @@
         android:background="@drawable/btn_main_login"
         android:textColor="#ffffff"
         android:text="注 册"
+        android:onClick="Register"
         android:textSize="20sp"/>
 
 
