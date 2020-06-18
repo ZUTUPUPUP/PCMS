@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Utils {
     //md5 加密算法
-    static String md5(String text) {
+    public static String md5(String text) {
         MessageDigest digest = null;
         try {
             digest = MessageDigest.getInstance("md5");

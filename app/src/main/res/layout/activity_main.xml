@@ -49,6 +49,7 @@
     <Button
         android:id="@+id/btn_login"
         android:text="登录"
+        android:onClick="Login"
         android:background="#1E90FF"
         android:textSize="24sp"
         android:layout_gravity="center"
@@ -66,6 +67,7 @@
             android:layout_marginRight="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="Register"
             android:text="新用户注册"/>
 
     </RelativeLayout>
