@@ -18,6 +18,7 @@ Programming Competition Management System
 
 ### 注册问题
     注意:现在注册过后进不去主界面了,有空写注册
+    已解决QwQ。
 ### 数据库contest
     user：用户账号管理表
     status：用户身份表
