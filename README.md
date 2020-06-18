@@ -18,8 +18,10 @@ MainActivity(登录界面)->RegisterActivity(注册界面)+MD5Utils(MD5加密算
 
 ### 注册问题
     注意:现在注册过后进不去主界面了,有空写注册
-### 数据库表
+### 数据库contest
     user：用户账号管理表
     status：用户身份表
+### 数据库contact
+    contact:存储用户和管理员的聊天记录(存到contest里暂时实现不了，所以新开一个数据库)
     
  
