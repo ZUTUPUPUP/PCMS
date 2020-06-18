@@ -10,11 +10,15 @@ MainActivity(登录界面)->RegisterActivity(注册界面)+MD5Utils(MD5加密算
 一个适配器：ManagerAdapter<br>
 三个fragment: EditFragment(编辑) ManageFragment(管理) ReplyFragment(回复)<br>
 对应的layout：fragment_edit      fragment_manage      fragment_reply<br>
-### Fragment嵌套：*********  比葫芦画瓢可以直接套这个样式，如果你的模块也需要嵌套的话<br>
+### Fragment嵌套：  **比葫芦画瓢可以直接套这个样式，如果你的模块也需要嵌套的话**<br>
+<br>
 1.EditFragment(编辑) 下有两个fragment: NewsFragment(新闻)  NoticeFragment(通知)<br>
 一个FragmentController管理：EditFragmentController<br>
 一个Fragment负责执行：就是EditFragment本身，其对于的布局fragment_edit也做了相应修改<br>
-2.ManageFragment(奖项管理) 下有四个fragment: AwardsAddFragment(添加)  AwardsDeleteFragment(删除) AwardsUpdateFragment(修改) AwardsQueryFragment(查询)<br>
+<br>
+2.ManageFragment(奖项管理) 下有四个fragment: <br>
+AwardsAddFragment(添加)  AwardsDeleteFragment(删除)<br>
+AwardsUpdateFragment(修改) AwardsQueryFragment(查询)<br>
 一个FragmentController管理：ManageFragmentController<br>
 一个Fragment负责执行：就是ManageFragment本身，其对于的布局fragment_manage也做了相应修改<br>
 <br>
