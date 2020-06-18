@@ -15,3 +15,6 @@ MainActivity(登录界面)->RegisterActivity(注册界面)+MD5Utils(MD5加密算
 一个适配器：UserAdapter  
 三个fragment: HomeFragment(主页) MessageFragment(信息) MineFragment(我的)  
 对应的layout：fragment_home     fragment_message      fragment_mine  
+
+(3) 注册问题
+    注意:现在注册过后进不去主界面了,有空写注册
