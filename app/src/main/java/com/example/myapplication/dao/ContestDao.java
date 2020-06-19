@@ -28,7 +28,7 @@ public class ContestDao {
         values.put(ContestTable.CONTEST_TIME, contest.getContestTime());
         values.put(ContestTable.CONTEST_NOTE, contest.getContestNote().trim());
         long id = database.insert(ContestTable.TAB_NAME, null, values);
-        Log.v("MyInfo", "id = " + id);
+        Log.v("Contest", "id = " + id);
         database.close();
     }
     public List<Contest> queryAll(){
@@ -44,5 +44,19 @@ public class ContestDao {
             contestList.add(new Contest(id,name,introduction,time,note));
         }
         return contestList;
+    }
+    public void modifyContest(Contest contest){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ContestTable.CONTEST_NAME, contest.getContestName().trim());
+        values.put(ContestTable.CONTEST_INTRODUCTION, contest.getContestIntroduction());
+        values.put(ContestTable.CONTEST_TIME, contest.getContestTime());
+        values.put(ContestTable.CONTEST_NOTE, contest.getContestNote().trim());
+        database.update(ContestTable.TAB_NAME,values,ContestTable.CONTEST_ID+"=?", new String[]{String.valueOf(contest.getContestId())});
+        database.close();
+    }
+    public void deleteContest(Contest contest){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        database.delete(ContestTable.TAB_NAME,ContestTable.CONTEST_ID+"=?",new String[]{String.valueOf(contest.getContestId())});
     }
 }

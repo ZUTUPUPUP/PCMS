@@ -19,13 +19,13 @@ import java.util.List;
 public class ManagerContestActivity extends AppCompatActivity {
 
     private List<Contest> contextList=new ArrayList<>();
-
+    ContestDao contestDao=new ContestDao(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_contest);
 
-        ContestDao contestDao=new ContestDao(this);
+
         contextList=contestDao.queryAll();
 
         ContestAdapter contestAdapter=new ContestAdapter(this,R.layout.item_listview_contest,contextList);
@@ -36,10 +36,25 @@ public class ManagerContestActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Contest contest=contextList.get(position);
-                Toast.makeText(ManagerContestActivity.this,contest.getContestName(),Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(ManagerContestActivity.this,ModifyContestActivity.class);
+                intent.putExtra("id",String.valueOf(contest.getContestId()));
+                intent.putExtra("name",contest.getContestName());
+                intent.putExtra("introduction",contest.getContestIntroduction());
+                intent.putExtra("time",contest.getContestTime());
+                intent.putExtra("note",contest.getContestNote());
+                startActivity(intent);
             }
         });
     }
+    protected void onResume() {
+        super.onResume();
+        contextList=contestDao.queryAll();
+        ContestAdapter contestAdapter=new ContestAdapter(this,R.layout.item_listview_contest,contextList);
+        ListView listView=(ListView)findViewById(R.id.manager_contest_list_view);
+        listView.setAdapter(contestAdapter);
+    }
+
+
 
     public void OpenAddContest(View view) {
         Intent intent=new Intent(this,AddContestActivity.class);
