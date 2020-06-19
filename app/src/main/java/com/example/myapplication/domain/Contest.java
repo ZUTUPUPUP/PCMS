@@ -1,59 +1,64 @@
 package com.example.myapplication.domain;
 
-import java.util.Date;
-
 public class Contest {
-    private int id;
-    private String name;
-    private String introduction;
-    private Date startTime;
-    private Date endTime;
+    private int contestId;
+    private String contestName;
+    private String contestIntroduction;
+    private String contestTime;
+    private String contestNote;
 
-    public Contest(int id, String name, String introduction, Date startTime, Date endTime) {
-        this.id = id;
-        this.name = name;
-        this.introduction = introduction;
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public Contest(String contestName, String contestIntroduction, String contestTime, String contestNote) {
+        this.contestName = contestName;
+        this.contestIntroduction = contestIntroduction;
+        this.contestTime = contestTime;
+        this.contestNote = contestNote;
     }
 
-    public int getId() {
-        return id;
+    public Contest(int contestId, String contestName, String contestIntroduction, String contestTime, String contestNote) {
+        this.contestId = contestId;
+        this.contestName = contestName;
+        this.contestIntroduction = contestIntroduction;
+        this.contestTime = contestTime;
+        this.contestNote = contestNote;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getContestId() {
+        return contestId;
     }
 
-    public String getName() {
-        return name;
+    public void setContestId(int contestId) {
+        this.contestId = contestId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getContestName() {
+        return contestName;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public void setContestName(String contestName) {
+        this.contestName = contestName;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public String getContestIntroduction() {
+        return contestIntroduction;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public void setContestIntroduction(String contestIntroduction) {
+        this.contestIntroduction = contestIntroduction;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public String getContestTime() {
+        return contestTime;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public void setContestTime(String contestTime) {
+        this.contestTime = contestTime;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public String getContestNote() {
+        return contestNote;
+    }
+
+    public void setContestNote(String contestNote) {
+        this.contestNote = contestNote;
     }
 }

@@ -1,5 +1,6 @@
-package com.example.myapplication.Manager;
+package com.example.myapplication.Manager.Manager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Manager.ManageFragmentController;
+import com.example.myapplication.Manager.Manager.Contest.AddContestActivity;
 import com.example.myapplication.R;
 
 
@@ -37,7 +40,10 @@ public class ManageFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_manage_contest:
-                        controller.showFragment(0);
+                        //controller.showFragment(0);
+                        Intent intent0=new Intent();
+                        intent0.setClass(getActivity(),AddContestActivity.class);
+                        startActivity(intent0);
                         break;
                     case R.id.rb_manage_awards:
                         controller.showFragment(1);

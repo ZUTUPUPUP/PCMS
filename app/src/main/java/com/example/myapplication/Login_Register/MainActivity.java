@@ -9,14 +9,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.myapplication.utils.MD5Utils;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.Manager.ManagerActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User.UserActivity;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
-
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.myapplication.utils.MD5Utils;
 
 
 /**
@@ -108,15 +108,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=null;
         intent = new Intent(this, ManagerActivity.class);
         intent.putExtra("userName", "admin");
-        finish();
         startActivity(intent);
+        this.finish();
     }
     //用户测试需删掉
     public void LoginOnUser(View view) {
         Intent intent=null;
         intent = new Intent(this, UserActivity.class);
         intent.putExtra("userName", "user");
-        finish();
         startActivity(intent);
+        this.finish();
     }
 }

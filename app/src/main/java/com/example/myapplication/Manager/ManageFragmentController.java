@@ -44,7 +44,7 @@ public class ManageFragmentController {
         for(Fragment fragment : fragments) {
             ft.add(containerId, fragment);
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     public void showFragment(int position) {
@@ -52,7 +52,7 @@ public class ManageFragmentController {
         Fragment fragment = fragments.get(position);
         FragmentTransaction ft = fm.beginTransaction();
         ft.show(fragment);
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     public void hideFragments() {
@@ -62,7 +62,7 @@ public class ManageFragmentController {
                 ft.hide(fragment);
             }
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     public Fragment getFragment(int position) {
