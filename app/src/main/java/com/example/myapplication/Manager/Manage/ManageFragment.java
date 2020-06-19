@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Manager.Manage.Awards.AwardsActivity;
 import com.example.myapplication.Manager.Manage.Contest.AddContestActivity;
+import com.example.myapplication.Manager.Manage.Contest.ManagerContestActivity;
 import com.example.myapplication.R;
 
 
@@ -39,7 +40,7 @@ public class ManageFragment extends Fragment {
                     case R.id.rb_manage_contest:
                         //controller.showFragment(0);
                         Intent intent0=new Intent();
-                        intent0.setClass(getActivity(),AddContestActivity.class);
+                        intent0.setClass(getActivity(), ManagerContestActivity.class);
                         startActivity(intent0);
                         break;
                     case R.id.rb_manage_awards:

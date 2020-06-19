@@ -1,4 +1,4 @@
-package com.example.myapplication.utils.Manager;
+package com.example.myapplication.utils.Manager.Contest;
 
 public class ContestTable {
 

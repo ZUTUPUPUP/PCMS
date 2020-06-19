@@ -1,4 +1,4 @@
-package com.example.myapplication.utils.Manager;
+package com.example.myapplication.utils.Manager.Contest;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +12,7 @@ public class ContestDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ContestTable.CREATE_TAB);
+        db.execSQL("insert into contest values(null, '111','111','111','111')");
     }
 
     @Override
