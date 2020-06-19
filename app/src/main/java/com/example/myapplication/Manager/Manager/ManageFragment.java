@@ -7,11 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.myapplication.Manager.ManageFragmentController;
 import com.example.myapplication.Manager.Manager.Contest.AddContestActivity;
+import com.example.myapplication.Manager.Manager.UserManager.QueryAllUsersActivity;
 import com.example.myapplication.R;
+
+import androidx.fragment.app.Fragment;
 
 
 public class ManageFragment extends Fragment {
@@ -49,6 +50,7 @@ public class ManageFragment extends Fragment {
                         controller.showFragment(1);
                         break;
                     case R.id.rb_manage_user:
+                        startActivity(new Intent(getActivity(), QueryAllUsersActivity.class));
                         controller.showFragment(2);
                         break;
                     case R.id.rb_manage_sign:

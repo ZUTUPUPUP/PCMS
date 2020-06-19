@@ -41,7 +41,8 @@ Programming Competition Management System
     一个FragmentController管理：ManageFragmentController
     一个Fragment负责执行：就是ManageFragment本身，其对于的布局fragment_manage也做了相应修改
 
-### 个人信息管理
+### 用户信息管理
     用户界面 -> 我的：点击昵称可以修改昵称
+    管理员界面 -> 管理 -> 用户管理：查询到所有用户，点击item可以删除用户
     
  
