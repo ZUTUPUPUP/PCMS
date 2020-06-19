@@ -3,7 +3,7 @@ package com.example.myapplication.dao;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.myapplication.MD5Utils;
+import com.example.myapplication.utils.MD5Utils;
 import com.example.myapplication.domain.User;
 
 import org.junit.Test;

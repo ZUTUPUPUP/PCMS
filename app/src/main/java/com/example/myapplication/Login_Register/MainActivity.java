@@ -9,14 +9,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.myapplication.MD5Utils;
+import com.example.myapplication.utils.MD5Utils;
 import com.example.myapplication.Manager.ManagerActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User.UserActivity;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 /**
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             et_user_name.setSelection(userName.length());
         }
     }
+
     //管理员测试需删掉
     public void LoginOnAdmin(View view) {
         Intent intent=null;

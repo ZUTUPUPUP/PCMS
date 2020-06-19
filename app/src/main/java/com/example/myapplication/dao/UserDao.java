@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.myapplication.MD5Utils;
+import com.example.myapplication.utils.MD5Utils;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.UserDBHelper;
 import com.example.myapplication.utils.UserTable;

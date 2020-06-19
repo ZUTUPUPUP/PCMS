@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Login_Register;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.R;
 import com.example.myapplication.dao.DepDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.Dep;
@@ -41,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private DepDao dao;
     private MyAdapter adapter;
     private User user = new User();
+    UserDao userDao = new UserDao(this);
     //一个能显示View的窗体
     private PopupWindow popupWindow;
 
@@ -91,18 +93,20 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String name = et_user_name.getText().toString().trim();
         String passWd = et_passWd.getText().toString().trim();
         String passWdAgain = et_passsWd_again.getText().toString().trim();
+        User userDaoByUserName = userDao.findByUserName(name);
         if(name.length() != 12) {
             Toast.makeText(this, "请输入正确的学号", Toast.LENGTH_SHORT).show();
+        } else if (userDaoByUserName != null) {
+            Toast.makeText(this, "该学号已经存在,检查是否是自己的学号,如果是请联系管理员", Toast.LENGTH_SHORT).show();
         } else if (passWd.length() < 6) {
             Toast.makeText(this, "密码长度过短", Toast.LENGTH_SHORT).show();
         } else if (!passWd.equals(passWdAgain)) {
             Toast.makeText(this, "两次密码不一致,请检查", Toast.LENGTH_SHORT).show();
         } else {
-            user.setUserName(name);
-            user.setPasswd(passWd);
-            user.setNickName(et_reg_nickname.getText().toString().trim());
-            UserDao dao = new UserDao(this);
-            dao.add(user);
+            this.user.setUserName(name);
+            this.user.setPasswd(passWd);
+            this.user.setNickName(et_reg_nickname.getText().toString().trim());
+            userDao.add(this.user);
             Intent data = new Intent();
             data.putExtra("userName", name);
             data.putExtra("passWd", passWd);
