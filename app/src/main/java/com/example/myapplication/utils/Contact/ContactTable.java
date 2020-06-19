@@ -1,4 +1,4 @@
-package com.example.myapplication.utils;
+package com.example.myapplication.utils.Contact;
 
 import static com.example.myapplication.utils.UserTable.USER_NAME;
 import static com.example.myapplication.utils.UserTable.USER_NICKNAME;

@@ -1,17 +1,12 @@
 package com.example.myapplication.dao;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.myapplication.domain.Contact;
-import com.example.myapplication.domain.User;
-import com.example.myapplication.utils.ContactDBHelper;
-import com.example.myapplication.utils.ContactTable;
-import com.example.myapplication.utils.UserDBHelper;
-import com.example.myapplication.utils.UserTable;
+import com.example.myapplication.utils.Contact.ContactDBHelper;
+import com.example.myapplication.utils.Contact.ContactTable;
 
 import java.util.ArrayList;
 import java.util.List;

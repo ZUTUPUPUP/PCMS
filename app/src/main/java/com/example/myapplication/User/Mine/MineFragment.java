@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.UserContactActivity;
+import com.example.myapplication.User.Mine.Contact.UserContactActivity;
 import com.example.myapplication.dao.DepDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
@@ -128,6 +128,7 @@ public class MineFragment extends Fragment {
     }
 
     private void initContact() {
+
         Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
         userName = MainIntent.getStringExtra("userName");
         System.out.print(userName);

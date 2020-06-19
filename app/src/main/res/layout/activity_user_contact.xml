@@ -4,13 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserContactActivity">
+    tools:context=".User.Mine.Contact.UserContactActivity">
     <TextView
-        android:id="@+id/show"
-        android:text="这是提问"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="admin"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:background="#2990DC"
+        ></TextView>
 
-></TextView>
+  <ScrollView
+      android:id="@+id/sv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/et"
+      android:layout_below="@+id/tv"
+      >
+      <com.example.myapplication.utils.Contact.ListViewForScrollView
+          android:id="@+id/show_listView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+      </com.example.myapplication.utils.Contact.ListViewForScrollView>
+  </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:background="#EDEDED"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="11dp"
+            android:padding="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_input_box"
+            android:hint=" 在此键入回复管理员"></EditText>
+
+        <Button
+            android:id="@+id/replyBtn"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_sendmassage"
+            android:text="发送"
+            android:textColor="@color/white"
+            ></Button>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
