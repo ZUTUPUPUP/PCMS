@@ -59,4 +59,24 @@ public class DepDao {
         database.close();
         return dep;
     }
+
+    /**
+     *
+     * @param id 用户名
+     * @return 用户
+     */
+    public Dep findById(int id) {
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        //select * from user where userName = 'admin';
+        Cursor cursor = database.query(DepTable.TAB_NAME, null,  DepTable.DEP_ID + "=" + id, null, null, null, null);
+        Dep dep = null;
+        while (cursor.moveToNext()) {
+            int department_id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            dep = new Dep(department_id, name);
+        }
+        cursor.close();
+        database.close();
+        return dep;
+    }
 }

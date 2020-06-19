@@ -39,7 +39,7 @@ public class UserDaoTest {
     @Test
     public void update() {
         UserDao dao = new UserDao(context);
-        dao.update(new User("admin", "11111", "bbbbb", null, 1, 1));
+        dao.update(new User("user", "123456", "user", "女", 2, 2));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class UserDaoTest {
     @Test
     public void findByUserName() {
         UserDao dao = new UserDao(context);
-        User user = dao.findByUserName("admin");
+        User user = dao.findByUserName("user");
         Log.v("MyInfo", user + "");
     }
 }

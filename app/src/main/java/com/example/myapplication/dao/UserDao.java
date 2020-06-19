@@ -64,11 +64,11 @@ public class UserDao {
         //执行update update user set user where icon_username=icon_username
         ContentValues values = new ContentValues();
         values.put(UserTable.USER_NAME, user.getUserName().trim());
-        values.put(UserTable.USER_PASSWD, user.getPasswd().trim());
+        values.put(UserTable.USER_PASSWD, MD5Utils.md5(user.getPasswd().trim()));
         values.put(UserTable.USER_NICKNAME, user.getNickName().trim().isEmpty() ? user.getUserName():user.getNickName());
         values.put(UserTable.USER_GENDER, user.getGender());
         values.put(UserTable.USER_DEP_ID, user.getDepartment_id());
-        values.put(UserTable.USER_STATUS_ID, 1);
+        values.put(UserTable.USER_STATUS_ID, user.getStatus_id());
         int updateCount = database.update(UserTable.TAB_NAME, values,  UserTable.USER_NAME + "=" + "'" + user.getUserName() + "'", null);
         Log.v("MyInfo", "updateCount = " + updateCount);
         //关闭连接

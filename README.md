@@ -41,5 +41,7 @@ Programming Competition Management System
     一个FragmentController管理：ManageFragmentController
     一个Fragment负责执行：就是ManageFragment本身，其对于的布局fragment_manage也做了相应修改
 
+### 个人信息管理
+    用户界面 -> 我的：点击昵称可以修改昵称
     
  

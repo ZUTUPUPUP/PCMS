@@ -24,8 +24,8 @@ public class UserDBHelper extends SQLiteOpenHelper {
         db.execSQL(UserTable.CREATE_TAB);
         //String passWd = MD5Utils.md5("zut_acm54321");
         //Log.v("MyInfo", passWd);
-        db.execSQL("insert into user values('admin', 'e15015a3b9df6b0da040e2e557a7150c', 'admin', '', '1', 1);");
-        db.execSQL("insert into user values('user', 'e15015a3b9df6b0da040e2e557a7150c', 'user', '', '1', 2);");
+        db.execSQL("insert into user values('admin', 'e15015a3b9df6b0da040e2e557a7150c', 'admin', '女', '1', 1);");
+        db.execSQL("insert into user values('user', 'e15015a3b9df6b0da040e2e557a7150c', 'user', '女', '1', 2);");
         //院系表
         db.execSQL(DepTable.CREATE_TAB);
         db.execSQL("insert into dep values(null, '计算机学院');");
