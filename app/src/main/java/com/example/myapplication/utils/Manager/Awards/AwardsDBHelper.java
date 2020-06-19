@@ -1,4 +1,4 @@
-package com.example.myapplication.utils;
+package com.example.myapplication.utils.Manager.Awards;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AwardsDBHelper extends SQLiteOpenHelper {
     public AwardsDBHelper(Context context) {
-        super(context, "contest.db", null, 1);
+        super(context, "awards.db", null, 1);
     }
 
     @Override

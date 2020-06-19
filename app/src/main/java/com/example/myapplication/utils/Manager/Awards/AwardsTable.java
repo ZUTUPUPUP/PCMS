@@ -1,4 +1,4 @@
-package com.example.myapplication.utils;
+package com.example.myapplication.utils.Manager.Awards;
 
 public class AwardsTable {
     private String userId; //学号

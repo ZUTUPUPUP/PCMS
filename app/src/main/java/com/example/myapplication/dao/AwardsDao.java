@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.myapplication.domain.AwardsInfo;
-import com.example.myapplication.utils.AwardsDBHelper;
-import com.example.myapplication.utils.AwardsTable;
+import com.example.myapplication.utils.Manager.Awards.AwardsDBHelper;
+import com.example.myapplication.utils.Manager.Awards.AwardsTable;
 
 import java.util.ArrayList;
 import java.util.List;
