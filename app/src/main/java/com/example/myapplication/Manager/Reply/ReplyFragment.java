@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Manager.Reply;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.myapplication.R;
 
 
 public class ReplyFragment extends Fragment {

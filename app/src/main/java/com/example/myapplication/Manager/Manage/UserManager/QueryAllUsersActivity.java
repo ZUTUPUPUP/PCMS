@@ -1,4 +1,4 @@
-package com.example.myapplication.Manager.Manager.UserManager;
+package com.example.myapplication.Manager.Manage.UserManager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

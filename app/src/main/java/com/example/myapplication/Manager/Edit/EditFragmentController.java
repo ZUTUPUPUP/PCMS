@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myapplication.NewsFragment;
-import com.example.myapplication.NoticeFragment;
+import com.example.myapplication.Manager.Edit.News.NewsFragment;
+import com.example.myapplication.Manager.Edit.Notice.NoticeFragment;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.Manager.Manager.Contest;
+package com.example.myapplication.Manager.Manage.Contest;
 
 import android.os.Bundle;
 import android.view.View;

@@ -9,9 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Manager.Manager.UserManager.QueryAllUsersActivity"></activity>
-        <activity android:name=".Manager.Manager.Contest.AddContestActivity" />
-        <activity android:name=".User.Mine.Contact.UserContactActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Manager.Manage.Contest.AddContestActivity"></activity>
+        <activity android:name=".User.Mine.Contact.UserContactActivity" />
         <activity android:name=".Login_Register.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +21,10 @@
         <activity android:name=".Manager.ManagerActivity" />
         <activity android:name=".Login_Register.RegisterActivity" />
         <activity android:name=".User.UserActivity" />
+        <activity android:name=".Manager.Manage.Awards.AwardsActivity"/>
+        <activity android:name=".Manager.Manage.Awards.AwardsQueryActivity"/>
+        <activity android:name=".Manager.Manage.Awards.AwardsInsertActivity"/>
+        <activity android:name=".Manager.Manage.Awards.AwardsUpdateActivity"/>
     </application>
 
 </manifest>

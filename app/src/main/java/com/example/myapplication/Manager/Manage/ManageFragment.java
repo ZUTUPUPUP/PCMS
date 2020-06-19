@@ -1,4 +1,4 @@
-package com.example.myapplication.Manager.Manager;
+package com.example.myapplication.Manager.Manage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
-import com.example.myapplication.Manager.ManageFragmentController;
-import com.example.myapplication.Manager.Manager.Contest.AddContestActivity;
-import com.example.myapplication.Manager.Manager.UserManager.QueryAllUsersActivity;
-import com.example.myapplication.R;
-
 import androidx.fragment.app.Fragment;
+
+import com.example.myapplication.Manager.Manage.Awards.AwardsActivity;
+import com.example.myapplication.Manager.Manage.Contest.AddContestActivity;
+import com.example.myapplication.R;
 
 
 public class ManageFragment extends Fragment {
 
     private RadioGroup rg_tab;//顶部选择框
-    private ManageFragmentController controller;
 
     public ManageFragment() {
         // Required empty public constructor
@@ -33,8 +31,6 @@ public class ManageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage, container, false);
-        controller = ManageFragmentController.getInstance(this, R.id.manage_fragment);
-        controller.showFragment(0);
         rg_tab = (RadioGroup) view.findViewById(R.id.rg_tab_bar_manage);
         rg_tab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -47,14 +43,15 @@ public class ManageFragment extends Fragment {
                         startActivity(intent0);
                         break;
                     case R.id.rb_manage_awards:
-                        controller.showFragment(1);
+                        Intent intent1=new Intent();
+                        intent1.setClass(getActivity(), AwardsActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.rb_manage_user:
-                        startActivity(new Intent(getActivity(), QueryAllUsersActivity.class));
-                        controller.showFragment(2);
+
                         break;
                     case R.id.rb_manage_sign:
-                        controller.showFragment(3);
+
                         break;
                     default:
                         break;

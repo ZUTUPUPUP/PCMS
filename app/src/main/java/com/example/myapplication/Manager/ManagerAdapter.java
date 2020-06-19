@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.myapplication.Manager.Edit.EditFragment;
-import com.example.myapplication.Manager.Manager.ManageFragment;
-import com.example.myapplication.ReplyFragment;
+import com.example.myapplication.Manager.Manage.ManageFragment;
+import com.example.myapplication.Manager.Reply.ReplyFragment;
 
 public class ManagerAdapter extends FragmentPagerAdapter {
 
