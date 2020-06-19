@@ -11,17 +11,31 @@
         android:layout_marginTop="88dp"
         android:background="@drawable/btn_main_user"
         android:orientation="vertical">
-        <!--输入框-->
-        <EditText
-            android:id="@+id/et_user_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="学号"
-            android:padding="12dp"
-            android:background="@null"
-            android:textSize="20sp" />
-        <!--输入框-->
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="39dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:padding="3dp"
+                android:src="@mipmap/icon_username" />
+            <!--输入框-->
+            <EditText
+                android:id="@+id/et_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:ellipsize="middle"
+                android:hint="学号"
+                android:padding="12dp"
+                android:background="@null"
+                android:textSize="20sp" />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
@@ -29,17 +43,42 @@
             android:layout_marginRight="8dp"
             android:background="#fafafa" />
 
-
-        <EditText
-            android:id="@+id/et_psw"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="12dp"
-            android:hint="密码"
-            android:textSize="20sp"
-            android:background="@null"
-            android:inputType="textPassword"/>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="39dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:padding="3dp"
+                android:src="@mipmap/icon_passwd" />
+            <!--输入框-->
+            <EditText
+                android:id="@+id/et_psw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:ellipsize="middle"
+                android:padding="12dp"
+                android:hint="密码"
+                android:textSize="20sp"
+                android:background="@null"
+                android:inputType="textPassword"/>
+
+            <ImageView
+                android:id="@+id/iv_main_del"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:onClick="mainDelPassWd"
+                android:src="@mipmap/icon_del" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -89,7 +128,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="忘记密码"
+            android:text="忘记密码? 请联系管理员"
             android:layout_marginRight="15dp"
             android:textColor="@color/blue"
             android:textSize="12sp"

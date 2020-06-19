@@ -12,8 +12,6 @@ import org.junit.runner.RunWith;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
-import static org.junit.Assert.*;
-
 @RunWith(AndroidJUnit4.class)
 public class UserDaoTest {
     Context context = null;
@@ -28,7 +26,7 @@ public class UserDaoTest {
             Log.v("MyInfo", "该用户名已经存在");
         } else {
             String passwd = MD5Utils.md5("222");
-            dao.add(new User("201708024xx1", passwd + "", "aaaaa", null, "计算机学院", 1));
+            dao.add(new User("201708024xx1", passwd + "", "aaaaa", null, 1, 1));
         }
     }
 
@@ -41,7 +39,7 @@ public class UserDaoTest {
     @Test
     public void update() {
         UserDao dao = new UserDao(context);
-        dao.update(new User("admin", "11111", "bbbbb", null, "计算机学院", 1));
+        dao.update(new User("admin", "11111", "bbbbb", null, 1, 1));
     }
 
     @Test

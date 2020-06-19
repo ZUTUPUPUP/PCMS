@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.myapplication.dao.UserDao;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
     private EditText et_user_name, et_passWd;//编辑框
+    private ImageView iv_main_del;
     private UserDao dao;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, UserActivity.class);
                 intent.putExtra("userName", user.getUserName());
             }
+            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             finish();
             startActivity(intent);
         } else {
@@ -65,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
     public void Register(View v) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivityForResult(intent, 1);//带结果的返回
+    }
+
+    //删除密码
+    public void mainDelPassWd(View v) {
+        et_passWd.setText("");
     }
 
     /**

@@ -43,7 +43,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:padding="8dp"
-                android:hint="请输入学号"
+                android:hint="请输入学号(仅12位)"
                 android:maxLength="12"
                 android:background="@null"
                 android:textSize="20sp" />
@@ -60,7 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv_register_password1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -68,16 +67,24 @@
                 android:text="密    码："
                 android:textSize="20sp"/>
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/et_psw"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="5"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@null"
                 android:padding="8dp"
-                android:hint="请输入密码"
+                android:hint="请输入密码(大于6位)"
                 android:inputType="textPassword"
-                android:id="@+id/et_psw"
                 android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/iv_reg_del"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_del" />
         </LinearLayout>
 
 
@@ -87,11 +94,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="#47acea" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv_register_password2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -99,6 +106,7 @@
                 android:text="密    码："
                 android:textSize="20sp"/>
             <EditText
+                android:id="@+id/et_psw_again"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -107,10 +115,37 @@
                 android:padding="8dp"
                 android:hint="请再次输入密码"
                 android:inputType="textPassword"
-                android:id="@+id/et_psw_again"
                 android:textSize="20sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="昵    称："
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/et_reg_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:padding="8dp"
+                android:hint="默认为用户名"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -128,20 +163,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:background="@null"
-                android:text="性    别:"
+                android:text="性    别："
                 android:textSize="20sp" />
             <RadioGroup
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:id="@+id/SexRadio"
+                android:layout_weight="4.0"
+                android:id="@+id/rg_reg_sex"
+                android:orientation="horizontal"
                 android:paddingLeft="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
                     <RadioButton
                         android:id="@+id/mainRegisterRdBtnFemale"
                         android:layout_width="wrap_content"
@@ -161,7 +193,6 @@
                         android:padding="1dp"
                         android:text="男生"
                         android:textSize="20sp"/>
-                </LinearLayout>
             </RadioGroup>
         </LinearLayout>
         <View
@@ -174,6 +205,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -181,17 +213,37 @@
                 android:background="@null"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="学    院:"
+                android:text="学    院："
                 android:textSize="20sp" />
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@null"
-                android:padding="8dp"
-                android:hint="请输入您的学院"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/et_user_dep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:ellipsize="middle"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@null"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="40dp"
+                    android:hint="默认计算机学院"
+                    android:textSize="20sp" />
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignTop="@id/et_user_dep"
+                    android:layout_alignRight="@id/et_user_dep"
+                    android:layout_gravity="center_vertical"
+                    android:padding="3dp"
+                    android:onClick="regDownArrow"
+                    android:src="@mipmap/icon_down_arrow"/>
+            </RelativeLayout>
+
         </LinearLayout>
 
         </LinearLayout>
@@ -211,6 +263,7 @@
         android:background="@drawable/btn_main_login"
         android:textColor="#ffffff"
         android:text="注 册"
+        android:onClick="Register_reg"
         android:textSize="20sp"/>
 
 

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.myapplication.MD5Utils;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.UserDBHelper;
 import com.example.myapplication.utils.UserTable;
@@ -31,10 +32,11 @@ public class UserDao {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(UserTable.USER_NAME, user.getUserName().trim());
-        values.put(UserTable.USER_PASSWD, user.getPasswd().trim());
-        values.put(UserTable.USER_NICKNAME, user.getNickName() == null ? user.getUserName() : user.getNickName());
+        values.put(UserTable.USER_PASSWD, MD5Utils.md5(user.getPasswd().trim()));
+        String nickName = user.getNickName().trim();
+        values.put(UserTable.USER_NICKNAME, nickName.isEmpty() ? user.getUserName() : user.getNickName());
         values.put(UserTable.USER_GENDER, user.getGender());
-        values.put(UserTable.USER_DEP, user.getDepartment());
+        values.put(UserTable.USER_DEP_ID, user.getDepartment_id());
         values.put(UserTable.USER_STATUS_ID, 2);
         long id = database.insert(UserTable.TAB_NAME, null, values);
         Log.v("MyInfo", "id = " + id);
@@ -59,13 +61,13 @@ public class UserDao {
     public void update(User user) {
         //得到连接
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        //执行update update user set user where username=username
+        //执行update update user set user where icon_username=icon_username
         ContentValues values = new ContentValues();
         values.put(UserTable.USER_NAME, user.getUserName().trim());
         values.put(UserTable.USER_PASSWD, user.getPasswd().trim());
         values.put(UserTable.USER_NICKNAME, user.getNickName().trim().isEmpty() ? user.getUserName():user.getNickName());
         values.put(UserTable.USER_GENDER, user.getGender());
-        values.put(UserTable.USER_DEP, user.getDepartment());
+        values.put(UserTable.USER_DEP_ID, user.getDepartment_id());
         values.put(UserTable.USER_STATUS_ID, 1);
         int updateCount = database.update(UserTable.TAB_NAME, values,  UserTable.USER_NAME + "=" + "'" + user.getUserName() + "'", null);
         Log.v("MyInfo", "updateCount = " + updateCount);
@@ -89,9 +91,9 @@ public class UserDao {
             String passwd  = cursor.getString(1);
             String nickName = cursor.getString(2);
             String gender = cursor.getString(3);
-            String department = cursor.getString(4);
+            int department_id = cursor.getInt(4);
             int status_id = cursor.getInt(5);
-            list.add(new User(name, passwd, nickName, gender, department, status_id));
+            list.add(new User(name, passwd, nickName, gender, department_id, status_id));
         }
         //关闭连接
         cursor.close();
@@ -114,9 +116,9 @@ public class UserDao {
             String passwd  = cursor.getString(1);
             String nickName = cursor.getString(2);
             String gender = cursor.getString(3);
-            String department = cursor.getString(4);
+            int department_id = cursor.getInt(4);
             int status_id = cursor.getInt(5);
-            user = new User(name, passwd, nickName, gender, department, status_id);
+            user = new User(name, passwd, nickName, gender, department_id, status_id);
         }
         cursor.close();
         database.close();

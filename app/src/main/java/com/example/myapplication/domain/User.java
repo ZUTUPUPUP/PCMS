@@ -8,15 +8,18 @@ public class User {
     private String passwd;//密码
     private String nickName;//用户昵称
     private String gender;//性别
-    private String department;//学院
+    private int department_id;//学院
     private int status_id;//身份id
 
-    public User(String userName, String passwd, String nickName, String gender, String department, int status_id) {
+    public User() {
+    }
+
+    public User(String userName, String passwd, String nickName, String gender, int department_id, int status_id) {
         this.userName = userName;
         this.passwd = passwd;
         this.nickName = nickName;
         this.gender = gender;
-        this.department = department;
+        this.department_id = department_id;
         this.status_id = status_id;
     }
 
@@ -52,12 +55,12 @@ public class User {
         this.gender = gender;
     }
 
-    public String getDepartment() {
-        return department;
+    public int getDepartment_id() {
+        return department_id;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartment_id(int department_id) {
+        this.department_id = department_id;
     }
 
     public int getStatus_id() {
@@ -70,12 +73,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "UserAccount{" +
-                "name='" + userName + '\'' +
-                ", paw='" + passwd + '\'' +
-                ", nick='" + nickName + '\'' +
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", gender='" + gender + '\'' +
-                ", department='" + department + '\'' +
+                ", department_id=" + department_id +
                 ", status_id=" + status_id +
                 '}';
     }

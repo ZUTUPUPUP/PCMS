@@ -7,7 +7,7 @@ public class UserTable {
     public static final String USER_PASSWD = "passwd";
     public static final String USER_NICKNAME = "nickName";
     public static final String USER_GENDER = "gender";
-    public static final String USER_DEP = "department";
+    public static final String USER_DEP_ID = "department_id";
     public static final String USER_STATUS_ID = "status_id";
     public static final String CREATE_TAB = "create table "
             + TAB_NAME + "("
@@ -15,7 +15,9 @@ public class UserTable {
             + USER_PASSWD + " varchar not null, "
             + USER_NICKNAME + " varchar, "
             + USER_GENDER + " varchar, "
-            + USER_DEP + " varchar, "
-            + USER_STATUS_ID + " int, constraint user_status_fk foreign key " + "(" +USER_STATUS_ID + ") references "
-            + UserStatusTable.TAB_NAME + "(" + UserStatusTable.STATUS_ID + ") ON UPDATE CASCADE ON DELETE CASCADE);";
+            + USER_DEP_ID + " int, "
+            + USER_STATUS_ID + " int, constraint user_status_fk foreign key" + "(" +USER_STATUS_ID + ") references "
+            + UserStatusTable.TAB_NAME + "(" + UserStatusTable.STATUS_ID + ") ON UPDATE CASCADE ON DELETE CASCADE, "
+            + "constraint user_dep_fk foreign key" + "(" + USER_DEP_ID + ") references "
+            + DepTable.TAB_NAME + "(" + DepTable.DEP_ID + ") ON UPDATE CASCADE ON DELETE CASCADE);";
 }
