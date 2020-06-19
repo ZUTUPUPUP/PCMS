@@ -4,34 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ManageFragment">
+    tools:context=".Manager.ManageFragment">
 
     <RadioGroup
-        android:id="@+id/rg_tab_bar_awards"
+        android:id="@+id/rg_tab_bar_manage"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="match_parent"
         android:background="@color/bg_white"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <RadioButton
-            android:id="@+id/rb_awards_add"
+            android:id="@+id/rb_manage_contest"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             style="@style/tab_menu_item"
-            android:text="@string/tab_menu_awards_add" />
+            android:text="@string/tab_menu_manage_contest"/>
 
         <RadioButton
-            android:id="@+id/rb_awards_delete"
+            android:id="@+id/rb_manage_awards"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             style="@style/tab_menu_item"
-            android:text="@string/tab_menu_awards_delete" />
+            android:text="@string/tab_menu_manage_awards"/>
 
         <RadioButton
-            android:id="@+id/rb_awards_update"
+            android:id="@+id/rb_manage_user"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             style="@style/tab_menu_item"
-            android:text="@string/tab_menu_awards_update" />
+            android:text="@string/tab_menu_manage_user" />
 
         <RadioButton
-            android:id="@+id/rb_awards_query"
+            android:id="@+id/rb_manage_sign"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             style="@style/tab_menu_item"
-            android:text="@string/tab_menu_awards_query" />
+            android:text="@string/tab_menu_manage_sign" />
 
 
     </RadioGroup>

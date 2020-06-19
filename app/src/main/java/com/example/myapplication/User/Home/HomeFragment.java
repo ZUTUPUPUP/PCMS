@@ -1,27 +1,27 @@
-package com.example.myapplication;
+package com.example.myapplication.User.Home;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class AwardsDeleteFragment extends Fragment {
+import androidx.fragment.app.Fragment;
+
+import com.example.myapplication.R;
+
+public class HomeFragment extends Fragment {
 
 
-    public AwardsDeleteFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fg_content, container, false);
         TextView txt_content = (TextView) view.findViewById(R.id.txt_content);
-        txt_content.setText("删除奖项");
+        txt_content.setText("一.比赛宣传的新闻，点击可报名\n二.竞赛情况公布(奖项、排名等)");
         return view;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Login_Register;
 
 
 import android.content.Intent;
@@ -9,10 +9,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.MD5Utils;
+import com.example.myapplication.Manager.ManagerActivity;
+import com.example.myapplication.R;
+import com.example.myapplication.User.UserActivity;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 
 /**
@@ -97,5 +101,21 @@ public class MainActivity extends AppCompatActivity {
             //setSelection()方法来设置光标位置
             et_user_name.setSelection(userName.length());
         }
+    }
+    //管理员测试需删掉
+    public void LoginOnAdmin(View view) {
+        Intent intent=null;
+        intent = new Intent(this, ManagerActivity.class);
+        intent.putExtra("userName", "admin");
+        finish();
+        startActivity(intent);
+    }
+    //用户测试需删掉
+    public void LoginOnUser(View view) {
+        Intent intent=null;
+        intent = new Intent(this, UserActivity.class);
+        intent.putExtra("userName", "user");
+        finish();
+        startActivity(intent);
     }
 }

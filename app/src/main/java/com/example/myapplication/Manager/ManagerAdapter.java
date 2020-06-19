@@ -1,10 +1,13 @@
-package com.example.myapplication;
+package com.example.myapplication.Manager;
 
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.myapplication.Manager.Edit.EditFragment;
+import com.example.myapplication.ReplyFragment;
 
 public class ManagerAdapter extends FragmentPagerAdapter {
 

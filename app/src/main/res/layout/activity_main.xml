@@ -142,6 +142,39 @@
         android:layout_height="wrap_content">
 
     </RelativeLayout>
+    <!--快捷测试按钮需删掉-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_login_admin"
+            android:text="管理员模式"
+            android:background="@drawable/btn_main_login"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="LoginOnAdmin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_login_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main_login"
+            android:onClick="LoginOnUser"
+            android:text="用户模式"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
+    </LinearLayout>
+    <!--快捷测试按钮到此-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
