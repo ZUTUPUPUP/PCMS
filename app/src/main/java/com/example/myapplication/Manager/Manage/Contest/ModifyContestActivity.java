@@ -2,19 +2,9 @@ package com.example.myapplication.Manager.Manage.Contest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.example.myapplication.R;
-import com.example.myapplication.dao.ContestDao;
-import com.example.myapplication.domain.Contest;
-
 public class ModifyContestActivity extends AppCompatActivity {
 
-    EditText et_contest_name,et_contest_introduction,et_contest_time,et_contest_note;
+    /*EditText et_contest_name,et_contest_introduction,et_contest_time,et_contest_note;
     private void bindUI() {
         //从activity_add_contest.xml 页面中获取对应的UI控件
         et_contest_name = findViewById(R.id.et_modify_contest_name);
@@ -50,5 +40,5 @@ public class ModifyContestActivity extends AppCompatActivity {
         contestDao.deleteContest(contest);
         Toast.makeText(this,"删除成功！",Toast.LENGTH_LONG);
         finish();
-    }
+    }*/
 }

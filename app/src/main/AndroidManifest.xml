@@ -12,6 +12,7 @@
         <activity android:name=".Manager.Manage.Contest.ModifyContestActivity"></activity>
         <activity android:name=".Manager.Manage.Contest.AddContestActivity" />
         <activity android:name=".User.Mine.Contact.UserContactActivity" />
+        <activity android:name=".Manager.Manage.UserManager.QueryAllUsersActivity"/>
         <activity android:name=".Login_Register.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
