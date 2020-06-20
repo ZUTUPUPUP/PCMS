@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String name = data.get(position);
-        user.setDepartment_id(position);
+        user.setDepartment_id(position + 1);
         tv_user_dep.setText(name);
         //选择后取消
         if(popupWindow != null && popupWindow.isShowing()) {

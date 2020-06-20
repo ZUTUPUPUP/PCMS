@@ -33,7 +33,7 @@ public class UserDaoTest {
     @Test
     public void deleteByUserName() {
         UserDao dao = new UserDao(context);
-        dao.deleteByUserName("201708024xx1");
+        dao.deleteByUserName("201708024104");
     }
 
     @Test
