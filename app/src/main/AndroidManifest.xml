@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Manager.Manage.Contest.ModifyContestActivity"></activity>
         <activity android:name=".Manager.Manage.Contest.AddContestActivity" />
-        <activity android:name=".User.Mine.Contact.UserContactActivity" />
+        <activity android:name=".User.Mine.Contact.UserContactActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Manager.Manage.UserManager.QueryAllUsersActivity"/>
         <activity android:name=".Login_Register.MainActivity">
             <intent-filter>
