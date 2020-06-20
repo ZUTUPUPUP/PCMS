@@ -95,7 +95,7 @@
                 android:layout_margin="20dp"
                 android:layout_weight="1"
                 android:padding="3dp"
-                android:background="@drawable/btn_mine_update_message"
+                android:background="@drawable/item_mine_update_message_selector"
                 android:text="修改密码"
                 android:textColor="@color/black"
                 android:textSize="12dp" />

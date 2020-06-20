@@ -9,8 +9,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/ll_mine_user">
 
         <LinearLayout
@@ -85,7 +86,7 @@
                 android:layout_margin="20dp"
                 android:layout_weight="1"
                 android:padding="3dp"
-                android:background="@drawable/btn_mine_update_message"
+                android:background="@drawable/item_mine_update_message_selector"
                 android:text="修改密码"
                 android:focusable="false"
                 android:textColor="@color/black"

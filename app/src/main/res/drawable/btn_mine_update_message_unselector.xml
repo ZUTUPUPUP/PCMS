@@ -5,6 +5,7 @@
             android:radius="200dp"
             />
 
+
         <stroke
             android:color="@color/common_google_signin_btn_text_light_disabled"
             android:width="1.0dp"
