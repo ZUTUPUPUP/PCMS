@@ -8,34 +8,39 @@
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:text="admin"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="26dp"
         android:gravity="center"
-        android:background="#2990DC"
+        android:background="@color/colorAccent"
         ></TextView>
 
-  <ScrollView
-      android:id="@+id/sv"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_above="@id/et"
-      android:layout_below="@+id/tv"
-      >
-      <com.example.myapplication.utils.Contact.ListViewForScrollView
-          android:id="@+id/show_listView"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content">
-      </com.example.myapplication.utils.Contact.ListViewForScrollView>
-  </ScrollView>
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/et"
+        android:layout_below="@+id/tv"
+        android:layout_marginTop="0dp"
+        android:background="#66F3F1F1"
+        android:layout_marginBottom="0dp">
+
+        <com.example.myapplication.utils.Contact.ListViewForScrollView
+            android:id="@+id/show_listView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/list_view_divider"
+            android:dividerHeight="1px"
+            ></com.example.myapplication.utils.Contact.ListViewForScrollView>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/et"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
-        android:background="#EDEDED"
+        android:background="#66F3F1F1"
         android:orientation="horizontal">
 
         <EditText
