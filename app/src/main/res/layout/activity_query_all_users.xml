@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:id="@+id/lv_user_query_listview"
     android:divider="@null"
-    tools:context=".Manager.Manager.UserManager.QueryAllUsersActivity">
+    tools:context=".Manager.Manage.UserManager.QueryAllUsersActivity">
 
 </ListView>
