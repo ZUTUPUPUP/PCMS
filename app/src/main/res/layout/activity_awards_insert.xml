@@ -63,6 +63,7 @@
     <Button android:id="@+id/but_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/awards_button_shap"
         android:hint="点击添加"
         android:layout_below="@+id/ed_level"/>
 

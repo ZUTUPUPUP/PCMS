@@ -8,12 +8,14 @@
     <Button android:id="@+id/but_insert"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/awards_button_shap"
         android:hint="添加获奖信息"
         android:layout_alignParentLeft="true"/>
 
     <Button android:id="@+id/but_queryOrder"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/awards_button_shap"
         android:hint="分类查询统计"
         android:layout_alignParentRight="true"/>
 
