@@ -82,7 +82,10 @@ public class MineFragment extends Fragment {
             }
         });
     }
+    //点击事件报名信息查询
+    public void findMineRegMessage(View v) {
 
+    }
     private void bindUI() {
         tv_mine_nickname = view.findViewById(R.id.tv_mine_nickname);
         tv_mine_username = view.findViewById(R.id.tv_mine_username);

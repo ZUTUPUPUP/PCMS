@@ -84,6 +84,7 @@ public class QueryAllUsersActivity extends AppCompatActivity {
         lv_user_query_listview = findViewById(R.id.lv_user_query_listview);
     }
 
+
     class MyAdapter extends BaseAdapter {
 
         @Override
