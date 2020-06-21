@@ -55,4 +55,5 @@ Programming Competition Management System
     管理员界面 -> 管理 -> 报名管理
     直接进入查询出所有的报名信息，后报名的优先显示，每个报名信息可以修改相关信息(关键信息不可修改)
     
- 
+### 去app标题栏
+    要去标题在相应的Activity，setContentView()前面加 supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
