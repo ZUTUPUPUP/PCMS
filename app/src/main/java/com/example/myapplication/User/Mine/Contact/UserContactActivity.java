@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
@@ -25,32 +27,68 @@ public class UserContactActivity extends AppCompatActivity {
     private String userName;
     private ListView showListView;
     private ScrollView scrollView;
+    private Button btn_sendmes;
+    private EditText ed_input;
+    private ContactDao contactDao;
+    private MassageItemAdapter adapter;
+    private List<Contact> contactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
         setContentView(R.layout.activity_user_contact);
-        Intent getIntent = getIntent();
-        userName = getIntent.getStringExtra("userName");  //System.out.println(userName);
+        init();//初始化部件和参数
         getHistoryContact();//读取历史消息
+        setBtnSendMes();//设置发送信息
     }
 
-    private void getHistoryContact() {
+    public  void init(){
+        Intent getIntent = getIntent();
+        userName = getIntent.getStringExtra("userName");  //System.out.println(userName);
+        contactDao = new ContactDao(this);
         scrollView = (ScrollView)findViewById(R.id.sv);
+        showListView = (ListView) findViewById(R.id.show_listView);
+    }
+    private void getHistoryContact() {
         //开延迟，使得可以先显示底部最新消息
         scrollView.post(new Runnable() {
             public void run() {
                 scrollView.fullScroll(View.FOCUS_DOWN);
             }
         });
-        showListView = (ListView) findViewById(R.id.show_listView);
-        ContactDao contactDao=new ContactDao(this);
-        List<Contact> list=contactDao.findAll();
-        MassageItemAdapter adapter =new MassageItemAdapter(this,R.layout.masseage_item,list);
+        contactList=contactDao.findById(userName);
+        //筛选出admin和user的对话
+        adapter = new MassageItemAdapter(this,R.layout.item_message, contactList);
         showListView.setAdapter(adapter);
         showListView.setSelection(adapter.getCount()-1);
+
     }
+    private void setBtnSendMes() {
+        btn_sendmes = (Button)findViewById(R.id.btn_sendmas);
+        ed_input = (EditText)findViewById(R.id.ed_input);
+        btn_sendmes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Contact contact= new Contact(-1,null,userName,"admin",ed_input.getText().toString());
+                contactDao.insertOneContact(contact);
+                //强制到底
+                scrollView.post(new Runnable() {
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+                //插入一个聊天记录后要刷新ListVeiw
+                contactList.clear();
+                contactList.addAll(contactDao.findAll());
+                adapter.notifyDataSetChanged();//关键
+                ed_input.setText("");//清空
+
+            }
+        });
+    }
+
+
 
 
 
@@ -70,4 +108,5 @@ public class UserContactActivity extends AppCompatActivity {
     }
 
 }
+
 

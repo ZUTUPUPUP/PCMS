@@ -12,9 +12,9 @@
 
         <TextView
             android:id="@+id/tv1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/shape_round_textview"
@@ -26,25 +26,27 @@
         </TextView>
 
         <TextView
-            android:text="I am a text"
             android:id="@+id/tv2"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/white"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/btn_sendmassage"
-            android:padding="10dp"
-            ></TextView>
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="8dp"
+            android:text="I am a text"
+            android:textColor="@color/white"
+            android:textSize="18dp"></TextView>
     </LinearLayout>
     <TextView
         android:id="@+id/tv3"
         android:layout_below="@id/LL"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:gravity="right"
         android:layout_marginRight="20dp"
 
