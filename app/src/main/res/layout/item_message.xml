@@ -12,8 +12,8 @@
 
         <TextView
             android:id="@+id/tv1"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
@@ -21,7 +21,7 @@
             android:gravity="center"
             android:text="A"
             android:textColor="@color/white"
-            android:textSize="22dp">
+            android:textSize="17dp">
 
         </TextView>
 
@@ -30,17 +30,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="8.5dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/btn_sendmassage"
             android:paddingLeft="10dp"
-            android:paddingTop="5dp"
+            android:paddingTop="7dp"
             android:paddingRight="10dp"
             android:paddingBottom="8dp"
-            android:text="I am a text"
+            android:text="啊啊啊啊aaaaAAAAAAAA"
             android:textColor="@color/white"
-            android:textSize="18dp"></TextView>
+            android:textSize="13.5dp"></TextView>
     </LinearLayout>
     <TextView
         android:id="@+id/tv3"
@@ -49,7 +49,8 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:layout_marginRight="20dp"
-
+        android:textSize="10dp"
+        android:textColor="#BDBDBD"
         android:text="2019/08/12/12:00"
         ></TextView>
 </RelativeLayout>
