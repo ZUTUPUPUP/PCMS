@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:id="@+id/LL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_round_textview"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="@color/white"
+            android:textSize="22dp">
 
+        </TextView>
+
+        <TextView
+            android:text="I am a text"
+            android:id="@+id/tv2"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_sendmassage"
+            android:padding="10dp"
+            ></TextView>
+    </LinearLayout>
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/tv3"
+        android:layout_below="@id/LL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/mas"
-        android:layout_below="@+id/id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/purple"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/date"
-        android:layout_below="@+id/mas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/tomato"
-        >
-    </TextView>
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+
+        android:text="2019/08/12/12:00"
+        ></TextView>
 </RelativeLayout>

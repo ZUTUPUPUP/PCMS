@@ -1,6 +1,9 @@
 package com.example.myapplication.utils.Contact;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +29,25 @@ public class MassageItemAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Contact contact = (Contact) getItem(position); // 获取当前项的实例
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);//实例化一个对象
-        TextView vid = (TextView) view.findViewById(R.id.id);//获取该布局内的文本视图
-        TextView vmas =(TextView) view.findViewById(R.id.mas);
-        TextView vdate =(TextView) view.findViewById(R.id.date);
-        vid.setText(contact.getSenderId()); //发送人id
-        vmas.setText(contact.getMas());   //发送的信息
-        vdate.setText(contact.getTimestamp()); //时间
+        TextView v1 = (TextView) view.findViewById(R.id.tv1);//获取该布局内的文本视图
+        TextView v2 =(TextView) view.findViewById(R.id.tv2);
+        TextView v3 =(TextView) view.findViewById(R.id.tv3);
+
+        GradientDrawable drawable = (GradientDrawable) getContext().getResources().getDrawable(R.drawable.shape_round_textview);
+        if(contact.getSenderId().equals("admin")){
+            v1.setText("管"); //发送人id
+            GradientDrawable gradientDrawable = (GradientDrawable) v1.getBackground();
+            gradientDrawable.setColor(Color.parseColor("#FF0033"));
+
+        }
+        else{
+            v1.setText("我"); //发送人id
+            GradientDrawable gradientDrawable = (GradientDrawable) v1.getBackground();
+            gradientDrawable.setColor(Color.parseColor("#FFCC33"));
+        }
+
+        v2.setText(contact.getMas());   //发送的信息
+        v3.setText(contact.getTimestamp()); //时间
         return view;
     }
 

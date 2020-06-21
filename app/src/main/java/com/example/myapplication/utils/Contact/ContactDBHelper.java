@@ -16,21 +16,30 @@ public class ContactDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ContactTable.CREATE_TAB);
        // for(int i=1;i<=10;i++)
-        db.execSQL("insert into contact values(1, 'THIS IS START','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(2, '11:11','admin', '12','admin say hello to 12')");
-        // for(int i=21;i<=30;i++)
-        db.execSQL("insert into contact values(3, '11','12', 'admin','admin 12 hello to admin')");
-        db.execSQL("insert into contact values(4, '11:11','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(5, '11:11','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(6, '11:11','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(7, '11:11','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(8, '11:11','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(9, '11:11','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(10, 'THIS IS END','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(11, 'THIS IS END','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(12, 'THIS IS END','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(13, 'THIS IS END','admin', '12','admin say hello to 12')");
-        db.execSQL("insert into contact values(14, 'THIS IS END','admin', '12','admin say hello to 12')");
+        db.execSQL("insert into contact values(0, '2020-6-20 21:50','1', 'admin','yoyoyo')");
+        db.execSQL("insert into contact values(1, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(2, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(3, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(4, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(5, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(6, '2020-6-20 23:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(7, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(8, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(9, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(10, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(11, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(12, '2020-6-20 23:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(13, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(14, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(15, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(16, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(17, '2020-6-20 21:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(18, '2020-6-20 23:50','1', 'admin','hello admin')");
+        db.execSQL("insert into contact values(19, '2020-6-20 23:54','admin', '1','whis up?')");
+        db.execSQL("insert into contact values(20, '2020-6-20 23:50','1', 'admin','yoyoyo')");
+        db.execSQL("insert into contact values(21, '2020-6-20 23:50','1', 'admin','oyoyoyoyoyyoyooyyoyoyoyyoyoyoyoyoyyyoyoyoyoyoyyoyoyoyoyoyoyoyyoyoyoyooyy')");
+        db.execSQL("insert into contact values(22, '2020-6-20 23:54','admin', '1','???')");
+        db.execSQL("insert into contact values(23, '2020-6-20 23:50','1', 'admin','???????????????????????????????')");
        // for(int i=11;i<=20;i++)
       /*
         for(int i=1;i<=20;i++){
