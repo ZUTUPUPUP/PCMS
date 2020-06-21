@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="注 册"
+        android:text="修改用户报名信息"
         android:background="#ffffff"
         android:gravity="center"
         android:textSize="30sp"/>
@@ -33,20 +33,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="用户名："
+                android:text="竞 赛："
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/et_user_name"
+            <TextView
+                android:id="@+id/tv_update_contesregmessage_contestname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:padding="8dp"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:padding="8dp"
-                android:hint="请输入学号(仅12位)"
-                android:maxLength="12"
+                android:text="第十届校赛"
+                android:textColor="@color/gray"
                 android:background="@null"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -66,24 +66,98 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="密    码："
+                android:text="学 号："
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/tv_update_contesregmessage_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:padding="8dp"
+                android:text="201708024103"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="姓 名："
                 android:textSize="20sp"/>
             <EditText
-                android:id="@+id/et_psw"
+                android:id="@+id/et_update_contesregmessage_relname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:background="@null"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:background="@null"
                 android:padding="8dp"
-                android:hint="请输入密码(大于6位)"
-                android:inputType="textPassword"
+                android:text="孙艺苹"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
             <ImageView
-                android:id="@+id/iv_reg_del"
+                android:id="@+id/iv_update_contesregmessage_delRelName"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:onClick="click"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_del" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#47acea" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="班 级："
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/et_update_contesregmessage_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:padding="8dp"
+                android:text="计科171"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/iv_update_contesregmessage_delClass"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1"
@@ -91,7 +165,6 @@
                 android:src="@mipmap/icon_del" />
         </LinearLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
@@ -107,21 +180,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="密    码："
+                android:text="性 别："
                 android:textSize="20sp"/>
-            <EditText
-                android:id="@+id/et_psw_again"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_update_contesregmessage_gender"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="5"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:background="@null"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:background="@null"
                 android:padding="8dp"
-                android:hint="请再次输入密码"
-                android:inputType="textPassword"
+                android:text="女"
+                android:textColor="@color/gray"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <View
@@ -139,21 +214,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="昵    称："
+                android:text="学 院："
                 android:textSize="20sp"/>
             <EditText
-                android:id="@+id/et_reg_nickname"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_update_contesregmessage_depname"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="5"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:background="@null"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:background="@null"
                 android:padding="8dp"
-                android:hint="默认为用户名"
+                android:text="计算机学院"
+                android:textColor="@color/gray"
                 android:textSize="20sp" />
         </LinearLayout>
+
 
         <View
             android:layout_width="match_parent"
@@ -161,48 +239,42 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="#47acea" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="0px"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="邮 箱："
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/et_update_contesregmessage_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@null"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:padding="8dp"
+                android:text="1738871130@qq.com"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_update_contesregmessage_delEmail"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="4dp"
-                android:background="@null"
-                android:text="性    别："
-                android:textSize="20sp" />
-            <RadioGroup
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="4.0"
-                android:id="@+id/rg_reg_sex"
-                android:orientation="horizontal"
-                android:paddingLeft="5dp">
-                <RadioButton
-                    android:id="@+id/mainRegisterRdBtnFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:padding="1dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="女"
-                    android:textSize="20sp"/>
-                <RadioButton
-                    android:id="@+id/mainRegisterRdBtnMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="5dp"
-                    android:padding="1dp"
-                    android:text="男"
-                    android:textSize="20sp"/>
-            </RadioGroup>
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_del" />
         </LinearLayout>
+    </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
@@ -210,57 +282,7 @@
             android:layout_marginRight="5dp"
             android:background="#47acea" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="学    院："
-                android:textSize="20sp" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/et_user_dep"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:ellipsize="middle"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@null"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="40dp"
-                    android:hint="默认计算机学院"
-                    android:textSize="20sp" />
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignTop="@id/et_user_dep"
-                    android:layout_alignRight="@id/et_user_dep"
-                    android:layout_gravity="center_vertical"
-                    android:padding="3dp"
-                    android:onClick="regDownArrow"
-                    android:src="@mipmap/icon_down_arrow"/>
-            </RelativeLayout>
 
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="#47acea" />
 
     <Button
         android:layout_width="match_parent"
@@ -270,10 +292,21 @@
         android:layout_marginRight="18dp"
         android:background="@drawable/btn_main_login"
         android:textColor="#ffffff"
-        android:text="注 册"
-        android:onClick="Register_reg"
+        android:text="确    定"
+        android:onClick="updateSubmit"
         android:textSize="20sp"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="该页面为重复修改,修改成功后请手动退出" />
+    </RelativeLayout>
 
 </LinearLayout>

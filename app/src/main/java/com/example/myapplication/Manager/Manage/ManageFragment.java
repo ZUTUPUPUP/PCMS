@@ -9,7 +9,8 @@ import android.widget.RadioGroup;
 
 import com.example.myapplication.Manager.Manage.Awards.AwardsActivity;
 import com.example.myapplication.Manager.Manage.Contest.ManagerContestActivity;
-import com.example.myapplication.Manager.Manage.UserManager.QueryAllUsersActivity;
+import com.example.myapplication.Manager.Manage.ContestRegistryMamage.QueryAllContestRegistryActivity;
+import com.example.myapplication.Manager.Manage.UserManage.QueryAllUsersActivity;
 import com.example.myapplication.R;
 
 import androidx.fragment.app.Fragment;
@@ -52,7 +53,7 @@ public class ManageFragment extends Fragment {
                         startActivity(new Intent(getActivity(), QueryAllUsersActivity.class));
                         break;
                     case R.id.rb_manage_sign:
-
+                        startActivity(new Intent(getActivity(), QueryAllContestRegistryActivity.class));
                         break;
                     default:
                         break;

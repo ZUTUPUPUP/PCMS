@@ -4,6 +4,7 @@ package com.example.myapplication.domain;
  * 用户信息类
  */
 public class User {
+    private Integer _id;
     private String userName;//用户名
     private String passwd;//密码
     private String nickName;//用户昵称
@@ -14,13 +15,22 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String passwd, String nickName, String gender, int department_id, int status_id) {
+    public User(Integer _id, String userName, String passwd, String nickName, String gender, int department_id, int status_id) {
+        this._id = _id;
         this.userName = userName;
         this.passwd = passwd;
         this.nickName = nickName;
         this.gender = gender;
         this.department_id = department_id;
         this.status_id = status_id;
+    }
+
+    public Integer get_id() {
+        return _id;
+    }
+
+    public void set_id(Integer _id) {
+        this._id = _id;
     }
 
     public String getUserName() {
@@ -74,7 +84,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "_id=" + _id +
+                ", userName='" + userName + '\'' +
                 ", passwd='" + passwd + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", gender='" + gender + '\'' +

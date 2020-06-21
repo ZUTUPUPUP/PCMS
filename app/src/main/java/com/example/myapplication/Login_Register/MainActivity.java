@@ -6,10 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Manager.ManagerActivity;
 import com.example.myapplication.R;
@@ -18,13 +15,14 @@ import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.MD5Utils;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 
 /**
  *一个activity理解成是一个页面
  */
 public class MainActivity extends AppCompatActivity {
     private EditText et_user_name, et_passWd;//编辑框
-    private ImageView iv_main_del;
     private UserDao dao;
     @Override
     protected void onCreate(Bundle savedInstanceState){

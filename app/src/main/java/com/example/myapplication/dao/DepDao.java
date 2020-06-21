@@ -6,16 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.myapplication.domain.Dep;
 import com.example.myapplication.utils.DepTable;
-import com.example.myapplication.utils.UserDBHelper;
+import com.example.myapplication.utils.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DepDao {
-    private UserDBHelper dbHelper;
+    private DBHelper dbHelper;
 
     public DepDao(Context context) {
-        dbHelper = new UserDBHelper(context);
+        dbHelper = new DBHelper(context);
     }
     /**
      * 查询所有学院

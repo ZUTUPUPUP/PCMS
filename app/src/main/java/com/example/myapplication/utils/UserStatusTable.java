@@ -9,5 +9,4 @@ public class UserStatusTable {
             + TAB_NAME + "("
             + STATUS_ID + " integer primary key autoincrement, "
             + STATUS_NAME + " varchar not null unique);";
-
 }

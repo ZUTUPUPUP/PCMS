@@ -6,13 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ContestDBHelper extends SQLiteOpenHelper {
     public ContestDBHelper(Context context) {
-        super(context, "ManagerContest.db",null, 1);
+        super(context, "",null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ContestTable.CREATE_TAB);
-        db.execSQL("insert into contest values(null, '111','111','111','111')");
+        //db.execSQL(ContestTable.CREATE_TAB);
+        //db.execSQL("insert into contest values(null, '111','111','111','111')");
     }
 
     @Override

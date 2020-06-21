@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.myapplication.domain.Contest;
-import com.example.myapplication.utils.Manager.Contest.ContestDBHelper;
+import com.example.myapplication.utils.DBHelper;
 import com.example.myapplication.utils.Manager.Contest.ContestTable;
 
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ import java.util.List;
 
 public class ContestDao {
 
-    private ContestDBHelper dbHelper;
+    private DBHelper dbHelper;
 
     public ContestDao(Context context){
-        dbHelper = new ContestDBHelper(context);
+        dbHelper = new DBHelper(context);
     }
     public void add(Contest contest) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();

@@ -1,4 +1,4 @@
-package com.example.myapplication.Manager.Manage.UserManager;
+package com.example.myapplication.Manager.Manage.UserManage;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -54,6 +54,7 @@ public class QueryAllUsersActivity extends AppCompatActivity {
                                 userDao.deleteByUserName(user.getUserName());
                                 data.remove(position);
                                 adapter.notifyDataSetChanged();
+                                Toast.makeText(QueryAllUsersActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -26,7 +26,7 @@ public class UserDaoTest {
             Log.v("MyInfo", "该用户名已经存在");
         } else {
             String passwd = MD5Utils.md5("222");
-            dao.add(new User("201708024xx1", passwd + "", "aaaaa", null, 1, 1));
+            dao.add(new User(-1, "201708024xx1", passwd + "", "aaaaa", null, 1, 1));
         }
     }
 
@@ -39,7 +39,7 @@ public class UserDaoTest {
     @Test
     public void update() {
         UserDao dao = new UserDao(context);
-        dao.update(new User("user", "123456", "user", "女", 2, 2));
+        dao.update(new User(-1, "user", "123456", "user", "女", 2, 2));
     }
 
     @Test

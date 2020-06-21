@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.example.myapplication.utils.MD5Utils;
 import com.example.myapplication.domain.User;
-import com.example.myapplication.utils.UserDBHelper;
+import com.example.myapplication.utils.DBHelper;
 import com.example.myapplication.utils.UserTable;
 
 import java.util.ArrayList;
@@ -18,10 +18,10 @@ import java.util.List;
  * 用户增删改查
  */
 public class UserDao {
-    private UserDBHelper dbHelper;
+    private DBHelper dbHelper;
 
     public UserDao(Context context) {
-        dbHelper = new UserDBHelper(context);
+        dbHelper = new DBHelper(context);
     }
 
     /**
@@ -31,6 +31,7 @@ public class UserDao {
     public void add(User user) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
+        values.put(UserTable.USER_ID, user.get_id());
         values.put(UserTable.USER_NAME, user.getUserName().trim());
         values.put(UserTable.USER_PASSWD, MD5Utils.md5(user.getPasswd().trim()));
         String nickName = user.getNickName().trim();
@@ -63,6 +64,7 @@ public class UserDao {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         //执行update update user set user where icon_username=icon_username
         ContentValues values = new ContentValues();
+        values.put(UserTable.USER_ID, user.get_id());
         values.put(UserTable.USER_NAME, user.getUserName().trim());
         values.put(UserTable.USER_PASSWD, MD5Utils.md5(user.getPasswd().trim()));
         values.put(UserTable.USER_NICKNAME, user.getNickName().trim().isEmpty() ? user.getUserName():user.getNickName());
@@ -84,16 +86,17 @@ public class UserDao {
         //得到连接
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         //执行query select * from user
-        Cursor cursor = database.query(UserTable.TAB_NAME, null, null, null, null, null, null);
+        Cursor cursor = database.query(UserTable.TAB_NAME, null, null, null, null, null, UserTable.USER_ID + " desc");
         //从cursor取出所有数据,并且封装到List中
         while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            String passwd  = cursor.getString(1);
-            String nickName = cursor.getString(2);
-            String gender = cursor.getString(3);
-            int department_id = cursor.getInt(4);
-            int status_id = cursor.getInt(5);
-            list.add(new User(name, passwd, nickName, gender, department_id, status_id));
+            int _id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String passwd  = cursor.getString(2);
+            String nickName = cursor.getString(3);
+            String gender = cursor.getString(4);
+            int department_id = cursor.getInt(5);
+            int status_id = cursor.getInt(6);
+            list.add(new User(_id, name, passwd, nickName, gender, department_id, status_id));
         }
         //关闭连接
         cursor.close();
@@ -112,16 +115,18 @@ public class UserDao {
         Cursor cursor = database.query(UserTable.TAB_NAME, null,  UserTable.USER_NAME + "=?", new String[]{userName}, null, null, null);
         User user = null;
         while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            String passwd  = cursor.getString(1);
-            String nickName = cursor.getString(2);
-            String gender = cursor.getString(3);
-            int department_id = cursor.getInt(4);
-            int status_id = cursor.getInt(5);
-            user = new User(name, passwd, nickName, gender, department_id, status_id);
+            int _id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String passwd  = cursor.getString(2);
+            String nickName = cursor.getString(3);
+            String gender = cursor.getString(4);
+            int department_id = cursor.getInt(5);
+            int status_id = cursor.getInt(6);
+            user = new User(_id, name, passwd, nickName, gender, department_id, status_id);
         }
         cursor.close();
         database.close();
         return user;
     }
+
 }
