@@ -83,7 +83,7 @@ public class ContestRegistryDao {
     public ContestRegistryMessage findById(int id) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         //select * from user where userName = 'admin';
-        String sql = "select contestregistry.*, contest.contestName, user.userName, dep.name from contestregistry, contest, user, dep where contestregistry._id = " + id + " and contest.contestId and contestregistry.STNumberId = user._id and contestregistry.depId = dep._id order by id desc;";
+        String sql = "select contestregistry.*, contest.contestName, user.userName, dep.name from contestregistry, contest, user, dep where contestregistry._id = " + id + " and contest.contestId and contestregistry.STNumberId = user._id and contestregistry.depId = dep._id order by _id desc;";
         Cursor cursor = database.rawQuery(sql, null);
         ContestRegistryMessage contestRegistryMessage = null;
         while (cursor.moveToNext()) {
