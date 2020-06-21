@@ -44,6 +44,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/ed_input"
             android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11dp"
@@ -55,7 +56,7 @@
             android:hint=" 在此键入回复管理员"></EditText>
 
         <Button
-            android:id="@+id/replyBtn"
+            android:id="@+id/btn_sendmas"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
