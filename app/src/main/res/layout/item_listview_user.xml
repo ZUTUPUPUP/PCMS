@@ -39,8 +39,8 @@
                     android:layout_marginLeft="8dp"
                     android:background="@null"
                     android:ellipsize="middle"
-                    android:padding="3dp"
                     android:singleLine="true"
+                    android:padding="3dp"
                     android:text="201708024103"
                     android:textColor="@color/black"
                     android:textSize="20sp" />

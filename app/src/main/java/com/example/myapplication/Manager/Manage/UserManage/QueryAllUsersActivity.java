@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class QueryAllUsersActivity extends AppCompatActivity {
 
+    private EditText et_user_query_username;
     private ListView lv_user_query_listview;
     private UserDao userDao;
     private DepDao depDao;
@@ -68,8 +69,18 @@ public class QueryAllUsersActivity extends AppCompatActivity {
         });
 
     }
+    //根据学号模糊查询用户信息,后创建的展示在上面
+    public void UsersFindByUserName(View v) {
+        String userName = et_user_query_username.getText().toString();
+        data = userDao.findByLikeUserName(userName);
+        adapter.notifyDataSetChanged();
+    }
+    public void delUserName(View v) {
+        et_user_query_username.setText("");
+    }
 
     private void bindUI() {
+        et_user_query_username = findViewById(R.id.et_user_query_username);
         lv_user_query_listview = findViewById(R.id.lv_user_query_listview);
     }
 

@@ -53,4 +53,10 @@ public class UserDaoTest {
         User user = dao.findByUserName("user");
         Log.v("MyInfo", user + "");
     }
+
+    @Test
+    public void findByLikeUserName() {
+        UserDao dao = new UserDao(context);
+        Log.v("MyInfo", dao.findByLikeUserName("admin").toString());
+    }
 }

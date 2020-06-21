@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.myapplication.utils.MD5Utils;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.DBHelper;
+import com.example.myapplication.utils.MD5Utils;
 import com.example.myapplication.utils.UserTable;
 
 import java.util.ArrayList;
@@ -112,7 +112,7 @@ public class UserDao {
     public User findByUserName(String userName) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         //select * from user where userName = 'admin';
-        Cursor cursor = database.query(UserTable.TAB_NAME, null,  UserTable.USER_NAME + "=?", new String[]{userName}, null, null, null);
+        Cursor cursor = database.query(UserTable.TAB_NAME, null,  UserTable.USER_NAME + "=?", new String[]{userName}, null, null, UserTable.USER_ID + " desc");
         User user = null;
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);
@@ -129,4 +129,32 @@ public class UserDao {
         return user;
     }
 
+
+    /**
+     *
+     * @param userName 用户名
+     * @return 用户
+     */
+    public List<User> findByLikeUserName(String userName) {
+        List<User> list = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        //select * from user where userName = 'admin';
+        String sql = "select * from user where userName like '%" + userName + "%' order by _id desc";
+        Cursor cursor = database.rawQuery(sql, null);
+        User user = null;
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String passwd  = cursor.getString(2);
+            String nickName = cursor.getString(3);
+            String gender = cursor.getString(4);
+            int department_id = cursor.getInt(5);
+            int status_id = cursor.getInt(6);
+            user = new User(_id, name, passwd, nickName, gender, department_id, status_id);
+            list.add(user);
+        }
+        cursor.close();
+        database.close();
+        return list;
+    }
 }
