@@ -59,7 +59,7 @@ public class UserContactActivity extends AppCompatActivity {
         });
         contactList=contactDao.findById(userName);
         //筛选出admin和user的对话
-        adapter = new MassageItemAdapter(this,R.layout.item_message, contactList);
+        adapter = new MassageItemAdapter(this,R.layout.item_contactmessage, contactList);
         showListView.setAdapter(adapter);
         showListView.setSelection(adapter.getCount()-1);
 
@@ -72,18 +72,17 @@ public class UserContactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Contact contact= new Contact(-1,null,userName,"admin",ed_input.getText().toString());
                 contactDao.insertOneContact(contact);
+                //插入一个聊天记录后要刷新ListVeiw
+                contactList.add(contact);
+                adapter.notifyDataSetChanged();//关键
                 //强制到底
                 scrollView.post(new Runnable() {
                     public void run() {
                         scrollView.fullScroll(View.FOCUS_DOWN);
                     }
                 });
-                //插入一个聊天记录后要刷新ListVeiw
-                contactList.clear();
-                contactList.addAll(contactDao.findAll());
-                adapter.notifyDataSetChanged();//关键
                 ed_input.setText("");//清空
-
+                //ed_input.requestFocus();
             }
         });
     }

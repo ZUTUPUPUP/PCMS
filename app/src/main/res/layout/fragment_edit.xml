@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Manager.Edit.EditFragment">
-
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="编辑"
+        android:textColor="@color/white"
+        android:textSize="21dp"></TextView>
 
     <RadioGroup
         android:id="@+id/rg_tab_bar_edit"

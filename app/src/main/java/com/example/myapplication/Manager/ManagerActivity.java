@@ -2,6 +2,7 @@ package com.example.myapplication.Manager;
 
 
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
         setContentView(R.layout.activity_manager);
         mAdapter = new ManagerAdapter(getSupportFragmentManager(),1);
         bindViews();

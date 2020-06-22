@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" android:state_enabled="true">
+        <shape >
+            <corners android:topLeftRadius="15dp"
+                android:topRightRadius="15dp"
+                android:bottomRightRadius="15dp"
+                android:bottomLeftRadius="15dp"
+                />
+            <solid android:color="@color/deepskyblue"/>
+        </shape>
+    </item>
+
+    <!--正常状态-->
+    <item android:state_pressed="false" android:state_enabled="false">
+        <shape >
+            <corners android:topLeftRadius="15dp"
+                android:topRightRadius="15dp"
+                android:bottomRightRadius="15dp"
+                android:bottomLeftRadius="15dp"
+                />
+
+            <solid android:color="#FFFFFF"/>
+        </shape>
+    </item>
+
+</selector>
+
+
