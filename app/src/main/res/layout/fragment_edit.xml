@@ -8,12 +8,12 @@
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="编辑"
         android:textColor="@color/white"
-        android:textSize="21dp"></TextView>
+        android:textSize="17dp"></TextView>
 
     <RadioGroup
         android:id="@+id/rg_tab_bar_edit"

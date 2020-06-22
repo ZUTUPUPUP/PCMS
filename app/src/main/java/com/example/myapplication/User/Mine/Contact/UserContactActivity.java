@@ -48,7 +48,7 @@ public class UserContactActivity extends AppCompatActivity {
         userName = getIntent.getStringExtra("userName");  //System.out.println(userName);
         contactDao = new ContactDao(this);
         scrollView = (ScrollView)findViewById(R.id.sv);
-        showListView = (ListView) findViewById(R.id.show_listView);
+        showListView = (ListView) findViewById(R.id.uc_show_listView);
     }
     private void getHistoryContact() {
         //开延迟，使得可以先显示底部最新消息
@@ -71,6 +71,10 @@ public class UserContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Contact contact= new Contact(-1,null,userName,"admin",ed_input.getText().toString());
+                Calendar calendar= Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                String nowDate=(sdf.format(calendar.getTime()));
+                contact.setTimestamp(nowDate);
                 contactDao.insertOneContact(contact);
                 //插入一个聊天记录后要刷新ListVeiw
                 contactList.add(contact);

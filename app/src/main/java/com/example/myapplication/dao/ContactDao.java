@@ -25,10 +25,7 @@ public class ContactDao {
     public void insertOneContact(Contact contact){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
-        Calendar calendar= Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        String nowDate=(sdf.format(calendar.getTime()));
-        values.put("date",nowDate);
+        values.put("date",contact.getTimestamp());
         values.put("senderId",contact.getSenderId());
         values.put("receiverId",contact.getReceiverId());
         values.put("mas",contact.getMas());

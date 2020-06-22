@@ -8,10 +8,10 @@
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:text="admin"
         android:textColor="@color/white"
-        android:textSize="21dp"
+        android:textSize="17dp"
         android:gravity="center"
         android:background="@color/colorAccent"
         ></TextView>
@@ -27,7 +27,7 @@
         android:layout_marginBottom="0dp">
 
         <com.example.myapplication.utils.Contact.ListViewForScrollView
-            android:id="@+id/show_listView"
+            android:id="@+id/uc_show_listView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:divider="@drawable/list_view_divider"

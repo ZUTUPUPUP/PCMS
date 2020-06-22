@@ -4,24 +4,24 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_width="match_parent">
+
     <LinearLayout
         android:id="@+id/LL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/shape_round_textview"
             android:gravity="center"
             android:text="A"
             android:textColor="@color/white"
-            android:textSize="17dp">
+            android:textSize="14dp">
 
         </TextView>
 
@@ -42,6 +42,7 @@
             android:textColor="@color/white"
             android:textSize="13.5dp"></TextView>
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv3"
         android:layout_below="@id/LL"

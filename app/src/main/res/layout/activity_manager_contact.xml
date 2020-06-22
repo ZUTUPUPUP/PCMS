@@ -9,12 +9,11 @@
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
         android:text="admin"
         android:textColor="@color/white"
-        android:textSize="21dp"
-        android:gravity="center"
-        android:background="@color/colorAccent"
-        ></TextView>
+        android:textSize="15dp"></TextView>
 
     <ScrollView
         android:id="@+id/sv"

@@ -32,10 +32,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into user values(null, 'admin1', 'e15015a3b9df6b0da040e2e557a7150c', 'admin1', '男', '1', 1);");
         db.execSQL("insert into user values(null, 'admin2', 'e15015a3b9df6b0da040e2e557a7150c', 'admin2', '男', '1', 1);");
         db.execSQL("insert into user values(null, 'admin3', 'e15015a3b9df6b0da040e2e557a7150c', 'admin3', '男', '1', 1);");
-        db.execSQL("insert into user values(null, 'user', 'e15015a3b9df6b0da040e2e557a7150c', 'user', '女', '1', 2);");
-        db.execSQL("insert into user values(null, 'user1', 'e15015a3b9df6b0da040e2e557a7150c', 'user1', '女', '1', 2);");
-        db.execSQL("insert into user values(null, 'user2', 'e15015a3b9df6b0da040e2e557a7150c', 'user2', '女', '1', 2);");
-        db.execSQL("insert into user values(null, 'user3', 'e15015a3b9df6b0da040e2e557a7150c', 'user3', '女', '1', 2);");
+        db.execSQL("insert into user values(null, 'user', 'e15015a3b9df6b0da040e2e557a7150c', '用户', '女', '1', 2);");
+        db.execSQL("insert into user values(null, 'user1', 'e15015a3b9df6b0da040e2e557a7150c', '用一', '女', '1', 2);");
+        db.execSQL("insert into user values(null, 'user2', 'e15015a3b9df6b0da040e2e557a7150c', '用二', '女', '1', 2);");
+        db.execSQL("insert into user values(null, 'user3', 'e15015a3b9df6b0da040e2e557a7150c', '用三', '女', '1', 2);");
+        db.execSQL("insert into user values(null, '201708024119', 'e15015a3b9df6b0da040e2e557a7150c', '刘勇', '女', '1', 2);");
+        db.execSQL("insert into user values(null, '201708024103', 'e15015a3b9df6b0da040e2e557a7150c', '孙艺苹', '女', '1', 2);");
+        db.execSQL("insert into user values(null, '201708024104', 'e15015a3b9df6b0da040e2e557a7150c', '张萌', '女', '1', 2);");
+        db.execSQL("insert into user values(null, '201708024105', 'e15015a3b9df6b0da040e2e557a7150c', '刘海铭', '女', '1', 2);");
+        db.execSQL("insert into user values(null, '201708024106', 'e15015a3b9df6b0da040e2e557a7150c', '王强强', '女', '1', 2);");
+        db.execSQL("insert into user values(null, '201708024107', 'e15015a3b9df6b0da040e2e557a7150c', '陈博', '女', '1', 2);");
 
         //院系表
         db.execSQL(DepTable.CREATE_TAB);
