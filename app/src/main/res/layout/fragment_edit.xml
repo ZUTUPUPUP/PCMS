@@ -25,11 +25,13 @@
         <RadioButton
             android:id="@+id/rb_edit_news"
             style="@style/tab_menu_item"
+            android:textSize="15dp"
             android:text="@string/tab_menu_news" />
 
         <RadioButton
             android:id="@+id/rb_edit_notice"
             style="@style/tab_menu_item"
+            android:textSize="15dp"
             android:text="@string/tab_menu_notice" />
 
 

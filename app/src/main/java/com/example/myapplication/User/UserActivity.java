@@ -1,7 +1,10 @@
 package com.example.myapplication.User;
 
 
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -32,12 +35,26 @@ public class UserActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
         setContentView(R.layout.activity_user);
         mAdapter = new UserAdapter(getSupportFragmentManager(),1);
         bindViews();
+        buildUI();
         rb_home.setChecked(true);
     }
-
+    public  void buildUI(){
+        //设置底部图标大小
+        RadioButton rb[]=new RadioButton[3];
+        rb[0]= (RadioButton)findViewById(R.id.rb_home);
+        rb[1] = (RadioButton)findViewById(R.id.rb_message);
+        rb[2]= (RadioButton)findViewById(R.id.rb_mine);
+        for(RadioButton rb1:rb){
+            Drawable drs[] = rb1.getCompoundDrawables();
+            Rect r = new Rect(0, 0, drs[1].getMinimumWidth()*10/48, drs[1].getMinimumHeight()*10/48);
+            drs[1].setBounds(r);
+            rb1.setCompoundDrawables(null,drs[1],null,null);
+        }
+    }
     private void bindViews() {
         txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);

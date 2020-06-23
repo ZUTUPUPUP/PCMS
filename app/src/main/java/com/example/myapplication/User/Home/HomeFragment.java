@@ -19,7 +19,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fg_content, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         TextView txt_content = (TextView) view.findViewById(R.id.txt_content);
         txt_content.setText("一.比赛宣传的新闻，点击可报名\n二.竞赛情况公布(奖项、排名等)");
         return view;

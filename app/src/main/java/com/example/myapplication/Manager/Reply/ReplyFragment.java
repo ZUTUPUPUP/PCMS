@@ -12,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.User.Mine.Contact.UserContactActivity;
 import com.example.myapplication.dao.ContactDao;
 import com.example.myapplication.domain.Contact;
 import com.example.myapplication.utils.Contact.UserListItemAdapter;
@@ -26,8 +24,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.example.myapplication.utils.Contact.UserListItemAdapter.mlength;
 
 
 public class ReplyFragment extends Fragment {
@@ -51,7 +47,7 @@ public class ReplyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_manager_contactlist, container, false);
+        view = inflater.inflate(R.layout.fragment_reply, container, false);
        // System.out.println(new String("ypy踩踩").length());
         initUI();
         getUserList();//读取用户列表

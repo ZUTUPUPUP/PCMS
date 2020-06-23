@@ -5,29 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".User.UserActivity">
 
-    <RelativeLayout
-        android:id="@+id/ly_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/bg_topbar">
-
-        <TextView
-            android:id="@+id/txt_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="用户界面"
-            android:textColor="@color/text_topbar"
-            android:textSize="18sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_alignParentBottom="true"
-            android:background="@color/div_white" />
-
-    </RelativeLayout>
 
 
     <RadioGroup
@@ -42,19 +19,19 @@
         <RadioButton
             android:id="@+id/rb_home"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_channel"
+            android:drawableTop="@drawable/tab_menu_main"
             android:text="@string/tab_menu_home" />
 
         <RadioButton
             android:id="@+id/rb_message"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_message"
+            android:drawableTop="@drawable/tab_menu_notice"
             android:text="@string/tab_menu_message" />
 
         <RadioButton
             android:id="@+id/rb_mine"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_better"
+            android:drawableTop="@drawable/tab_menu_my"
             android:text="@string/tab_menu_mine" />
 
 
@@ -72,5 +49,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/div_tab_bar"
-        android:layout_below="@id/ly_top_bar" />
+         />
 </RelativeLayout>
