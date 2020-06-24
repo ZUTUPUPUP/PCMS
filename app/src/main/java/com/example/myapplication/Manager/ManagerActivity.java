@@ -4,17 +4,21 @@ package com.example.myapplication.Manager;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-
-import androidx.appcompat.app.AppCompatActivity;;
-import androidx.viewpager.widget.ViewPager;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+;
 
 
 public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
@@ -37,6 +41,15 @@ public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPa
     public static final int PAGE_TWO = 1;
     public static final int PAGE_THREE = 2;
 
+    private boolean isExit = false;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                isExit = false;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,5 +130,19 @@ public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPa
                     break;
             }
         }
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if(!isExit) {//不退出
+                isExit = true;
+                Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+                //发送延迟消息
+                handler.sendEmptyMessageDelayed(1, 2000);
+                return true;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }
