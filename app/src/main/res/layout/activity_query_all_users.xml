@@ -51,13 +51,13 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="35dp"
             android:layout_weight="0.6"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:padding="5dp"
             android:onClick="UsersFindByUserName"
-            android:background="@mipmap/icon_search"/>
+            android:background="@mipmap/search"/>
     </LinearLayout>
 
     <ListView

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myapplication.Login_Register.MainActivity;
 import com.example.myapplication.Manager.Manage.Awards.AwardsActivity;
 import com.example.myapplication.Manager.Manage.Contest.ManagerContestActivity;
 import com.example.myapplication.Manager.Manage.ContestRegistryMamage.QueryAllContestRegistryActivity;
@@ -124,6 +125,13 @@ public class ManageFragment extends Fragment {
                 startActivity(intent1);
             }
         });
+        view.findViewById(R.id.btn_manage_exit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+            }
+        });
     }
 
     private void updateManageNickName() {
@@ -182,7 +190,7 @@ public class ManageFragment extends Fragment {
 
     private void showManageMessage() {
         tv_manage_nickname.setText(user.getNickName());
-        tv_manage_username.setText("账号" + user.getUserName());
+        tv_manage_username.setText("账号：" + user.getUserName());
         tv_manage_dep.setText(depDao.findById(user.getDepartment_id()).getName());
         tv_manage_gender.setText(user.getGender());
     }

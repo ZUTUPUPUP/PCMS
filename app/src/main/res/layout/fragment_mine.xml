@@ -10,9 +10,9 @@
         android:layout_height="45dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="我的"
+        android:text="个人中心"
         android:textColor="@color/white"
-        android:textSize="17dp"></TextView>
+        android:textSize="17dp"/>
     <LinearLayout
         android:layout_below="@id/tv"
         android:layout_width="match_parent"
@@ -156,7 +156,7 @@
     <TextView
         android:id="@+id/txt_content"
         android:layout_width="match_parent"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="256dp"
         android:layout_height="200dp"
         android:text="文本框"
         android:gravity="center"
@@ -188,6 +188,20 @@
             />
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/btn_manage_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/btn_user_exit"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
 
 </RelativeLayout>

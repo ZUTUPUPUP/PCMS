@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.myapplication.Login_Register.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User.Mine.Contact.UserContactActivity;
 import com.example.myapplication.dao.DepDao;
@@ -52,6 +53,13 @@ public class MineFragment extends Fragment {
         updateUserPassWd();
         //点击事件修改昵称
         updateUserNickName();
+        view.findViewById(R.id.btn_manage_exit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+            }
+        });
         return view;
     }
 

@@ -201,7 +201,7 @@
                 android:layout_marginLeft="10dp"
                 android:padding="5dp"
                 android:onClick="findAllMessageByPrint"
-                android:background="@mipmap/icon_search"/>
+                android:background="@mipmap/search"/>
         </LinearLayout>
 
     </LinearLayout>

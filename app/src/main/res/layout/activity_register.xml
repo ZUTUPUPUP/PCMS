@@ -8,13 +8,14 @@
 
 
     <TextView
+        android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="注 册"
-        android:background="#ffffff"
+        android:layout_height="45dp"
+        android:background="@color/colorAccent"
         android:gravity="center"
-        android:textSize="30sp"/>
+        android:text="注 册"
+        android:textColor="@color/white"
+        android:textSize="17dp"/>
 
 
     <LinearLayout

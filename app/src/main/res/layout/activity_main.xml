@@ -92,7 +92,7 @@
             android:text="登 录"
             android:onClick="Login"
             android:background="@drawable/btn_main_login"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:layout_margin="10dp"
             android:layout_width="0dp"
@@ -102,9 +102,9 @@
         <!--按钮-->
         <Button
             android:id="@+id/btn_main_register"
-            android:text="注册"
+            android:text="注 册"
             android:background="@drawable/btn_main_login"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:layout_margin="10dp"
             android:layout_gravity="center"
@@ -152,7 +152,7 @@
             android:id="@+id/btn_login_admin"
             android:text="管理员模式"
             android:background="@drawable/btn_main_login"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             android:layout_margin="10dp"
             android:layout_gravity="center"
@@ -168,11 +168,12 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_main_login"
             android:onClick="LoginOnUser"
             android:text="用户模式"
             android:textColor="#ffffff"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </LinearLayout>
     <!--快捷测试按钮到此-->
     <LinearLayout
