@@ -71,7 +71,7 @@ public class UserActivity extends AppCompatActivity implements ViewPager.OnPageC
         }
     }
     private void bindViews() {
-        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
+//        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
         rb_home = (RadioButton) findViewById(R.id.rb_home);
         rb_message = (RadioButton) findViewById(R.id.rb_message);

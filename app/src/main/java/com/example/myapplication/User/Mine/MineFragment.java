@@ -74,12 +74,12 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final EditText editText = new EditText(getActivity());
-                editText.setHint(userName);
+                editText.setHint(user.getNickName());
                 editText.setSingleLine(true);
                 editText.setEllipsize(TextUtils.TruncateAt.MIDDLE);
                 //显示AlertDialog
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("修改昵称")
+                        .setTitle("修改姓名")
                         .setView(editText)
                         .setPositiveButton("修改", new DialogInterface.OnClickListener() {
                             @Override

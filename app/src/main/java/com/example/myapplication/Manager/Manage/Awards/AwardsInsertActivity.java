@@ -1,56 +1,83 @@
 package com.example.myapplication.Manager.Manage.Awards;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dao.AwardsDao;
 import com.example.myapplication.domain.AwardsInfo;
 
-public class AwardsInsertActivity extends AppCompatActivity implements View.OnClickListener{
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AwardsInsertActivity extends AppCompatActivity {
 
     private AwardsDao awardsDao;
-    private EditText ed_id, ed_name, ed_college, ed_type, ed_level;
-    private AwardsInfo awardsInfo;
-    private Button add;
+    private TextView STNumber, relName, depName, className, contestName, awardLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_awards_insert);
-        ed_id = findViewById(R.id.ed_id);
-        ed_name = findViewById(R.id.ed_name);
-        ed_college = findViewById(R.id.ed_college);
-        ed_type = findViewById(R.id.ed_type);
-        ed_level = findViewById(R.id.ed_level);
-        add = findViewById(R.id.but_add);
         awardsDao = new AwardsDao(this);
-        add.setOnClickListener(this);
-
+        bindUI();
     }
 
-    private void SqlInsert() {
-        AwardsInfo awardsInfo1 = new AwardsInfo();
-        awardsInfo1.setUserId(ed_id.getText().toString());
-        awardsInfo1.setUserName(ed_name.getText().toString());
-        awardsInfo1.setCollege(ed_college.getText().toString());
-        awardsInfo1.setCompetitionType(ed_type.getText().toString());
-        awardsInfo1.setAwardLevel(ed_level.getText().toString());
-        awardsDao.add(awardsInfo1);
-        Toast.makeText(AwardsInsertActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+    public void updateInsertSubmit(View v) {
+        String STNumber1 = STNumber.getText().toString().trim();
+        String relName1 = relName.getText().toString().trim();
+        String depName1 = depName.getText().toString().trim();
+        String className1 = className.getText().toString().trim();
+        String contestName1 = contestName.getText().toString().trim();
+        String awardLevel1 = awardLevel.getText().toString().trim();
+        if (STNumber1.length() != 12) {
+            Toast.makeText(this, "请输入正确的学号", Toast.LENGTH_SHORT).show();
+        } else if (contestName1.length() <= 0) {
+            Toast.makeText(this, "请输入比赛名称", Toast.LENGTH_SHORT).show();
+        } else if (awardLevel1.length() <= 0) {
+            Toast.makeText(this, "请输入奖项", Toast.LENGTH_SHORT).show();
+        } else if (awardsDao.findBySTNumberAndContestAndAward(STNumber1, contestName1, awardLevel1) != null) {
+            Toast.makeText(this, "当前奖项已经添加,请添加未添加的奖项", Toast.LENGTH_SHORT).show();
+        } else {
+            awardsDao.add(new AwardsInfo(null, STNumber1, relName1, className1, contestName1, awardLevel1, depName1));
+            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
-    @Override
-    public void onClick(View v) {
+    private void bindUI() {
+        STNumber = findViewById(R.id.et_update_award_STNumber);
+        relName = findViewById(R.id.et_update_award_relName);
+        depName = findViewById(R.id.et_update_award_depName);
+        className = findViewById(R.id.et_update_award_className);
+        contestName = findViewById(R.id.et_update_award_contestName);
+        awardLevel = findViewById(R.id.et_update_award_awardLevel);
+    }
+
+    public void click(View v) {
         switch (v.getId()) {
-            case R.id.but_add:
-                SqlInsert();
+            case R.id.iv_update_award_delSTNumber:
+                STNumber.setText("");
+                break;
+            case R.id.iv_update_award_delRelName:
+                relName.setText("");
+                break;
+            case R.id.iv_update_award_delDepName:
+                depName.setText("");
+                break;
+            case R.id.iv_update_award_delClassName:
+                className.setText("");
+                break;
+            case R.id.iv_update_award_delContestName:
+                contestName.setText("");
+                break;
+            case R.id.iv_update_award_delAwardLevel:
+                awardLevel.setText("");
+                break;
+            default:
                 break;
         }
     }

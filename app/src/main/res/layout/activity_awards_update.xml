@@ -1,70 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent"
-    tools:context=".Manager.Manage.Awards.AwardsUpdateActivity">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="修改学生奖项信息"
+        android:textColor="@color/white"
+        android:textSize="17dp"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:maxLength="12"
+            android:text="学 号："
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_update_award_STNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="201708024103"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_update_award_delSTNumber"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:onClick="click"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_del" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="姓 名："
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_update_award_relName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="张三"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_update_award_delRelName"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:onClick="click"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_del" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="学 院："
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_update_award_depName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="计算机学院"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_update_award_delDepName"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:onClick="click"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_del" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="班 级："
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_update_award_className"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="计科171"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_update_award_delClassName"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:onClick="click"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_del" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="竞 赛："
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_update_award_contestName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="第十届校赛"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_update_award_delContestName"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:onClick="click"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_del" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="奖 项："
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_update_award_awardLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="最佳新人奖"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_update_award_delAwardLevel"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:onClick="click"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_del" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#47acea" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/btn_main_login"
+        android:textColor="#ffffff"
+        android:text="确    定"
+        android:onClick="updateAwardSubmit"
+        android:clickable="true"
+        android:textSize="20sp"/>
 
     <RelativeLayout
-        android:id="@+id/ly_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/bg_topbar">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txt_topbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="修改获奖信息"
-            android:textColor="@color/text_topbar"
-            android:textSize="18sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/div_white" />
-
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="该页面为重复修改,修改成功后请手动退出" />
     </RelativeLayout>
-    <EditText android:id="@+id/ed_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入学号"
-        android:layout_below="@+id/ly_top_bar"/>
 
-    <EditText android:id="@+id/ed_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入姓名"
-        android:layout_below="@+id/ed_id"/>
-
-    <EditText android:id="@+id/ed_college"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入专业"
-        android:layout_below="@+id/ed_name"/>
-
-    <EditText android:id="@+id/ed_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入比赛类型"
-        android:layout_below="@+id/ed_college"/>
-
-    <EditText android:id="@+id/ed_level"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入获奖等级"
-        android:layout_below="@+id/ed_type"/>
-
-
-    <Button android:id="@+id/but_modify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/awards_button_shap"
-        android:hint="点击修改"
-        android:layout_below="@+id/ed_level"/>
-
-</RelativeLayout>
+</LinearLayout>

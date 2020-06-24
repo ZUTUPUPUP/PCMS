@@ -120,9 +120,7 @@ public class ManageFragment extends Fragment {
         iv_manage_awards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1=new Intent();
-                intent1.setClass(getActivity(), AwardsActivity.class);
-                startActivity(intent1);
+                startActivity(new Intent(getActivity(), AwardsActivity.class));
             }
         });
         view.findViewById(R.id.btn_manage_exit).setOnClickListener(new View.OnClickListener() {
@@ -139,12 +137,12 @@ public class ManageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final EditText editText = new EditText(getActivity());
-                editText.setHint(userName);
+                editText.setHint(user.getNickName());
                 editText.setSingleLine(true);
                 editText.setEllipsize(TextUtils.TruncateAt.MIDDLE);
                 //显示AlertDialog
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("修改昵称")
+                        .setTitle("修改姓名")
                         .setView(editText)
                         .setPositiveButton("修改", new DialogInterface.OnClickListener() {
                             @Override

@@ -75,7 +75,7 @@ public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPa
         }
     }
     private void bindViews() {
-        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
+//        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
         rb_edit = (RadioButton) findViewById(R.id.rb_edit);
         rb_manage = (RadioButton) findViewById(R.id.rb_manage);

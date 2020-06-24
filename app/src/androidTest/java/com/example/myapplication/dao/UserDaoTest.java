@@ -22,18 +22,18 @@ public class UserDaoTest {
     @Test
     public void add() {
         UserDao dao = new UserDao(context);
-        if(dao.findByUserName("201708024xx1") == null) {
+        if(dao.findByUserName("201708024xx1") != null) {
             Log.v("MyInfo", "该用户名已经存在");
         } else {
             String passwd = MD5Utils.md5("222");
-            dao.add(new User(-1, "201708024xx1", passwd + "", "aaaaa", null, 1, 1));
+            dao.add(new User(null, "201708024xx1", passwd + "", "aaaaa", null, 1, 1));
         }
     }
 
     @Test
     public void deleteByUserName() {
         UserDao dao = new UserDao(context);
-        dao.deleteByUserName("201708024104");
+        dao.deleteByUserName("201708024xx1");
     }
 
     @Test
@@ -50,13 +50,13 @@ public class UserDaoTest {
     @Test
     public void findByUserName() {
         UserDao dao = new UserDao(context);
-        User user = dao.findByUserName("user");
+        User user = dao.findByUserName("201708024xx1");
         Log.v("MyInfo", user + "");
     }
 
     @Test
     public void findByLikeUserName() {
         UserDao dao = new UserDao(context);
-        Log.v("MyInfo", dao.findByLikeUserName("admin").toString());
+        Log.v("MyInfo", dao.findByLikeUserName("201708024xx1").toString());
     }
 }

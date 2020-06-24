@@ -3,7 +3,6 @@ package com.example.myapplication.Manager.Manage.Awards;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.example.myapplication.R;
 import com.example.myapplication.dao.AwardsDao;
 import com.example.myapplication.domain.AwardsInfo;
 
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 
 public class AwardsAdapter extends BaseAdapter {
@@ -58,40 +57,29 @@ public class AwardsAdapter extends BaseAdapter {
         final AwardsInfo java = list.get(position);
         if(convertView == null){
             hui = new HUi();
-            final int wo =position;
+            final int wo = position;
             awardsDao = new AwardsDao(context);
-            convertView = LayoutInflater.from(context).inflate(R.layout.awards_item, null);
-            hui.name = (TextView) convertView.findViewById(R.id.tv_name);
-            hui.college = (TextView) convertView.findViewById(R.id.tv_college);
-            hui.level = (TextView) convertView.findViewById(R.id.tv_level);
-            hui.type = (TextView) convertView.findViewById(R.id.tv_type);
-            hui.update = (Button) convertView.findViewById(R.id.but_name);
-            hui.delete = (Button) convertView.findViewById(R.id.but_delete);
-
-            //
-            //修改按钮
-            hui.update.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context,AwardsUpdateActivity.class);
-                    int on = (int) hui.update.getTag();
-                    AwardsInfo awardsInfo = list.get(on);
-                    intent.putExtra("id",awardsInfo.getUserId());
-                    context.startActivity(intent);
-
-                }
-            });
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_awards, null);
+            hui.relName = convertView.findViewById(R.id.tv_item_query_award_relName);
+            hui.award = convertView.findViewById(R.id.tv_item_query_award_award);
+            hui.STNumber = convertView.findViewById(R.id.tv_item_query_award_STNumber);
+            hui.contestName = convertView.findViewById(R.id.tv_item_query_award_contestName);
+            hui.className = convertView.findViewById(R.id.tv_item_query_award_calssName);
+            hui.depName = convertView.findViewById(R.id.tv_item_query_award_depName);
+            hui.update = convertView.findViewById(R.id.tv_item_query_award_update_message);
+            hui.delete = convertView.findViewById(R.id.tv_item_query_award_delete_message);
             convertView.setTag(hui);
         }else{
             hui = (HUi) convertView.getTag();
         }
-
-        hui.update.setTag(position);
-        hui.name.setText(java.getUserName());
-        hui.college.setText(java.getCollege());
-        hui.type.setText(java.getCompetitionType());
-        hui.level.setText(java.getAwardLevel());
-        final String userId = java.getUserId();
+        final AwardsInfo awardsInfo = list.get(position);
+        hui.relName.setText(awardsInfo.getRelName());
+        hui.award.setText(awardsInfo.getAwardLevel());
+        hui.STNumber.setText(awardsInfo.getSTNumber());
+        hui.contestName.setText(awardsInfo.getContestName());
+        hui.contestName.setText(awardsInfo.getContestName());
+        hui.className.setText(awardsInfo.getClassName());
+        hui.depName.setText(awardsInfo.getDepName());
         //构建删除对话框
         hui.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,21 +90,29 @@ public class AwardsAdapter extends BaseAdapter {
                 builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        awardsDao.deleteByUserId(userId);
+                        awardsDao.deleteByUserId(awardsInfo.get_id());
                         list = awardsDao.findAll();
                         setList(list);
                         notifyDataSetChanged();
                         Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
                     }
                 }).show();
-
+            }
+        });
+        hui.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AwardsUpdateActivity.class);
+                intent.putExtra("ID", awardsInfo.get_id() + "");
+                Log.v("MyInfo", awardsInfo.get_id() + "");
+                context.startActivity(intent);
             }
         });
         return convertView;
     }
 
     class HUi {
-        TextView id,name,college,type,level;
-        Button update,delete;
+        TextView relName, award, STNumber, contestName, className, depName;
+        Button update, delete;
     }
 }

@@ -101,7 +101,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:text="姓 名："
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/et_update_contesregmessage_relname"
                 android:layout_width="0dp"
@@ -142,7 +143,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:text="班 级："
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/et_update_contesregmessage_class"
                 android:layout_width="0dp"
@@ -250,7 +252,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:text="邮 箱："
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/et_update_contesregmessage_email"
                 android:layout_width="0dp"

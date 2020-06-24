@@ -12,20 +12,20 @@ public class AwardsDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(AwardsTable.CREATE_TAB);
-        db.execSQL("insert into awards values('201801', '王平','计算机系', '蓝桥杯校赛','一等奖')");
-        db.execSQL("insert into awards values('201802', '侯晓','计算机系', '蓝桥杯校赛','二等奖')");
-        db.execSQL("insert into awards values('201842', '王二','计算机系', '蓝桥杯校赛','冠军')");
-        db.execSQL("insert into awards values('201899', '赵信','计算机系', '蓝桥杯校赛','二等奖')");
-        db.execSQL("insert into awards values('201803', '刘海','计算机系', '蓝桥杯校赛','三等奖')");
-        db.execSQL("insert into awards values('201817', '刘晓','电信专业', 'acm选拔赛','一等奖')");
-        db.execSQL("insert into awards values('201827', '张高','物联网专业', 'acm选拔赛','二等奖')");
-        db.execSQL("insert into awards values('201832', '孙吴','计算机系', 'acm选拔赛','冠军')");
-        db.execSQL("insert into awards values('201877', '张楚','计算机系', 'acm校赛','一等奖')");
-        db.execSQL("insert into awards values('201867', '张良','计算机系', 'acm校赛','二等奖')");
-        db.execSQL("insert into awards values('201846', '王强','计算机系', 'acm校赛','冠军')");
-        db.execSQL("insert into awards values('201866', '黄静','计算机系', 'acm校赛','二等奖')");
-        db.execSQL("insert into awards values('201896', '孙策贤','计算机系', 'acm校赛','一等奖')");
-    }
+        db.execSQL("insert into awards values(null, '201708024103', '王平', '计科171', '蓝桥杯校赛', '一等奖', '计算机学院')");
+        db.execSQL("insert into awards values(null, '201708024104', '侯晓', '计科171', '蓝桥杯校赛', '二等奖', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024105', '王二', '计科171', '蓝桥杯校赛', '冠军', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024106', '赵信', '计科171', '蓝桥杯校赛', '二等奖', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024107', '刘海', '计科172', '蓝桥杯校赛', '三等奖', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024108', '刘晓', '计科172', 'acm选拔赛', '一等奖', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024109', '张高', '计科173', 'acm选拔赛', '二等奖', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024110', '孙吴', '计科174', 'acm选拔赛', '冠军', '理学院')");
+        db.execSQL("insert into awards values(null, '201708024111', '张楚', '计科175', 'acm校赛', '一等奖', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024112', '张良', '计科176', 'acm校赛', '二等奖', '能源与环境学院')");
+        db.execSQL("insert into awards values(null, '201708024113', '王强', '计科177', 'acm校赛', '冠军', '计算计学院')");
+        db.execSQL("insert into awards values(null, '201708024114', '黄静', '计科178', 'acm校赛', '二等奖', '理学院')");
+        db.execSQL("insert into awards values(null, '201708024115', '孙策贤', '计科179', 'acm校赛', '一等奖', '新闻与传播学院')");
+}
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
