@@ -74,7 +74,6 @@ public class ReplyFragment extends Fragment {
             if(longer) mes=mes+"...";
             contact.setMas(mes);
             contactList.add(contact);
-
         }
         adapter = new UserListItemAdapter(view.getContext(),R.layout.item_contactuserlist, contactList);
         sshowListView.setAdapter(adapter);
@@ -107,5 +106,4 @@ public class ReplyFragment extends Fragment {
         }
         return str;
     }
-
 }

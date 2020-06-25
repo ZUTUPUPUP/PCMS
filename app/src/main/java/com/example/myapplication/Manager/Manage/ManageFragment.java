@@ -17,6 +17,7 @@ import com.example.myapplication.Login_Register.MainActivity;
 import com.example.myapplication.Manager.Manage.Awards.AwardsActivity;
 import com.example.myapplication.Manager.Manage.Contest.ManagerContestActivity;
 import com.example.myapplication.Manager.Manage.ContestRegistryMamage.QueryAllContestRegistryActivity;
+import com.example.myapplication.Manager.Manage.Notice.NoticeActivity;
 import com.example.myapplication.Manager.Manage.UserManage.QueryAllUsersActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.DepDao;
@@ -36,7 +37,7 @@ public class ManageFragment extends Fragment {
     private DepDao depDao;
     private Button btn_mine_update_msg;
     private TextView tv_mine_nickname, tv_mine_username, tv_mine_dep, tv_mine_gender;
-    private ImageView iv_manage_user, iv_manage_contest, iv_manage_register, iv_manage_awards;
+    private ImageView iv_manage_user, iv_manage_contest, iv_manage_register, iv_manage_awards, iv_manage_notice;
     User user = null;
     public ManageFragment() {
         // Required empty public constructor
@@ -123,6 +124,12 @@ public class ManageFragment extends Fragment {
                 startActivity(new Intent(getActivity(), AwardsActivity.class));
             }
         });
+        iv_manage_notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), NoticeActivity.class));
+            }
+        });
         view.findViewById(R.id.btn_manage_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,5 +210,6 @@ public class ManageFragment extends Fragment {
         iv_manage_contest = view.findViewById(R.id.iv_manage_contest);
         iv_manage_register = view.findViewById(R.id.iv_manage_register);
         iv_manage_awards = view.findViewById(R.id.iv_manage_awards);
+        iv_manage_notice = view.findViewById(R.id.iv_manage_notice);
     }
 }

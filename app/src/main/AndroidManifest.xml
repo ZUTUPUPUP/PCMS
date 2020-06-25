@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Manager.Reply.ContactOneUserActivity" android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".Manager.Manage.ContestRegistryMamage.UpdateContestRegistryMessage"></activity>
+        <activity android:name=".Manager.Manage.Notice.NoticeSendActivity"></activity>
+        <activity android:name=".Manager.Manage.Notice.NoticeInsertActivity" />
+        <activity
+            android:name=".Manager.Reply.ContactOneUserActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Manager.Manage.ContestRegistryMamage.UpdateContestRegistryMessage" />
         <activity android:name=".Manager.Manage.ContestRegistryMamage.QueryAllContestRegistryActivity" />
         <activity android:name=".Manager.Manage.Contest.ModifyContestActivity" />
         <activity android:name=".Manager.Manage.Contest.AddContestActivity" />
@@ -32,6 +36,7 @@
         <activity android:name=".Manager.Manage.Awards.AwardsQueryActivity" />
         <activity android:name=".Manager.Manage.Awards.AwardsInsertActivity" />
         <activity android:name=".Manager.Manage.Awards.AwardsUpdateActivity" />
+        <activity android:name=".Manager.Manage.Notice.NoticeActivity" />
         <activity android:name=".Manager.Manage.Contest.ManagerContestActivity" />
     </application>
 
