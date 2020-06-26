@@ -6,21 +6,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.myapplication.Manager.Edit.EditFragment;
+
 import com.example.myapplication.Manager.Manage.ManageFragment;
+import com.example.myapplication.Manager.News.NewsFragment;
 import com.example.myapplication.Manager.Reply.ReplyFragment;
 
 public class ManagerAdapter extends FragmentPagerAdapter {
 
     private final int PAGER_COUNT = 3;
-    private EditFragment editFragment = null;
+    private NewsFragment editFragment = null;
     private ManageFragment manageFragment = null;
     private ReplyFragment replyFragment = null;
 
 
     public ManagerAdapter(FragmentManager fm,int w) {
         super(fm,w);
-        editFragment = new EditFragment();
+        editFragment = new NewsFragment();
         manageFragment = new ManageFragment();
         replyFragment = new ReplyFragment();
     }

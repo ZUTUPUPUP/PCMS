@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="input_style">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textSize">14.5dp</item>
+    </style>
+</resources>

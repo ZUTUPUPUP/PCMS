@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="预览"
+        android:textColor="@color/white"
+        android:textSize="17dp"/>
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_margin="10dp"
+        android:layout_below="@id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/e0"
+                style="@style/input_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:textSize="22dp">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/e1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerInside">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/e2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            </TextView>
+
+            <Button
+                android:id="@+id/e3"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_sendmassage"
+                android:gravity="center"
+                >
+
+            </Button>
+
+            <ImageView
+                android:id="@+id/e4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               >
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/e5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                >
+
+            </TextView>
+
+            <Button
+                android:id="@+id/e6"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_sendmassage"
+                android:gravity="center"
+               >
+
+            </Button>
+
+            <ImageView
+                android:id="@+id/e7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+             >
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/e8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+              >
+
+            </TextView>
+
+            <Button
+                android:id="@+id/e9"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_sendmassage"
+                android:gravity="center"
+               >
+
+            </Button>
+
+            <ImageView
+                android:id="@+id/e10"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+               >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/e11"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+               >
+            </TextView>
+
+            <Button
+                android:id="@+id/e12"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_sendmassage"
+                android:gravity="center"
+               >
+            </Button>
+
+            <Button
+                android:id="@+id/perShow"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_sendmassage"
+                android:text="发布新闻"
+                android:textColor="@color/white"
+                android:textSize="18dp">
+
+            </Button>
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

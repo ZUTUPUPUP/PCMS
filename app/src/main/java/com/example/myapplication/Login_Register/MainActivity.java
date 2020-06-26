@@ -1,8 +1,10 @@
 package com.example.myapplication.Login_Register;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +17,12 @@ import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.MD5Utils;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,6 +31,12 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private EditText et_user_name, et_passWd;//编辑框
     private UserDao dao;
+    private static final int PERMISSION_REQUEST = 1001; //申请权限
+    //申请权限
+    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.READ_EXTERNAL_STORAGE};
+    //申请权限
+    List<String> permissionsList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -31,8 +44,47 @@ public class MainActivity extends AppCompatActivity {
         //设置此界面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         bindUI();
+        initPermissions();//申请权限
         dao = new UserDao(this);
     }
+    /**
+     * 请求权限
+     */
+    private void initPermissions() {
+        permissionsList.clear();
+
+        //判断哪些权限未授予
+        for(String permission : permissions){
+            if(ActivityCompat.checkSelfPermission(this,permission)!= PackageManager.PERMISSION_GRANTED){
+                permissionsList.add(permission);
+            }
+        }
+
+        //请求权限
+        if(!permissionsList.isEmpty()){
+            String[] permissions = permissionsList.toArray(new String[permissionsList.size()]);//将List转为数组
+            ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST);
+        }
+    }
+
+    /**
+     * 权限回调,
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case PERMISSION_REQUEST:
+                break;
+            default:
+                break;
+        }
+    }
+
 
     //获取界面控件
     private void bindUI() {
