@@ -59,7 +59,7 @@ public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPa
         mAdapter = new ManagerAdapter(getSupportFragmentManager(),1);
         buildUI();
         bindViews();
-        rb_manage.setChecked(true);
+        rb_edit.setChecked(true);
     }
     public  void buildUI(){
         //设置底部图标大小

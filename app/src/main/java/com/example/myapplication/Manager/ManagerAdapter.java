@@ -39,7 +39,7 @@ public class ManagerAdapter extends FragmentPagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         System.out.println("position Destory" + position);
-        super.destroyItem(container, position, object);
+       // super.destroyItem(container, position, object);
     }
 
     @Override
