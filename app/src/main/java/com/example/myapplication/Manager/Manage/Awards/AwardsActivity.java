@@ -79,7 +79,7 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(new Intent(this,AwardsInsertActivity.class));
                 break;
             case R.id.but_queryOrder:
-//                startActivity(new Intent(this,AwardsQueryActivity.class));
+                startActivity(new Intent(this, AwardsStatisticsActivity.class));
                 break;
         }
     }

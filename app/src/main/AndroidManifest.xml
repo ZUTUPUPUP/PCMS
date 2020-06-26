@@ -33,7 +33,7 @@
         <activity android:name=".Login_Register.RegisterActivity" />
         <activity android:name=".User.UserActivity" />
         <activity android:name=".Manager.Manage.Awards.AwardsActivity" />
-        <activity android:name=".Manager.Manage.Awards.AwardsQueryActivity" />
+        <activity android:name=".Manager.Manage.Awards.AwardsStatisticsActivity" />
         <activity android:name=".Manager.Manage.Awards.AwardsInsertActivity" />
         <activity android:name=".Manager.Manage.Awards.AwardsUpdateActivity" />
         <activity android:name=".Manager.Manage.Notice.NoticeActivity" />

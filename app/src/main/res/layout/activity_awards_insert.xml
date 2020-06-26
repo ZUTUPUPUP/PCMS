@@ -11,7 +11,7 @@
         android:layout_height="45dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="添 加 获 奖 信 息"
+        android:text="添加获奖信息"
         android:textColor="@color/white"
         android:textSize="17dp"/>
 
