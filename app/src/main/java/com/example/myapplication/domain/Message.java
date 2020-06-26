@@ -1,20 +1,22 @@
 package com.example.myapplication.domain;
 
-public class Notice {
+public class Message {
     private int _id; //编号
+    private String userId; //用户id
     private String title; //标题
     private String content; //内容
     private String time; //时间
-    private String receiver; //接收者学号
-    public Notice(){
+
+
+    public Message() {
 
     }
-    public Notice(int _id, String title, String content, String time, String receiver) {
+    public Message(int _id, String userId, String title, String content, String time) {
         this._id = _id;
+        this.userId = userId;
         this.title = title;
         this.content = content;
         this.time = time;
-        this.receiver = receiver;
     }
 
     public int get_id() {
@@ -23,6 +25,14 @@ public class Notice {
 
     public void set_id(int _id) {
         this._id = _id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -49,22 +59,14 @@ public class Notice {
         this.time = time;
     }
 
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
     @Override
     public String toString() {
-        return "Notice{" +
-                "_id=" + _id +
+        return "Message{" +
+                "_id='" + _id + '\'' +
+                ", userId='" + userId + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", time='" + time + '\'' +
-                ", receiver='" + receiver + '\'' +
                 '}';
     }
 }

@@ -61,7 +61,7 @@ public class NoticeAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_notice, null);
             hui.title = convertView.findViewById(R.id.tv_notice_title);
             hui.content = convertView.findViewById(R.id.tv_notice_content);
-            hui.time = convertView.findViewById(R.id.tv_notice_time);
+            hui.receiver = convertView.findViewById(R.id.tv_notice_receiver);
             hui.send = convertView.findViewById(R.id.tv_notice_edit);
             hui.delete = convertView.findViewById(R.id.tv_notice_delete);
             convertView.setTag(hui);
@@ -71,7 +71,7 @@ public class NoticeAdapter extends BaseAdapter {
         final Notice notice = list.get(position);
         hui.title.setText(notice.getTitle());
         hui.content.setText(notice.getContent());
-        hui.time.setText(notice.getTime());
+        hui.receiver.setText(notice.getReceiver());
 
         //构建删除对话框
         hui.delete.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class NoticeAdapter extends BaseAdapter {
         hui.send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, NoticeInsertActivity.class);
+                Intent intent = new Intent(context, NoticeSendActivity.class);
                 intent.putExtra("ID", notice.get_id() + "");
                 Log.v("MyInfo", notice.get_id() + "");
                 context.startActivity(intent);
@@ -105,7 +105,7 @@ public class NoticeAdapter extends BaseAdapter {
     }
 
     class HUi {
-        TextView title,content,time;
+        TextView title,content,receiver;
         Button send,delete;
     }
 }

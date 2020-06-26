@@ -1,12 +1,15 @@
 package com.example.myapplication.Manager.Manage.Notice;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -26,6 +29,7 @@ public class NoticeActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_notice);
         listView = findViewById(R.id.lv_notice_list);
         iv = findViewById(R.id.imageRightView);
@@ -49,4 +53,5 @@ public class NoticeActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         startActivity(new Intent(this, NoticeInsertActivity.class));
     }
+
 }

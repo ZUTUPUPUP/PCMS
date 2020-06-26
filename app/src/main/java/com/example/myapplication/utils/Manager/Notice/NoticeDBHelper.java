@@ -15,7 +15,10 @@ public class NoticeDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(NoticeTable.CREATE_TAB);
-        db.execSQL("insert into notice values(1, '比赛通知','新生校赛还有3个小时就要开始了，请比赛选手注意！','2020.6.24 15:37')");
+        db.execSQL("insert into notice values(1, '比赛通知','新生校赛还有3个小时就要开始了，请比赛选手注意！','2020.6.24 15:37','201708026119')");
+        db.execSQL("insert into notice values(4, '123','1234','2001','5855')");
+        db.execSQL("insert into notice values(3, '1243','41234','2101','7789')");
+        db.execSQL("insert into notice values(2, '1239','15234','24001','66554')");
     }
 
     @Override

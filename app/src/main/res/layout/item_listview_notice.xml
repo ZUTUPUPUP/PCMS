@@ -62,13 +62,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/tv_notice_time"
+                        android:id="@+id/tv_notice_receiver"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:ellipsize="middle"
                         android:background="@null"
-                        android:text="2020.6.22 15:37"
+                        android:text="默认发送全体成员"
                         android:layout_marginLeft="8dp"
                         android:padding="3dp"
                         android:textSize="13sp"/>
@@ -87,7 +87,7 @@
                 android:padding="3dp"
                 android:layout_marginRight="8dp"
                 android:background="@drawable/item_mine_update_message_selector"
-                android:text="发送编辑"
+                android:text="发 送"
                 android:focusable="false"
                 android:textColor="@color/black"
                 android:textSize="12dp" />

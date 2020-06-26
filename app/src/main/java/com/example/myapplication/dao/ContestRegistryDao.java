@@ -170,4 +170,29 @@ public class ContestRegistryDao {
         database.close();
         return list;
     }
+
+    /**
+     * 根据输入的比赛名称查询所有报名者的学号
+     * @return
+     */
+    public List<String> findAllUserIdByContestName(String ContestName){
+        List<String> list = new ArrayList<>();
+        //得到连接
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        /*
+         select userName
+         from contestregistry,user,Contest
+         where contestregistry.STNumber=user._id and contestregistry.contestId=contest.contestId and contest.contestName=contestName;
+        */
+        String sql="select userName from user, contestregistry, contest where contestregistry.STNumberId = user._id and contestregistry.contestId = contest.contestId and contest.contestName like '%" + ContestName + "%'";
+        Cursor cursor = database.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            String id=cursor.getString(cursor.getColumnIndex("userName"));
+            list.add(id);
+        }
+        //关闭连接
+        cursor.close();
+        database.close();
+        return list;
+    }
 }

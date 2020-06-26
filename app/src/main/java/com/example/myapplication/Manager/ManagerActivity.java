@@ -57,9 +57,9 @@ public class ManagerActivity extends AppCompatActivity implements ViewPager.OnPa
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
         setContentView(R.layout.activity_manager);
         mAdapter = new ManagerAdapter(getSupportFragmentManager(),1);
-        buildUI();
         bindViews();
-        rb_edit.setChecked(true);
+        buildUI();
+        rb_manage.setChecked(true);
     }
     public  void buildUI(){
         //设置底部图标大小

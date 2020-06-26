@@ -31,6 +31,7 @@ public class NoticeDao {
         values.put(NoticeTable.NOTICE_TITLE, notice.getTitle());
         values.put(NoticeTable.NOTICE_CONTENT, notice.getContent());
         values.put(NoticeTable.NOTICE_TIME, notice.getTime());
+        values.put(NoticeTable.NOTICE_RECEIVER, notice.getReceiver());
         long id = database.insert(NoticeTable.TAB_NAME, null, values);
         Log.v("MyInfo", "id = " + id);
         database.close();
@@ -59,6 +60,7 @@ public class NoticeDao {
         values.put(NoticeTable.NOTICE_TITLE, notice.getTitle());
         values.put(NoticeTable.NOTICE_CONTENT, notice.getContent());
         values.put(NoticeTable.NOTICE_TIME, notice.getTime());
+        values.put(NoticeTable.NOTICE_RECEIVER, notice.getReceiver());
         int updateCount = database.update(NoticeTable.TAB_NAME, values,  NoticeTable.NOTICE_ID + "=" + "'" + notice.get_id() + "'", null);
         Log.v("MyInfo", "updateCount = " + updateCount);
         //关闭连接
@@ -74,14 +76,15 @@ public class NoticeDao {
         //得到连接
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         //执行query select * from notice
-        Cursor cursor = database.query(NoticeTable.TAB_NAME, null, null, null, null, null, NoticeTable.NOTICE_ID + " desc");
+        Cursor cursor = database.query(NoticeTable.TAB_NAME, null, null, null, null, null, NoticeTable.NOTICE_ID+" desc");
         //从cursor取出所有数据,并且封装到List中
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);
             String title = cursor.getString(1);
             String content  = cursor.getString(2);
             String time = cursor.getString(3);
-            list.add(new Notice(_id, title, content, time));
+            String receiver = cursor.getString(4);
+            list.add(new Notice(_id, title, content, time, receiver));
         }
         //关闭连接
         cursor.close();
@@ -102,13 +105,35 @@ public class NoticeDao {
             String title = cursor.getString(1);
             String content  = cursor.getString(2);
             String time = cursor.getString(3);
-            notice = new Notice(id, title, content, time);
+            String receiver = cursor.getString(4);
+            notice = new Notice(id, title, content, time, receiver);
         }
         cursor.close();
         database.close();
         return notice;
     }
-
+    /**
+     * 查询空缺id
+     */
+    public int findEmptyNoticeId() {
+        //得到连接
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        //执行query select * from notice
+        Cursor cursor = database.query(NoticeTable.TAB_NAME, null, null, null, null, null, NoticeTable.NOTICE_ID);
+        //从cursor取出所有数据,并且封装到List中
+        int id=-1,sum=1;
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            if(_id!=sum){
+                id=sum;break;
+            }
+            ++sum;
+        }
+        //关闭连接
+        cursor.close();
+        database.close();
+        return id==-1?sum:id;
+    }
     /**
      * 根据标题查询部分通知
      * @return
@@ -118,13 +143,13 @@ public class NoticeDao {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         String sql="select * from notice where title like '%" + title + "%' order by _id desc;";
         Cursor cursor = database.rawQuery(sql, null);
-        Notice notice = null;
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);
             String _title = cursor.getString(1);
             String content  = cursor.getString(2);
             String time = cursor.getString(3);
-            list.add(new Notice(_id, _title, content, time));
+            String receiver = cursor.getString(4);
+            list.add(new Notice(_id, title, content, time, receiver));
         }
         cursor.close();
         database.close();
