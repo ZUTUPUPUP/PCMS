@@ -72,10 +72,12 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/contestMore"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/more" />
+                android:clickable="true"
+                app:srcCompat="@drawable/more"
+                android:focusable="true" />
 
 
         </LinearLayout>

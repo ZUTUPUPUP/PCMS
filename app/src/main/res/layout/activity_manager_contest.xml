@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="竞赛管理"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:background="#ffffff"
             android:gravity="center"/>
         <LinearLayout
@@ -33,6 +33,66 @@
                 android:onClick="OpenAddContest"
                 app:srcCompat="@android:drawable/ic_menu_add" />
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="5">
+
+                <EditText
+                    android:id="@+id/et_contestName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_mine_update_message_unselector"
+                    android:ellipsize="middle"
+                    android:hint="竞赛名称模糊查询"
+                    android:paddingStart="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="32dp"
+                    android:paddingBottom="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_contest_delContest"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@mipmap/icon_del"
+                    android:onClick="click"
+                    android:contentDescription="TODO" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0.6"
+                android:background="@mipmap/search"
+                android:onClick="findAllContestMessageByPrint"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
     </LinearLayout>
     <ListView
         android:id="@+id/manager_contest_list_view"

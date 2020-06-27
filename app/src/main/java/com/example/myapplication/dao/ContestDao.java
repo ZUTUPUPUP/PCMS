@@ -31,6 +31,20 @@ public class ContestDao {
         Log.v("Contest", "id = " + id);
         database.close();
     }
+    public List<Contest> querybyName(String Name){
+        List<Contest> contestList=new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor=database.rawQuery("select * from "+ContestTable.TAB_NAME+" where "+ContestTable.CONTEST_NAME+" like ?",new String[]{"%"+Name+"%"});
+        while(cursor.moveToNext()){
+            int id=cursor.getInt(0);
+            String name=cursor.getString(1);
+            String introduction=cursor.getString(2);
+            String time=cursor.getString(3);
+            String note=cursor.getString(4);
+            contestList.add(new Contest(id,name,introduction,time,note));
+        }
+        return contestList;
+    }
     public List<Contest> queryAll(){
         List<Contest> contestList=new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
