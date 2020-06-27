@@ -100,7 +100,7 @@ public class AwardsDao {
 
     public AwardsInfo findByUserId(int id) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.query(AwardsTable.TAB_NAME, null,  AwardsTable.AWARDS_ID + "=?", new String[]{id + ""}, null, null, null);
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null,  AwardsTable.AWARDS_ID + "=?", new String[]{id + ""}, null, null, AwardsTable.AWARDS_ID + " desc");
         AwardsInfo awardsInfo = null;
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);
@@ -156,4 +156,30 @@ public class AwardsDao {
         database.close();
         return list;
     }
+
+
+    /**
+     * 根据学号查询某一个人的获奖信息
+     * @param STNumber 学号
+     * @return 获奖信息
+     */
+    public List<AwardsInfo> findBySTNumber(String STNumber) {
+        List<AwardsInfo> list = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null,  AwardsTable.AWARDS_STNUMBER + "=?", new String[]{STNumber}, null, null, AwardsTable.AWARDS_ID + " desc");
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String id1 = cursor.getString(1);
+            String name  = cursor.getString(2);
+            String college = cursor.getString(3);
+            String competitionType = cursor.getString(4);
+            String awardLevel = cursor.getString(5);
+            String depName = cursor.getString(6);
+            list.add(new AwardsInfo(_id, id1, name, college, competitionType, awardLevel, depName));
+        }
+        cursor.close();
+        database.close();
+        return list;
+    }
+
 }

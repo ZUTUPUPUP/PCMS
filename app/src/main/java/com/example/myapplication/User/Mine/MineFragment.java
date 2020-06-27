@@ -40,7 +40,7 @@ public class MineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine, container, false);
-        TextView txt_content = (TextView) view.findViewById(R.id.txt_content);
+        TextView txt_content = view.findViewById(R.id.txt_content);
         txt_content.setText("竞赛信息管理\n留言互动管理\n获奖信息查询");
         bindUI();
         initContact();
@@ -53,6 +53,10 @@ public class MineFragment extends Fragment {
         updateUserPassWd();
         //点击事件修改昵称
         updateUserNickName();
+        //点击事件报名信息查询
+        findMineRegMessage();
+        //我的获奖
+        findMineAwardMessage();
         view.findViewById(R.id.btn_manage_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,8 +68,25 @@ public class MineFragment extends Fragment {
     }
 
     //点击事件报名信息查询
-    public void findMineRegMessage(View v) {
+    public void findMineRegMessage() {
+        view.findViewById(R.id.findMineRegMessage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+    }
+
+    //我的获奖点击事件
+    public void findMineAwardMessage() {
+        view.findViewById(R.id.findMineAwardMessage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MineAwardActivity.class);
+                intent.putExtra("userName", userName);
+                startActivity(intent);
+            }
+        });
     }
 
     //点击事件修改昵称

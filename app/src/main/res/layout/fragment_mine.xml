@@ -117,6 +117,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:background="@color/white"
+            android:layout_gravity="center"
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="30dp"
@@ -141,12 +142,54 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
                 <ImageView
+                    android:id="@+id/findMineRegMessage"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_weight="0.4"
                     android:padding="8dp"
                     android:layout_marginRight="10dp"
-                    android:onClick="findMineRegMessage"
+                    android:background="@mipmap/icon_right"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:padding="8dp"
+                android:background="@mipmap/icon_mine_award"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="获奖记录"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+                <ImageView
+                    android:id="@+id/findMineAwardMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.4"
+                    android:padding="8dp"
+                    android:layout_marginRight="10dp"
                     android:background="@mipmap/icon_right"/>
             </LinearLayout>
 

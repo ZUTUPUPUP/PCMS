@@ -27,4 +27,10 @@ public class AwardsDaoTest {
         AwardsDao awardsDao = new AwardsDao(context);
         Log.v("MyInfo", awardsDao.findAll().toString());
     }
+
+    @Test
+    public void findBySTNumber() {
+        AwardsDao awardsDao = new AwardsDao(context);
+        Log.v("MyInfo1", awardsDao.findBySTNumber("user").toString());
+    }
 }

@@ -25,6 +25,9 @@ public class AwardsDBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into awards values(null, '201708024113', '刘辉', '计科177', 'acm校赛', '冠军', '计算计学院')");
         db.execSQL("insert into awards values(null, '201708024114', '黄静', '计科178', 'acm校赛', '二等奖', '理学院')");
         db.execSQL("insert into awards values(null, '201708024115', '孙策贤', '计科179', 'acm校赛', '一等奖', '新闻与传播学院')");
+        db.execSQL("insert into awards values(null, 'user', '用户', '计科179', 'acm校赛', '一等奖', '计算机学院')");
+        db.execSQL("insert into awards values(null, 'user', '用户', '计科179', '蓝桥杯校赛', '一等奖', '计算机学院')");
+        db.execSQL("insert into awards values(null, 'user', '用户', '计科179', 'acm选拔赛', '一等奖', '计算机学院')");
 }
 
     @Override
