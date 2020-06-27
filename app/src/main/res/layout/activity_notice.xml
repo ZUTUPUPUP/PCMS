@@ -13,8 +13,7 @@
         android:orientation="horizontal"
         android:background="#ffffff"
         android:gravity="right"
-        android:backgroundTint="@color/colorAccent"
-        >
+        android:backgroundTint="@color/colorAccent">
         <ImageView
             android:id="@+id/imageRightView"
             android:layout_width="wrap_content"

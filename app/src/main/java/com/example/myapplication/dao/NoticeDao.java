@@ -141,7 +141,7 @@ public class NoticeDao {
     public List<Notice> findByTitle(String title) {
         List<Notice> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        String sql="select * from notice where title like '%" + title + "%' order by _id desc;";
+        String sql="select * from notice where title = '" + title + "' order by _id desc;";
         Cursor cursor = database.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);
@@ -149,7 +149,7 @@ public class NoticeDao {
             String content  = cursor.getString(2);
             String time = cursor.getString(3);
             String receiver = cursor.getString(4);
-            list.add(new Notice(_id, title, content, time, receiver));
+            list.add(new Notice(_id, _title, content, time, receiver));
         }
         cursor.close();
         database.close();

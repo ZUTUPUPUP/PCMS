@@ -47,10 +47,10 @@ public class NoticeSendActivity extends AppCompatActivity {
         context = NoticeSendActivity.this;
         String id = intent.getStringExtra("ID");
         Log.v("MyInfo", id + "");
-        userDao = new UserDao(NoticeSendActivity.this);
-        noticeDao = new NoticeDao(NoticeSendActivity.this);
-        messageDao = new MessageDao(NoticeSendActivity.this);
-        contestRegistryDao = new ContestRegistryDao(NoticeSendActivity.this);
+        userDao = new UserDao(context);
+        noticeDao = new NoticeDao(context);
+        messageDao = new MessageDao(context);
+        contestRegistryDao = new ContestRegistryDao(context);
         notice = noticeDao.findByNoticeId(Integer.valueOf(id));
         bindUI();
         showUI();
@@ -92,13 +92,12 @@ public class NoticeSendActivity extends AppCompatActivity {
             List<String> list = contestRegistryDao.findAllUserIdByContestName(receiver1);
             for(int i=0;i<list.size();++i){
                 String userId = list.get(i);
-                Log.v("部分用户ID",userId);
                 SendMsg(userId);
             }
             Toast.makeText(this, "通知已发送至部分用户", Toast.LENGTH_SHORT).show();
         } else {
             SendMsg(receiver1);
-            Toast.makeText(this, "通知已发送至特定用户", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "通知已发送至指定用户", Toast.LENGTH_SHORT).show();
         }
     }
     private void showUI() {

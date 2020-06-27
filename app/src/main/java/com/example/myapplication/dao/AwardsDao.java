@@ -140,7 +140,7 @@ public class AwardsDao {
     public List<AwardsInfo> findLikeByPrint(String STNumber, String ContestName, String Award) {
         List<AwardsInfo> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        String sql = "select * from awards where STNumber like '%" + STNumber + "%' and contestName like '%" + ContestName + "%' and awardLevel like '%" + Award + "%' order by _id desc;";
+        String sql = "select * from awards where STNumber = '" + STNumber + "' and contestName = '" + ContestName + "' and awardLevel = '" + Award + "' order by _id desc;";
         Cursor cursor = database.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);

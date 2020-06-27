@@ -49,13 +49,35 @@ public class MessageDao {
     }
 
     /**
+     * 根据id查询通知
+     * @return
+     */
+    public Message findById(int id){
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        String sql="select * from message where _id = '"+id+"' ;";
+        Cursor cursor = database.rawQuery(sql , null);
+        Message message = null;
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String userId = cursor.getString(1);
+            String title = cursor.getString(2);
+            String content = cursor.getString(3);
+            String time = cursor.getString(4);
+            message = new Message(_id, userId, title, content, time);
+        }
+        cursor.close();
+        database.close();
+        return message;
+    }
+
+    /**
      * 根据用户id查询部分通知
      * @return
      */
     public List<Message> findByUserId(String userId) {
         List<Message> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        String sql="select * from message where userId like '%" + userId + "%' order by _id desc;";
+        String sql="select * from message where userId = '"+userId+"' order by _id desc;";
         Cursor cursor = database.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
