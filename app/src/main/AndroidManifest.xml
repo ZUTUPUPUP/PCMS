@@ -36,6 +36,7 @@
             <activity android:name=".Manager.Manage.UserManage.QueryAllUsersActivity" />
             <!-- Manager.News -->
             <activity android:name=".Manager.News.NewsAdd" />
+            <activity android:name=".Manager.News.NewsOne"></activity>
             <activity android:name=".Manager.News.NewsPreview" />
             <activity android:name=".Manager.News.TemporaryAward" />
             <activity android:name=".Manager.News.TemporaryRegister" />
@@ -46,7 +47,7 @@
         <!-- User -->
         <activity android:name=".User.UserActivity" />
             <!-- User.Home -->
-
+            <activity android:name=".User.Home.NewsOne"></activity>
             <!-- User.Message -->
             <activity android:name=".User.Message.MessageDetialActivity"/>
             <!-- User.Mine -->

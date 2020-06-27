@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="预览"
+        android:text="新闻内容"
         android:textColor="@color/white"
         android:textSize="17dp"/>
 
@@ -27,65 +26,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="以下是新闻列表预览"
-                android:layout_height="wrap_content">
 
-            </TextView>
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="12dp"
-                android:padding="4dp"
-                android:background="@drawable/radius"
-                android:textColor="#8C8989"
-                android:text="2020-6-27 19:24"
-                ></TextView>
-            <TextView
-                android:id="@+id/head"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:textSize="40dp"
-                android:typeface="serif"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_below="@id/date"
-                android:gravity="center"
-                android:text="竞赛通知\n报名"
-                android:background="@color/hotpink"
-                ></TextView>
-            <TextView
-                android:id="@+id/brief"
-                android:layout_below="@id/head"
-                android:padding="5dp"
-                android:textSize="13.5dp"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:text="     第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/radius1"
-                android:layout_height="wrap_content">
-
-            </TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="以下是正文列表预览"
-                android:layout_height="wrap_content">
-
-            </TextView>
             <TextView
                 android:id="@+id/e0"
                 style="@style/input_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+
                 android:gravity="center"
                 android:textSize="22dp">
             </TextView>
-
+            <TextView
+                android:id="@+id/date"
+                android:layout_below="@id/LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginRight="20dp"
+                android:textSize="10dp"
+                android:textColor="#BDBDBD"
+                android:text="2019/08/12/12:00"
+                android:layout_marginBottom="20dp"
+                ></TextView>
             <ImageView
                 android:id="@+id/e1"
                 android:layout_width="wrap_content"
@@ -116,7 +78,7 @@
                 android:id="@+id/e4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               >
+                >
 
             </ImageView>
 
@@ -135,7 +97,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_sendmassage"
                 android:gravity="center"
-               >
+                >
 
             </Button>
 
@@ -143,7 +105,7 @@
                 android:id="@+id/e7"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-             >
+                >
 
             </ImageView>
 
@@ -151,7 +113,7 @@
                 android:id="@+id/e8"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-              >
+                >
 
             </TextView>
 
@@ -162,7 +124,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_sendmassage"
                 android:gravity="center"
-               >
+                >
 
             </Button>
 
@@ -170,14 +132,14 @@
                 android:id="@+id/e10"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-               >
+                >
             </ImageView>
 
             <TextView
                 android:id="@+id/e11"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-               >
+                >
             </TextView>
 
             <Button
@@ -187,21 +149,10 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_sendmassage"
                 android:gravity="center"
-               >
+                >
             </Button>
 
-            <Button
-                android:id="@+id/setNews"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_sendmassage"
-                android:text="发布新闻"
-                android:textColor="@color/white"
-                android:textSize="18dp">
 
-            </Button>
         </LinearLayout>
 
     </ScrollView>

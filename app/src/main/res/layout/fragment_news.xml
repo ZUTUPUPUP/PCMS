@@ -4,10 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Manager.News.NewsFragment">
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="新闻管理"
+        android:textColor="@color/white"
+        android:textSize="17dp"/>
+    <ScrollView
+        android:layout_below="@id/tv1"
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/add"
+        android:background="#66D6D6D6"
+        >
+        <com.example.myapplication.utils.Contact.ListViewForScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lv"
+            android:divider="@drawable/list_view_divider_null"
+
+            >
+        </com.example.myapplication.utils.Contact.ListViewForScrollView>
+
+    </ScrollView>
     <Button
         android:id="@+id/add"
         android:layout_width="50dp"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:background="@drawable/btn_shape_round"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"

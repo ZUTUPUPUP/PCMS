@@ -15,7 +15,9 @@ import com.example.myapplication.utils.News.PermisionUtils;
 public class NewsAdd extends AppCompatActivity {
 
     private EditText editText[];
+    private EditText listText[];
     private Button btn_preview;
+    private Intent getIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,11 @@ public class NewsAdd extends AppCompatActivity {
 
     }
     private void BuildUI() {
+        getIntent = this.getIntent();
+
+        listText =new EditText[2];
+        listText[0]=findViewById(R.id.head);
+        listText[1]=findViewById(R.id.brief);
         editText = new EditText[13];
         editText[0]=findViewById(R.id.e0);
         editText[1]=findViewById(R.id.e1);
@@ -48,6 +55,10 @@ public class NewsAdd extends AppCompatActivity {
                 for(int i=0;i<=12;i++){
                     intent.putExtra(Integer.toString(i),editText[i].getText().toString());
                 }
+                for(int i=0;i<2;i++){
+                    intent.putExtra(Integer.toString(i+100),listText[i].getText().toString());
+                }
+                intent.putExtra("userName",getIntent.getStringExtra("userName"));
                 startActivity(intent);
             }
         });

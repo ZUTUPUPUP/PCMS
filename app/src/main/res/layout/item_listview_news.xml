@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="12dp"
+            android:padding="4dp"
+            android:background="@drawable/radius"
+            android:textColor="#8C8989"
+            android:text="2020-6-27 19:24"
+            ></TextView>
+        <TextView
+            android:id="@+id/head"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:textSize="40dp"
+            android:typeface="serif"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_below="@id/date"
+            android:gravity="center"
+            android:text="竞赛通知\n报名"
+            android:background="@color/hotpink"
+            ></TextView>
+        <TextView
+            android:id="@+id/text"
+            android:layout_below="@id/head"
+            android:padding="5dp"
+            android:textSize="13.5dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:text="     第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/radius1"
+            android:layout_height="wrap_content">
+
+        </TextView>
+    </RelativeLayout>
+</RelativeLayout>
