@@ -1,9 +1,9 @@
 package com.example.myapplication.User.Mine;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,13 +27,14 @@ public class MineAwardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_mine_award);
         lv_mine_award = findViewById(R.id.lv_mine_award);
         userName = getIntent().getStringExtra("userName");
-        Log.v("MyInfo1", userName);
+        //Log.v("MyInfo1", userName);
         awardsDao = new AwardsDao(this);
         data = awardsDao.findBySTNumber(userName);
-        Log.v("MyInfo1", data.toString());
+//        Log.v("MyInfo1", data.toString());
         adapter = new MyAdapter();
         lv_mine_award.setAdapter(adapter);
     }

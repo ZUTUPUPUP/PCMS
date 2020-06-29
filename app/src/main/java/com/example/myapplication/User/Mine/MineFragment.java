@@ -72,7 +72,9 @@ public class MineFragment extends Fragment {
         view.findViewById(R.id.findMineRegMessage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), MineRegActivity.class);
+                intent.putExtra("userName", userName);
+                startActivity(intent);
             }
         });
     }

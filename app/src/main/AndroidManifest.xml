@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".User.Mine.MineRegActivity"></activity>
         <!-- Login_Register -->
         <activity android:name=".Login_Register.MainActivity">
             <intent-filter>
@@ -17,45 +18,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login_Register.RegisterActivity" />
-        <!-- Manager -->
-        <activity android:name=".Manager.ManagerActivity" />
-            <!-- Manager.Manage -->
-            <activity android:name=".Manager.Manage.Awards.AwardsActivity" />
-            <activity android:name=".Manager.Manage.Awards.AwardsStatisticsActivity" />
-            <activity android:name=".Manager.Manage.Awards.AwardsInsertActivity" />
-            <activity android:name=".Manager.Manage.Awards.AwardsUpdateActivity" />
-            <activity android:name=".Manager.Manage.Contest.AddContestActivity" />
-            <activity android:name=".Manager.Manage.Contest.ModifyContestActivity" />
-            <activity android:name=".Manager.Manage.Contest.ManagerContestActivity" />
-            <activity android:name=".Manager.Manage.ContestRegistryMamage.UpdateContestRegistryMessage" />
-            <activity android:name=".Manager.Manage.ContestRegistryMamage.QueryAllContestRegistryActivity" />
-            <activity android:name=".Manager.Manage.Notice.NoticeActivity" />
-            <activity android:name=".Manager.Manage.Notice.NoticeSendActivity" />
-            <activity android:name=".Manager.Manage.Notice.NoticeInsertActivity" />
-            <activity android:name=".Manager.Manage.UserManage.QueryAllUsersActivity" />
-            <!-- Manager.News -->
-            <activity android:name=".Manager.News.NewsAdd" />
-            <activity android:name=".Manager.News.NewsOne"></activity>
-            <activity android:name=".Manager.News.NewsPreview" />
-            <activity android:name=".Manager.News.TemporaryAward" />
-            <activity android:name=".Manager.News.TemporaryRegister" />
-            <!-- Manager.Reply -->
-            <activity
-                android:name=".Manager.Reply.ContactOneUserActivity"
-                android:windowSoftInputMode="adjustPan" />
-        <!-- User -->
-        <activity android:name=".User.UserActivity" />
-            <!-- User.Home -->
-            <activity android:name=".User.Home.NewsOne"></activity>
-            <!-- User.Message -->
-            <activity android:name=".User.Message.MessageDetialActivity"/>
-            <!-- User.Mine -->
-            <activity android:name=".User.Mine.MineAwardActivity" />
-                <!-- User.Mine.Contact -->
-                <activity
-                    android:name=".User.Mine.Contact.UserContactActivity"
-                    android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Login_Register.RegisterActivity" /> <!-- Manager -->
+        <activity android:name=".Manager.ManagerActivity" /> <!-- Manager.Manage -->
+        <activity android:name=".Manager.Manage.Awards.AwardsActivity" />
+        <activity android:name=".Manager.Manage.Awards.AwardsStatisticsActivity" />
+        <activity android:name=".Manager.Manage.Awards.AwardsInsertActivity" />
+        <activity android:name=".Manager.Manage.Awards.AwardsUpdateActivity" />
+        <activity android:name=".Manager.Manage.Contest.AddContestActivity" />
+        <activity android:name=".Manager.Manage.Contest.ModifyContestActivity" />
+        <activity android:name=".Manager.Manage.Contest.ManagerContestActivity" />
+        <activity android:name=".Manager.Manage.ContestRegistryMamage.UpdateContestRegistryMessage" />
+        <activity android:name=".Manager.Manage.ContestRegistryMamage.QueryAllContestRegistryActivity" />
+        <activity android:name=".Manager.Manage.Notice.NoticeActivity" />
+        <activity android:name=".Manager.Manage.Notice.NoticeSendActivity" />
+        <activity android:name=".Manager.Manage.Notice.NoticeInsertActivity" />
+        <activity android:name=".Manager.Manage.UserManage.QueryAllUsersActivity" /> <!-- Manager.News -->
+        <activity android:name=".Manager.News.NewsAdd" />
+        <activity android:name=".Manager.News.NewsOne" />
+        <activity android:name=".Manager.News.NewsPreview" />
+        <activity android:name=".Manager.News.TemporaryAward" />
+        <activity android:name=".Manager.News.TemporaryRegister" /> <!-- Manager.Reply -->
+        <activity
+            android:name=".Manager.Reply.ContactOneUserActivity"
+            android:windowSoftInputMode="adjustPan" /> <!-- User -->
+        <activity android:name=".User.UserActivity" /> <!-- User.Home -->
+        <activity android:name=".User.Home.NewsOne" /> <!-- User.Message -->
+        <activity android:name=".User.Message.MessageDetialActivity" /> <!-- User.Mine -->
+        <activity android:name=".User.Mine.MineAwardActivity" /> <!-- User.Mine.Contact -->
+        <activity
+            android:name=".User.Mine.Contact.UserContactActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
