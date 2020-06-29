@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp">
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -31,7 +33,7 @@
                     android:singleLine="true"
                     android:layout_gravity="center"
 
-                    android:background="@drawable/btn_mine_update_message_unselector"
+                    android:background="@drawable/et_manage_search"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:paddingLeft="12dp"
@@ -41,28 +43,24 @@
                     android:textSize="16sp"/>
 
                 <ImageView
-                    android:id="@+id/iv_contestreg_delContestName"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
-                    android:background="@mipmap/icon_del" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@mipmap/search"
+                    android:onClick="findAllMessageByPrint" />
             </RelativeLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp"/>
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -78,7 +76,7 @@
                     android:singleLine="true"
                     android:layout_gravity="center"
 
-                    android:background="@drawable/btn_mine_update_message_unselector"
+                    android:background="@drawable/et_manage_search"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:paddingLeft="12dp"
@@ -88,28 +86,24 @@
                     android:textSize="16sp"/>
 
                 <ImageView
-                    android:id="@+id/iv_contestreg_delUserName"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
-                    android:background="@mipmap/icon_del" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@mipmap/search"
+                    android:onClick="findAllMessageByPrint" />
             </RelativeLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -125,7 +119,7 @@
                     android:singleLine="true"
                     android:layout_gravity="center"
 
-                    android:background="@drawable/btn_mine_update_message_unselector"
+                    android:background="@drawable/et_manage_search"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:paddingLeft="12dp"
@@ -135,29 +129,24 @@
                     android:textSize="16sp"/>
 
                 <ImageView
-                    android:id="@+id/iv_contestreg_delDepName"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
-
-                    android:background="@mipmap/icon_del" />
+                    android:background="@mipmap/search"
+                    android:onClick="findAllMessageByPrint" />
             </RelativeLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -173,7 +162,7 @@
                     android:singleLine="true"
                     android:layout_gravity="center"
 
-                    android:background="@drawable/btn_mine_update_message_unselector"
+                    android:background="@drawable/et_manage_search"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:paddingLeft="12dp"
@@ -183,25 +172,15 @@
                     android:textSize="16sp"/>
 
                 <ImageView
-                    android:id="@+id/iv_contestreg_delClass"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
-
-                    android:background="@mipmap/icon_del" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@mipmap/search"
+                    android:onClick="findAllMessageByPrint" />
             </RelativeLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp"
-                android:onClick="findAllMessageByPrint"
-                android:background="@mipmap/search"/>
         </LinearLayout>
 
     </LinearLayout>

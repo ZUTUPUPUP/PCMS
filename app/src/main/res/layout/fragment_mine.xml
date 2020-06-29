@@ -24,12 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
+            android:padding="8dp"
             android:background="@drawable/ll_mine_user">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
                 android:padding="8dp"
                 android:layout_marginLeft="8dp"
                 android:src="@mipmap/icon_username" />
@@ -47,7 +48,7 @@
                     android:layout_marginLeft="8dp"
                     android:background="@null"
                     android:ellipsize="middle"
-                    android:padding="3dp"
+                    android:padding="4dp"
                     android:singleLine="true"
                     android:text="Max_n"
                     android:textColor="@color/black"
@@ -62,8 +63,8 @@
                     android:background="@null"
                     android:text="学号：20170802410x"
                     android:layout_marginLeft="8dp"
-                    android:padding="3dp"
-                    android:textSize="10sp"/>
+                    android:padding="4dp"
+                    android:textSize="13sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -78,8 +79,8 @@
                         android:background="@null"
                         android:text="计算机学院"
                         android:layout_marginLeft="8dp"
-                        android:padding="3dp"
-                        android:textSize="10sp"/>
+                        android:padding="4dp"
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_mine_gender"
@@ -90,8 +91,8 @@
                         android:ellipsize="middle"
                         android:text="女"
                         android:layout_marginLeft="8dp"
-                        android:padding="3dp"
-                        android:textSize="10sp"/>
+                        android:padding="4dp"
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -100,21 +101,21 @@
             <Button
                 android:id="@+id/btn_mine_update_msg"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:padding="3dp"
-                android:background="@drawable/item_mine_update_message_selector"
+                android:background="@drawable/btn_mine_and_user_update_passwd"
                 android:text="修改密码"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:background="@color/white"
             android:layout_gravity="center"

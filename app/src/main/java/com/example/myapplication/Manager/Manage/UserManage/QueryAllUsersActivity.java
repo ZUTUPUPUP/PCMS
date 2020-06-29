@@ -76,8 +76,6 @@ public class QueryAllUsersActivity extends AppCompatActivity {
         String userName = et_user_query_username.getText().toString();
         data = userDao.findByLikeUserName(userName);
         adapter.notifyDataSetChanged();
-    }
-    public void delUserName(View v) {
         et_user_query_username.setText("");
     }
 

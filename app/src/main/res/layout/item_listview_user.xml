@@ -2,16 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="6dp"
         android:orientation="vertical"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/ll_mine_user">
 
         <LinearLayout
@@ -19,12 +16,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="8dp"
-                android:layout_marginLeft="8dp"
-                android:src="@mipmap/icon_username" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:gravity="center"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:padding="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/icon_username" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,7 +48,7 @@
                     android:padding="3dp"
                     android:text="201708024103"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_item_query_nickname"
@@ -55,7 +60,8 @@
                     android:padding="3dp"
                     android:singleLine="true"
                     android:text="昵称：Max_n"
-                    android:textSize="10sp" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,7 +77,8 @@
                         android:text="学院：计算机学院"
                         android:layout_marginLeft="8dp"
                         android:padding="3dp"
-                        android:textSize="10sp"/>
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
 
                 </LinearLayout>
 
@@ -81,18 +88,22 @@
             <Button
                 android:id="@+id/tv_item_query_update_passwd"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:padding="3dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="36dp"
+                android:layout_weight="0.9"
+                android:padding="6dp"
                 android:background="@drawable/item_mine_update_message_selector"
                 android:text="修改密码"
                 android:focusable="false"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="12dp" />
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dadada" />
 
 
 </LinearLayout>

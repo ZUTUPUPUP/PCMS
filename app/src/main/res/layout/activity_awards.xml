@@ -9,175 +9,162 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-        <Button android:id="@+id/but_insert"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:background="@drawable/awards_button_shap"
-            android:text="添加获奖信息" />
-
-        <Button android:id="@+id/but_queryOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:background="@drawable/awards_button_shap"
-            android:text="分 类 统 计"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@color/white"
         android:orientation="vertical"
-        android:layout_marginTop="5dp">
+        android:background="@color/colorAccent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:orientation="horizontal">
-
-            <RelativeLayout
+            <Button android:id="@+id/but_insert"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:layout_gravity="center">
-                <EditText
-                    android:id="@+id/et_award_query_contestName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="middle"
-                    android:singleLine="true"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="#4892e1"
+                android:text="添加获奖信息"
+                android:textColor="@color/white"/>
 
-                    android:layout_gravity="center"
-
-                    android:background="@drawable/btn_mine_update_message_unselector"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="32dp"
-                    android:hint="竞赛,空值查询所有"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:id="@+id/iv_award_delContestName"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@mipmap/icon_del"
-                    android:onClick="click" />
-            </RelativeLayout>
-            <ImageView
+            <Button android:id="@+id/but_queryOrder"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="#4892e1"
+                android:textColor="@color/white"
+                android:text="获奖分类统计"/>
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:layout_gravity="center">
-                <EditText
-                    android:id="@+id/et_award_query_username"
-                    android:layout_width="match_parent"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ellipsize="middle"
-                    android:singleLine="true"
-                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:layout_gravity="center">
+                    <EditText
+                        android:id="@+id/et_award_query_contestName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
 
-                    android:background="@drawable/btn_mine_update_message_unselector"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="32dp"
-                    android:hint="学号,空值查询所有"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                        android:layout_gravity="center"
 
-                <ImageView
-                    android:id="@+id/iv_award_delUserName"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@mipmap/icon_del"
-                    android:onClick="click" />
-            </RelativeLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp" />
-        </LinearLayout>
+                        android:background="@drawable/et_manage_search"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="32dp"
+                        android:hint="竞赛,空值查询所有"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:onClick="findAllAwardMessageByPrint"
+                        android:background="@mipmap/search" />
+                </RelativeLayout>
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:layout_gravity="center">
-                <EditText
-                    android:id="@+id/et_award_query_award"
-                    android:layout_width="match_parent"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ellipsize="middle"
-                    android:singleLine="true"
-                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:layout_gravity="center">
+                    <EditText
+                        android:id="@+id/et_award_query_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:layout_gravity="center"
 
-                    android:background="@drawable/btn_mine_update_message_unselector"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="32dp"
-                    android:hint="奖项,空值查询所有"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                        android:background="@drawable/et_manage_search"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="32dp"
+                        android:hint="学号,空值查询所有"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
 
-                <ImageView
-                    android:id="@+id/iv_award_delAward"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:onClick="click"
-                    android:background="@mipmap/icon_del" />
-            </RelativeLayout>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="0.6"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp"
-                android:onClick="findAllAwardMessageByPrint"
-                android:background="@mipmap/search"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:onClick="findAllAwardMessageByPrint"
+                        android:background="@mipmap/search" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_gravity="center">
+                    <EditText
+                        android:id="@+id/et_award_query_award"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:layout_gravity="center"
+
+                        android:background="@drawable/et_manage_search"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="32dp"
+                        android:hint="奖项,空值查询所有"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:onClick="findAllAwardMessageByPrint"
+                        android:background="@mipmap/search" />
+                </RelativeLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

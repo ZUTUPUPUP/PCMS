@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +26,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class QueryAllContestRegistryActivity extends AppCompatActivity {
 
     private EditText et_contestreg_query_contestname, et_contestreg_query_username, et_contestreg_query_depname, et_contestreg_query_class;
-    private ImageView contest, user, dep, aClass;
     private ListView lv_contestreg_query_listview;
     private ContestRegistryDao contestRegistryDao;
     private List<ContestRegistryMessage> data;
@@ -40,7 +38,6 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_query_all_contest_registry);
         bindUI();
-        delAll();
         contestRegistryDao = new ContestRegistryDao(this);
         data = contestRegistryDao.findAll();
         adapter = new Myadapter();
@@ -72,32 +69,6 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
         });
     }
 
-    private void delAll() {
-        contest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_contestreg_query_contestname.setText("");
-            }
-        });
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_contestreg_query_username.setText("");
-            }
-        });
-        dep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_contestreg_query_depname.setText("");
-            }
-        });
-        aClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_contestreg_query_class.setText("");
-            }
-        });
-    }
 
     private void bindUI() {
         lv_contestreg_query_listview = findViewById(R.id.lv_contestreg_query_listview);
@@ -105,10 +76,6 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
         et_contestreg_query_username = findViewById(R.id.et_contestreg_query_username);
         et_contestreg_query_depname = findViewById(R.id.et_contestreg_query_depname);
         et_contestreg_query_class = findViewById(R.id.et_contestreg_query_class);
-        contest = findViewById(R.id.iv_contestreg_delContestName);
-        user = findViewById(R.id.iv_contestreg_delUserName);
-        dep = findViewById(R.id.iv_contestreg_delDepName);
-        aClass = findViewById(R.id.iv_contestreg_delClass);
     }
 
     @Override
@@ -125,6 +92,10 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
         String Class = et_contestreg_query_class.getText().toString().trim();
         data = contestRegistryDao.findLikeAllByPrint(contestName, userName, depName, Class);
         adapter.notifyDataSetChanged();
+        et_contestreg_query_contestname.setText("");
+        et_contestreg_query_username.setText("");
+        et_contestreg_query_depname.setText("");
+        et_contestreg_query_class.setText("");
     }
 
 

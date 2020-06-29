@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/btn_mine_update_message_unselector"
+                    android:background="@drawable/et_manage_search"
                     android:ellipsize="middle"
                     android:hint="竞赛名称模糊查询"
                     android:paddingStart="12dp"

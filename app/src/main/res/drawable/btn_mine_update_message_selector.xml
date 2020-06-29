@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
         <solid
-            android:color="#47acea"
+            android:color="@color/colorAccent"
             />
         <!-- 弧度-->
         <corners
-            android:radius="200dp"
+            android:radius="6dp"
             />
 
-        
         <stroke
-            android:color="@color/common_google_signin_btn_text_light_disabled"
-            android:width="1.0dp"
+            android:color="#dadada"
+            android:width="0.1dp"
             />
+
 </shape>

@@ -8,20 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/ll_mine_user">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="6dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
                 android:layout_marginLeft="8dp"
                 android:padding="8dp"
                 android:src="@mipmap/icon_username" />
@@ -106,17 +104,21 @@
             <Button
                 android:id="@+id/tv_item_query_contestreg_update_message"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:padding="3dp"
                 android:background="@drawable/item_mine_update_message_selector"
                 android:text="修 改"
                 android:focusable="false"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
+                android:textColor="@color/white"
+                android:textSize="13dp" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dadada" />
     </LinearLayout>
 
 

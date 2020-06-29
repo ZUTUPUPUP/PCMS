@@ -50,17 +50,12 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
         String STNumber = et_award_query_username.getText().toString().trim();
         String contestName = et_award_query_contestName.getText().toString().trim();
         String award = et_award_query_award.getText().toString().trim();
+        Log.v("MyInfo1", STNumber + " " + contestName + " " + award);
         list = awardsDao.findLikeByPrint(STNumber, contestName, award);
         awardsAdapter.setList(list);
-    }
-    public void click(View v) {
-        if (v.getId() == R.id.iv_award_delContestName) {
-            et_award_query_contestName.setText("");
-        } else if (v.getId() == R.id.iv_award_delUserName) {
-            et_award_query_username.setText("");
-        } else if (v.getId() == R.id.iv_award_delAward) {
-            et_award_query_award.setText("");
-        }
+        et_award_query_username.setText("");
+        et_award_query_contestName.setText("");
+        et_award_query_award.setText("");
     }
     //Activity创建或者从被覆盖、后台重新回到前台时被调用
     @Override
