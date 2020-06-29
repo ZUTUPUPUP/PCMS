@@ -35,7 +35,7 @@ public class ContestAdapter extends ArrayAdapter<Contest> {
             hui.contestNote = (TextView) convertView.findViewById(R.id.tv_item_query_contest_node);
             hui.contestMore=convertView.findViewById(R.id.contestMore);
         hui.contestImage.setImageResource(R.drawable.contest);
-        hui.contestName.setText(contest.getContestName());
+        hui.contestName.setText(contest.getContestName()+"(id:"+contest.getContestId()+")");
         hui.contestTime.setText(contest.getContestTime());
         hui.contestNote.setText(contest.getContestNote());
         hui.contestMore.setOnClickListener(new View.OnClickListener() {

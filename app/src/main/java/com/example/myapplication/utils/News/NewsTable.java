@@ -3,6 +3,7 @@ package com.example.myapplication.utils.News;
 public class NewsTable {
     public static final String TAB_NAME = "News";
     public static final String _id = "_id";
+    public static final String contestId= "contestId";
     public static final String date= "date";
     public static final String head="head";
     public static final String brief="brief";
@@ -15,6 +16,7 @@ public class NewsTable {
     public static final String CREATE_TAB = "create table "
             + TAB_NAME + "("
             + _id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + contestId + " varchar, "
             + date + " varchar, "+ head + " varchar, "+ brief + " varchar, "
             + t0 + " varchar, "+ t4 + " varchar, "+ t7 + " varchar, "+ t10 + " varchar, "
             + t1 + " varchar, "+ t5 + " varchar, "+ t8 + " varchar, "+ t11 + " varchar, "

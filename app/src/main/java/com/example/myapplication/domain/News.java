@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class News {
     private int _id;
+    private String contestId;
     private String head;//列表视图下的标题
     private String date;
     private String brief;//列表视图下的简介
@@ -16,6 +17,7 @@ public class News {
     public String toString() {
         return "News{" +
                 "_id=" + _id +
+                ", contestId='" + contestId + '\'' +
                 ", head='" + head + '\'' +
                 ", date='" + date + '\'' +
                 ", brief='" + brief + '\'' +
@@ -41,6 +43,14 @@ public class News {
 
     public void set_id(int _id) {
         this._id = _id;
+    }
+
+    public String getContestId() {
+        return contestId;
+    }
+
+    public void setContestId(String contestId) {
+        this.contestId = contestId;
     }
 
     public String getHead() {
@@ -171,8 +181,9 @@ public class News {
         this.t12 = t12;
     }
 
-    public News(int _id, String head, String date, String brief, String t0, String t1, String t2, String t3, String t4, String t5, String t6, String t7, String t8, String t9, String t10, String t11, String t12) {
+    public News(int _id, String contestId, String head, String date, String brief, String t0, String t1, String t2, String t3, String t4, String t5, String t6, String t7, String t8, String t9, String t10, String t11, String t12) {
         this._id = _id;
+        this.contestId = contestId;
         this.head = head;
         this.date = date;
         this.brief = brief;

@@ -35,7 +35,7 @@ public class NewsDao {
                     cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7),
                     cursor.getString(8), cursor.getString(9), cursor.getString(10),
                     cursor.getString(11), cursor.getString(12), cursor.getString(13), cursor.getString(14)
-                    , cursor.getString(15), cursor.getString(16)));
+                    , cursor.getString(15), cursor.getString(16),cursor.getString(17)));
         }
         //关闭连接
         cursor.close();
@@ -45,6 +45,7 @@ public class NewsDao {
     public void insertOne(News news){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
+        values.put("contestId",news.getContestId());
         values.put("date",news.getDate());
         values.put("head",news.getHead());
         values.put("brief",news.getBrief());
@@ -65,7 +66,7 @@ public class NewsDao {
                     cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7),
                     cursor.getString(8), cursor.getString(9), cursor.getString(10),
                     cursor.getString(11), cursor.getString(12), cursor.getString(13), cursor.getString(14)
-                    , cursor.getString(15), cursor.getString(16));
+                    , cursor.getString(15), cursor.getString(16),cursor.getString(17));
 
         }
         cursor.close();

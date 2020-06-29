@@ -18,6 +18,8 @@ public class NewsAdd extends AppCompatActivity {
     private EditText listText[];
     private Button btn_preview;
     private Intent getIntent;
+    private EditText cid;//竞赛id
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,6 @@ public class NewsAdd extends AppCompatActivity {
     }
     private void BuildUI() {
         getIntent = this.getIntent();
-
         listText =new EditText[2];
         listText[0]=findViewById(R.id.head);
         listText[1]=findViewById(R.id.brief);
@@ -51,6 +52,8 @@ public class NewsAdd extends AppCompatActivity {
         btn_preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cid = findViewById(R.id.cid);
+                final String contestId= cid.getText().toString();
                 Intent intent=new Intent(NewsAdd.this,NewsPreview.class);
                 for(int i=0;i<=12;i++){
                     intent.putExtra(Integer.toString(i),editText[i].getText().toString());
@@ -58,6 +61,7 @@ public class NewsAdd extends AppCompatActivity {
                 for(int i=0;i<2;i++){
                     intent.putExtra(Integer.toString(i+100),listText[i].getText().toString());
                 }
+                intent.putExtra("contestId",contestId);
                 intent.putExtra("userName",getIntent.getStringExtra("userName"));
                 startActivity(intent);
             }

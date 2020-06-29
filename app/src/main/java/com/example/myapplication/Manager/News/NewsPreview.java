@@ -66,7 +66,7 @@ public class NewsPreview extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                 String nowDate=(sdf.format(calendar.getTime()));
 
-                News news=new News(-1,nowDate,head.getText().toString(),brief.getText().toString(),getIntent.getStringExtra("0"),
+                News news=new News(-1,getIntent.getStringExtra("contestId"),nowDate,head.getText().toString(),brief.getText().toString(),getIntent.getStringExtra("0"),
                         getIntent.getStringExtra("1"),getIntent.getStringExtra("2"),getIntent.getStringExtra("3"),
                         getIntent.getStringExtra("4"),getIntent.getStringExtra("5"),getIntent.getStringExtra("6"),
                         getIntent.getStringExtra("7"),getIntent.getStringExtra("8"),getIntent.getStringExtra("9"),
@@ -74,6 +74,7 @@ public class NewsPreview extends AppCompatActivity {
                 newsDao.insertOne(news);
                 Toast.makeText(NewsPreview.this, "发布新闻成功", Toast.LENGTH_SHORT).show();
                 Intent nowIntent=new Intent(NewsPreview.this, ManagerActivity.class);
+                nowIntent.putExtra("cid",getIntent.getStringExtra("contestId"));
                 nowIntent.putExtra("ii",1);
                 nowIntent.putExtra("userName",getIntent.getStringExtra("userName"));
                 startActivity(nowIntent);

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Manager.News.TemporaryAward">
     <TextView
+        android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:text="获奖获奖获奖"
         android:layout_height="wrap_content">
