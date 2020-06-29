@@ -4,7 +4,7 @@
     android:useLevel="false"
     >
 
-    <solid android:color="#00BCD4" />
+    <solid android:color="#9E9D9D" />
 
     <size
         android:width="15dp"
