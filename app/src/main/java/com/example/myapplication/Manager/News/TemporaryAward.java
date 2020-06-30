@@ -54,6 +54,7 @@ public class TemporaryAward extends AppCompatActivity {
         String STNumber = et_award_query_STNumber.getText().toString().trim();
         data = awardsDao.findLikeByPrint(STNumber, contestName, "");
         adapter.notifyDataSetChanged();
+        et_award_query_STNumber.setText("");
     }
 
     class MyAdapter extends BaseAdapter {
