@@ -104,7 +104,7 @@
             <Button
                 android:id="@+id/tv_item_query_contestreg_update_message"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
                 android:layout_weight="0.8"
