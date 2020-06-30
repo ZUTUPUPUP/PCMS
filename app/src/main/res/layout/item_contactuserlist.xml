@@ -86,7 +86,7 @@
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
                     android:typeface="normal"
-                    android:text="yoyo踩踩踩00oWWW"
+
                     android:textSize="13dp">
 
                 </TextView>
@@ -102,7 +102,7 @@
         android:gravity="center"
         android:layout_alignParentRight="true"
         android:textSize="12.5dp"
-        android:text="17:49\n2020-6-22"
+        android:text="00:00\n0000-0-00"
         android:layout_height="match_parent"
 
         >

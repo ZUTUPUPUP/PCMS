@@ -18,9 +18,9 @@ public class NewsTable {
             + _id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + contestId + " varchar, "
             + date + " varchar, "+ head + " varchar, "+ brief + " varchar, "
-            + t0 + " varchar, "+ t4 + " varchar, "+ t7 + " varchar, "+ t10 + " varchar, "
-            + t1 + " varchar, "+ t5 + " varchar, "+ t8 + " varchar, "+ t11 + " varchar, "
-            + t2 + " varchar, "+ t6 + " varchar, "+ t9 + " varchar, "+ t12 + " varchar, "
-            + t3 + " varchar"
+            + t0 + " varchar, "+ t1 + " varchar, "+ t2 + " varchar, "+ t3 + " varchar, "
+            + t4 + " varchar, "+ t5 + " varchar, "+ t6 + " varchar, "+ t7 + " varchar, "
+            + t8 + " varchar, "+ t9+ " varchar, "+ t10 + " varchar, "+ t11 + " varchar, "
+            + t12 + " varchar"
             + ");";
 }

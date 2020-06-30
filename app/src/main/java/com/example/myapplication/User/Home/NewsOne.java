@@ -104,9 +104,10 @@ public class NewsOne extends AppCompatActivity {
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) button[i].getLayoutParams();
             lp.setMargins(10, 10, 10, 10);
             lp.height= 100;
-            button[i].setText(bt[i]);
+
             button[i].setLayoutParams(lp);
             if(bt[i].equals("reg")){
+                button[i].setText("报名");
                 button[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -118,6 +119,7 @@ public class NewsOne extends AppCompatActivity {
 
             }
             if(bt[i].equals("awa")){
+                button[i].setText("获奖");
                 button[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

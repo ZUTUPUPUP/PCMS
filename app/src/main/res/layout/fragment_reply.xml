@@ -24,11 +24,24 @@
         android:background="#66F3F1F1"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/btn_reflash"
+            android:layout_width="35dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="7.4dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_contact_search"
+            android:scaleType="centerInside"
+            android:padding="2dp"
+            android:src="@mipmap/btn_reflash1"
+            android:textColor="@color/white"></ImageButton>
         <EditText
             android:id="@+id/ed_input"
             android:layout_width="368dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="11dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
@@ -36,10 +49,10 @@
             android:layout_weight="1"
             android:background="@drawable/border_input_box"
             android:textSize="13.5dp"
-            android:hint="收索用户"></EditText>
+            android:hint="搜索用户"></EditText>
 
         <ImageButton
-            android:id="@+id/btn_sendmas"
+            android:id="@+id/btn_searchUser"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="10dp"

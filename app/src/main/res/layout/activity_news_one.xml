@@ -32,32 +32,24 @@
                 style="@style/input_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:text="中原工学院新生赛"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:textSize="22dp">
             </TextView>
-            <TextView
-                android:id="@+id/date"
-                android:layout_below="@id/LL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_marginRight="20dp"
-                android:textSize="10dp"
-                android:textColor="#BDBDBD"
-                android:text="2019/08/12/12:00"
-                android:layout_marginBottom="20dp"
-                ></TextView>
+
             <ImageView
                 android:id="@+id/e1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="centerInside">
 
             </ImageView>
 
             <TextView
+                style="@style/input_style"
                 android:id="@+id/e2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
@@ -65,6 +57,7 @@
 
             <Button
                 android:id="@+id/e3"
+                android:textColor="@color/white"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
@@ -75,6 +68,7 @@
             </Button>
 
             <ImageView
+                android:layout_margin="8dp"
                 android:id="@+id/e4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,6 +77,7 @@
             </ImageView>
 
             <TextView
+                style="@style/input_style"
                 android:id="@+id/e5"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -93,6 +88,7 @@
             <Button
                 android:id="@+id/e6"
                 android:layout_width="50dp"
+                android:textColor="@color/white"
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_sendmassage"
@@ -102,6 +98,7 @@
             </Button>
 
             <ImageView
+                android:layout_margin="8dp"
                 android:id="@+id/e7"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -110,6 +107,7 @@
             </ImageView>
 
             <TextView
+                style="@style/input_style"
                 android:id="@+id/e8"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -120,6 +118,7 @@
             <Button
                 android:id="@+id/e9"
                 android:layout_width="50dp"
+                android:textColor="@color/white"
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_sendmassage"
@@ -129,6 +128,7 @@
             </Button>
 
             <ImageView
+                android:layout_margin="8dp"
                 android:id="@+id/e10"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -136,6 +136,7 @@
             </ImageView>
 
             <TextView
+                style="@style/input_style"
                 android:id="@+id/e11"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -145,13 +146,25 @@
             <Button
                 android:id="@+id/e12"
                 android:layout_width="50dp"
+                android:textColor="@color/white"
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_sendmassage"
                 android:gravity="center"
                 >
             </Button>
-
+            <TextView
+                android:id="@+id/date"
+                android:layout_below="@id/LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginRight="20dp"
+                android:textSize="13dp"
+                android:textColor="#292929"
+                android:text="2019/08/12/12:00"
+                android:layout_marginBottom="20dp"
+                ></TextView>
 
         </LinearLayout>
 
