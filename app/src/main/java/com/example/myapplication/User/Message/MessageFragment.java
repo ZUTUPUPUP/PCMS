@@ -51,8 +51,6 @@ public class MessageFragment extends Fragment {
         for(int i=0;i<list.size();++i){
             int id = list.get(i).get_id();
             String userId = list.get(i).getUserId();
-            Log.v("ID编号：",id+"");
-            Log.v("用户名",userId);
         }
         adapter = new MessageAdapter(view.getContext(),list);
         listView.setAdapter(adapter);
