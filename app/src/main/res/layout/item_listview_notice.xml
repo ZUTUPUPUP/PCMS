@@ -100,7 +100,7 @@
                 android:layout_weight="1"
                 android:layout_marginRight="8dp"
                 android:padding="3dp"
-                android:background="@drawable/item_mine_update_message_selector"
+                android:background="@drawable/btn_mine_and_user_update_passwd"
                 android:text="删 除"
                 android:focusable="false"
                 android:textColor="@color/black"
