@@ -37,8 +37,6 @@ public class ManagerContestActivity extends AppCompatActivity {
         listView.setAdapter(contestAdapter);
     }
 
-
-
     public void OpenAddContest(View view) {
         Intent intent=new Intent(this,AddContestActivity.class);
         startActivity(intent);

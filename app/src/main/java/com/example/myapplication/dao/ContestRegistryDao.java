@@ -229,4 +229,32 @@ public class ContestRegistryDao {
         database.close();
         return list;
     }
+    //根据user查询注册信息
+    public List<ContestRegistryMessage> findByUsernameId(String Username) {
+        List<ContestRegistryMessage> list = new ArrayList<>();
+        //得到连接
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        //执行query select * from user
+        String sql = "select contestregistry.*, contest.contestName, user.userName, dep.name from contestregistry, contest, user, dep where user.userName = '" + Username + "' and contestregistry.contestId = contest.contestId and contestregistry.STNumberId = user._id and contestregistry.depId = dep._id order by _id desc";
+        Cursor cursor = database.rawQuery(sql, null);
+        //从cursor取出所有数据,并且封装到List中
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            int contestId = cursor.getInt(cursor.getColumnIndex("contestId"));
+            int STNumberId = cursor.getInt(cursor.getColumnIndex("STNumberId"));
+            int depId = cursor.getInt(cursor.getColumnIndex("depId"));
+            String ClassAndGrade = cursor.getString(cursor.getColumnIndex("ClassAndGrade"));
+            String gender = cursor.getString(cursor.getColumnIndex("gender"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+            String contestName = cursor.getString(cursor.getColumnIndex("contestName"));
+            String userName = cursor.getString(cursor.getColumnIndex("userName"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String relName = cursor.getString(cursor.getColumnIndex("relName"));
+            list.add(new ContestRegistryMessage(_id, contestId, STNumberId, depId, ClassAndGrade, gender, email, contestName, userName, name, relName));
+        }
+        //关闭连接
+        cursor.close();
+        database.close();
+        return list;
+    }
 }

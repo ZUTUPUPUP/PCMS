@@ -68,6 +68,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into contestregistry values(5, 5, 9, 1, '计科171', '女', '1738871130@qq.com', '刘勇')");
         db.execSQL("insert into contestregistry values(6, 5, 11, 1, '计科171', '女', '1738871130@qq.com', '张萌')");
         db.execSQL("insert into contestregistry values(7, 5, 13, 1, '计科171', '女', '1738871130@qq.com', '王强强')");
+        db.execSQL("insert into contestregistry values(8, 1, 5, 1, '计科171', '男', 'test@qq.com', '用户')");
+        db.execSQL("insert into contestregistry values(9, 2, 5, 1, '计科171', '男', 'test@qq.com', '用户')");
+        db.execSQL("insert into contestregistry values(10, 3, 5, 1, '计科171', '男', 'test@qq.com', '用户')");
+        db.execSQL("insert into contestregistry values(11, 4, 5, 1, '计科171', '男', 'test@qq.com', '用户')");
+        db.execSQL("insert into contestregistry values(12, 5, 5, 1, '计科171', '男', 'test@qq.com', '用户')");
     }
 
     @Override
