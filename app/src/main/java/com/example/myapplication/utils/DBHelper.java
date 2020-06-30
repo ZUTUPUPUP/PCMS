@@ -42,6 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into user values(12, '201708024105', 'e15015a3b9df6b0da040e2e557a7150c', '刘海铭', '女', '1', 2);");
         db.execSQL("insert into user values(13, '201708024106', 'e15015a3b9df6b0da040e2e557a7150c', '王强强', '女', '1', 2);");
         db.execSQL("insert into user values(14, '201708024107', 'e15015a3b9df6b0da040e2e557a7150c', '陈博', '女', '1', 2);");
+        db.execSQL("insert into user values(15, '201708024118', 'e15015a3b9df6b0da040e2e557a7150c', '傅泽浩', '女', '1', 2);");
+        db.execSQL("insert into user values(16, '201708024117', 'e15015a3b9df6b0da040e2e557a7150c', '叶家宏', '女', '1', 2);");
 
         //院系表
         db.execSQL(DepTable.CREATE_TAB);

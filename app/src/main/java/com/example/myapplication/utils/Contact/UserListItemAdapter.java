@@ -41,6 +41,7 @@ public class UserListItemAdapter extends ArrayAdapter {
         String uName=contact.getSenderId();
         if(uName.equals("admin"))uName=contact.getReceiverId();
         User user=userDao.findByUserName(uName);
+        System.out.println("aaaaaa"+user.getNickName());
         String realName;
         if(user==null) realName="-1";
         else  realName=userDao.findByUserName(uName).getNickName();
@@ -52,13 +53,16 @@ public class UserListItemAdapter extends ArrayAdapter {
         GradientDrawable drawable = (GradientDrawable) getContext().getResources().getDrawable(R.drawable.shape_round_textview);
         GradientDrawable gradientDrawable = (GradientDrawable) name.getBackground();
         gradientDrawable.setColor(Color.parseColor(color[position%7]));
+        //设置学号
+        L1.setText(uName);
+
         //设置时间
         String date=contact.getTimestamp();
+        if(date=="")return  view;
         String qian=date.substring(0,date.length()-6);
         String hou=date.substring(date.length()-5);
         R1.setText(qian+'\n'+hou);
-        //设置学号
-        L1.setText(uName);
+
         //设置消息
         B.setText(contact.getMas());
 

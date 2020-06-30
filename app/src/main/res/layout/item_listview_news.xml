@@ -34,11 +34,11 @@
         <TextView
             android:id="@+id/text"
             android:layout_below="@id/head"
-            android:padding="5dp"
+            android:padding="10dp"
             android:textSize="13.5dp"
             android:textColor="@color/black"
             android:layout_width="match_parent"
-            android:text="     第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届"
+            android:text="       第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届第-1届"
             android:layout_marginBottom="10dp"
             android:background="@drawable/radius1"
             android:layout_height="wrap_content">

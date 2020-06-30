@@ -164,13 +164,13 @@
             <Button
                 android:layout_marginTop="20dp"
                 android:id="@+id/perShow"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:background="@drawable/btn_sendmassage"
                 android:layout_gravity="center_horizontal"
                 android:text="预览"
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:textColor="@color/white"
-                android:layout_height="50dp">
+                android:layout_height="40dp">
 
             </Button>
         </LinearLayout>

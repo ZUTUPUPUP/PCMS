@@ -12,11 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dao.ContactDao;
+import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.Contact;
+import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.Contact.UserListItemAdapter;
 
 import java.util.ArrayList;
@@ -37,6 +42,9 @@ public class ReplyFragment extends Fragment {
     private UserListItemAdapter adapter;
     private List<Contact> allContacts;
     private boolean longer;
+    private ImageButton btn_reflash;
+    private ImageButton btn_searchUser;
+    private EditText input;
 
 
     public ReplyFragment() {
@@ -51,11 +59,16 @@ public class ReplyFragment extends Fragment {
        // System.out.println(new String("ypy踩踩").length());
         initUI();
         getUserList();//读取用户列表
-
+        btn_reflash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getUserList();
+            }
+        });
         return view;
     }
 
-    private void getUserList() {
+    public void getUserList() {
 
         contactDao = new ContactDao(getContext());
         allContacts = contactDao.findAll();
@@ -93,6 +106,45 @@ public class ReplyFragment extends Fragment {
     }
 
     private void initUI() {
+        btn_searchUser = (ImageButton)view.findViewById(R.id.btn_searchUser);
+        btn_reflash = (ImageButton)view.findViewById(R.id.btn_reflash);
+
+        input = (EditText)view.findViewById(R.id.ed_input);
+        final UserDao userDao=new UserDao(getContext());
+        btn_searchUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id=input.getText().toString();
+                List<User>list=userDao.findByLikeUserName(id);
+                Set<String> st = new HashSet();
+                for(User user:list){
+                    if(user.getStatus_id()==1)continue;
+                    st.add(user.getUserName());
+                }
+                contactList.clear();
+                Set hs = new HashSet();
+                for(Contact contact: allContacts){
+                    String uuuu=contact.getSenderId();
+                    if(uuuu.equals("admin")) uuuu=contact.getReceiverId();
+                    if(hs.contains(uuuu))continue;
+                    if(st.contains(uuuu)==false)continue;
+                    st.remove(uuuu);
+                    hs.add(uuuu);
+                    //超出部分删去
+                    String mes=contact.getMas();
+                    longer = false;
+                    mes=substringForWidth(mes,mes.length(),new TextPaint());
+                    if(longer) mes=mes+"...";
+                    contact.setMas(mes);
+                    contactList.add(contact);
+                }
+                for(String user:st) {
+                    contactList.add(new Contact(-1,"",user,"admin",""));
+                }
+                adapter = new UserListItemAdapter(view.getContext(),R.layout.item_contactuserlist, contactList);
+                sshowListView.setAdapter(adapter);
+            }
+        });
         sshowListView = (ListView) view.findViewById(R.id.sshow_listView);
     }
     //截取Text的固定长度
