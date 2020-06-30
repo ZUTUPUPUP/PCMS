@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.myapplication.Manager.News.TemporaryAward;
 import com.example.myapplication.Manager.News.TemporaryRegister;
 import com.example.myapplication.R;
@@ -21,6 +19,8 @@ import com.example.myapplication.dao.NewsDao;
 import com.example.myapplication.domain.News;
 
 import java.io.File;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class NewsOne extends AppCompatActivity {
     private ImageView[] imageView;
@@ -111,6 +111,7 @@ public class NewsOne extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(NewsOne.this,TemporaryRegister.class);
+                        intent.putExtra("cid",news.getContestId());
                         startActivity(intent);
                     }
                 });
@@ -121,6 +122,7 @@ public class NewsOne extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(NewsOne.this,TemporaryAward.class);
+                        intent.putExtra("cid",news.getContestId());
                         startActivity(intent);
                     }
                 });

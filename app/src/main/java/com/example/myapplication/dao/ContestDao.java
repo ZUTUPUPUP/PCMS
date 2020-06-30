@@ -31,6 +31,7 @@ public class ContestDao {
         Log.v("Contest", "id = " + id);
         database.close();
     }
+
     public List<Contest> querybyName(String Name){
         List<Contest> contestList=new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -45,6 +46,7 @@ public class ContestDao {
         }
         return contestList;
     }
+
     public List<Contest> queryAll(){
         List<Contest> contestList=new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -59,6 +61,7 @@ public class ContestDao {
         }
         return contestList;
     }
+
     public void modifyContest(Contest contest){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
@@ -69,8 +72,29 @@ public class ContestDao {
         database.update(ContestTable.TAB_NAME,values,ContestTable.CONTEST_ID+"=?", new String[]{String.valueOf(contest.getContestId())});
         database.close();
     }
+
     public void deleteContest(Contest contest){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         database.delete(ContestTable.TAB_NAME,ContestTable.CONTEST_ID+"=?",new String[]{String.valueOf(contest.getContestId())});
     }
+
+
+    public Contest findById(int id) {
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(ContestTable.TAB_NAME, null,  ContestTable.CONTEST_ID + "=?", new String[]{id + ""}, null, null, ContestTable.CONTEST_ID + " desc");
+        Contest contest = null;
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String name=cursor.getString(1);
+            String introduction=cursor.getString(2);
+            String time=cursor.getString(3);
+            String note=cursor.getString(4);
+            contest = new Contest(_id, name, introduction, time, note);
+        }
+        cursor.close();
+        database.close();
+        return contest;
+    }
+
+
 }

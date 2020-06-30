@@ -50,7 +50,7 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
         String STNumber = et_award_query_username.getText().toString().trim();
         String contestName = et_award_query_contestName.getText().toString().trim();
         String award = et_award_query_award.getText().toString().trim();
-        Log.v("MyInfo1", STNumber + " " + contestName + " " + award);
+        //Log.v("MyInfo1", STNumber + " " + contestName + " " + award);
         list = awardsDao.findLikeByPrint(STNumber, contestName, award);
         awardsAdapter.setList(list);
         et_award_query_username.setText("");

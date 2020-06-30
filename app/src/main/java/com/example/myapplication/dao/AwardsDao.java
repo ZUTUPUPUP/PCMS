@@ -182,4 +182,32 @@ public class AwardsDao {
         return list;
     }
 
+
+    /**
+     * 根据比赛查询获奖信息
+     * @param contestName 比赛名称
+     * @return 获奖信息
+     */
+    public List<AwardsInfo> findByContestName(String contestName) {
+        List<AwardsInfo> list = new ArrayList<>();
+        //得到连接
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null, AwardsTable.AWARDS_CONTESTNAME + "='" + contestName + "'", null, null, null, AwardsTable.AWARDS_ID + " desc");
+        //从cursor取出所有数据,并且封装到List中
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String id = cursor.getString(1);
+            String name  = cursor.getString(2);
+            String college = cursor.getString(3);
+            String competitionType = cursor.getString(4);
+            String awardLevel = cursor.getString(5);
+            String depName = cursor.getString(6);
+            list.add(new AwardsInfo(_id, id, name, college, competitionType, awardLevel, depName));
+        }
+        //关闭连接
+        cursor.close();
+        database.close();
+        return list;
+    }
+
 }
