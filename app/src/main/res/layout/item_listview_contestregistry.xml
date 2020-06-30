@@ -107,7 +107,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:padding="3dp"
                 android:background="@drawable/item_mine_update_message_selector"
                 android:text="修 改"

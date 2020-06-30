@@ -91,13 +91,13 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="36dp"
-                android:layout_weight="0.9"
+                android:layout_weight="1.3"
                 android:padding="6dp"
                 android:background="@drawable/item_mine_update_message_selector"
                 android:text="修改密码"
                 android:focusable="false"
                 android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:textSize="13dp" />
         </LinearLayout>
     </LinearLayout>
     <View
