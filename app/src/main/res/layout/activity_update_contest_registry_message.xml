@@ -219,7 +219,7 @@
                 android:layout_marginRight="5dp"
                 android:text="学 院："
                 android:textSize="20sp"/>
-            <EditText
+            <TextView
                 android:id="@+id/tv_update_contesregmessage_depname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
