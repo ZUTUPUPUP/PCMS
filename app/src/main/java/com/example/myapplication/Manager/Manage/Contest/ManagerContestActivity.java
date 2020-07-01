@@ -3,6 +3,7 @@ package com.example.myapplication.Manager.Manage.Contest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -21,6 +22,7 @@ public class ManagerContestActivity extends AppCompatActivity {
     ContestDao contestDao=new ContestDao(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_contest);
         contextList=contestDao.queryAll();
