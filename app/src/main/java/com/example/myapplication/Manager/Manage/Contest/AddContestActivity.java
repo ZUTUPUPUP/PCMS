@@ -2,14 +2,15 @@ package com.example.myapplication.Manager.Manage.Contest;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dao.ContestDao;
 import com.example.myapplication.domain.Contest;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddContestActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class AddContestActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contest);
         bindUI();

@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dao.ContestDao;
@@ -20,6 +18,9 @@ import com.example.myapplication.domain.Contest;
 import com.example.myapplication.domain.ContestRegistryMessage;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MineRegActivity extends AppCompatActivity {
     private  ContestDao contestDao;
@@ -30,6 +31,7 @@ public class MineRegActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_mine_reg);
         contestRegistryDao=new ContestRegistryDao(this);
         contestDao=new ContestDao(this);
@@ -51,7 +53,7 @@ public class MineRegActivity extends AppCompatActivity {
             final ContestRegistryMessage contestRegistryMessage=getItem(position);
             Contest contest=contestDao.findById(contestRegistryMessage.getContestId());
                 hui=new RegHui();
-                convertView= LayoutInflater.from(getContext()).inflate(R.layout.item_listview_mine_reg,null);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_listview_mine_reg,null);
                 hui.contestImage = convertView.findViewById(R.id.ContestImage);
                 hui.contestName = (TextView) convertView.findViewById(R.id.tv_item_mine_reg_contest_name);
                 hui.contestTime = (TextView) convertView.findViewById(R.id.tv_item_mine_reg_contest_time);
