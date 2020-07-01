@@ -111,6 +111,8 @@ public class NewsOne extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(NewsOne.this,TemporaryRegister.class);
                         intent.putExtra("cid",news.getContestId());
+                        String userName=getIntent.getStringExtra("userName");
+                        intent.putExtra("userName",userName);
                         startActivity(intent);
                     }
                 });
@@ -123,6 +125,8 @@ public class NewsOne extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(NewsOne.this,TemporaryAward.class);
                         intent.putExtra("cid",news.getContestId());
+                        String userName=getIntent.getStringExtra("userName");
+                        intent.putExtra("userName",userName);
                         startActivity(intent);
                     }
                 });

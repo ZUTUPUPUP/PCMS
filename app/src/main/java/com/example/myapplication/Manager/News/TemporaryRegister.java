@@ -17,6 +17,7 @@ public class TemporaryRegister extends AppCompatActivity {
         Intent intent=getIntent();
         TextView textView= findViewById(R.id.tv);
         String t=intent.getStringExtra("cid");
-        textView.setText(t);
+        String tt=intent.getStringExtra("userName");
+        textView.setText(t+'\n'+tt);
     }
 }

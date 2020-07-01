@@ -61,6 +61,7 @@ public class NewsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 News news=allNews.get(position);
                 Intent intent=new Intent(view.getContext(), NewsOne.class);
+                intent.putExtra("userName",getIntent.getStringExtra("userName"));
                 intent.putExtra("id",news.get_id());
                 startActivity(intent);
             }
