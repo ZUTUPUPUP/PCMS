@@ -17,7 +17,7 @@ Programming Competition Management System
     对应的layout：fragment_home     fragment_message      fragment_mine
 
 ### 注册
-    已解决QwQ。1
+    已解决QwQ。
     更改学院为下拉选择模式
     学号限制:方便获奖信息表学号与此学号一致,方便管理员发通知
     新增院系表
