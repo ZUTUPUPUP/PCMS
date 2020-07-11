@@ -3,6 +3,7 @@ package com.example.myapplication.Login_Register;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -15,21 +16,25 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.myapplication.R;
-import com.example.myapplication.dao.DepDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.Dep;
 import com.example.myapplication.domain.User;
+import com.example.myapplication.utils.BaseUrl;
 import com.example.myapplication.utils.DensityUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.Request;
 
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    private static final String TAG = "RegisterActivity";
     //用户名，密码，再次输入的密码的控件
     private EditText et_user_name, et_passWd, et_passsWd_again, et_reg_nickname;
     private ImageView iv_reg_del;
@@ -37,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private RadioGroup rg_reg_sex;
     private ListView listView;
     private List<Dep> data;
-    private DepDao dao;
     private RegisterAdapter adapter;
     private User user = new User();
     UserDao userDao = new UserDao(this);
@@ -53,15 +57,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         //设置此界面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         bindUI();
-        //准备数据
-        dao = new DepDao(this);
-
-        data = new ArrayList<>();
-        data = dao.findAll();
         listView = new ListView(this);
         listView.setBackgroundResource(R.mipmap.listview_background);
-        adapter = new RegisterAdapter(this, data);
-        listView.setAdapter(adapter);
+
+        getDataGetByOKHttpUtils();
         //给listView的项设置点击事件
         listView.setOnItemClickListener(this);
 
@@ -150,6 +149,72 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
         //设置显示在文本框下面以及位置
         popupWindow.showAsDropDown(tv_user_dep, 0, 0);
+    }
+
+    /**
+     * post请求
+     */
+    public void getDataGetByOKHttpUtils() {
+        String url = BaseUrl.BASE_URL + "/dep/findAll.do";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .id(100)
+                .build()
+                .execute(new MyStringCallback());
+    }
+
+    public class MyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(okhttp3.Call call, Exception e, int id) {
+            e.printStackTrace();
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.v(TAG, "onError:" + e.getMessage());
+        }
+        @Override
+        public void onResponse(String response, int id) {
+            Log.e(TAG, "onResponse：complete");
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
+            Log.v(TAG, "onResponse:" + response);
+            switch (id) {
+                case 100:
+                    Toast.makeText(RegisterActivity.this, "http:数据请求成功",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case 101:
+                    Toast.makeText(RegisterActivity.this, "https:数据请求成功",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            if(response != null) {
+                //解析数据
+                parseData(response);
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            Log.e(TAG, "inProgress:" + progress);
+        }
+    }
+
+    private void parseData(String json) {
+        data = JSON.parseArray(json, Dep.class);
+        Log.v("MyInfo", data.toString());
+        adapter = new RegisterAdapter(this, data);
+        listView.setAdapter(adapter);
     }
 }
 
