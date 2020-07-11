@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -38,10 +36,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private TextView tv_user_dep;
     private RadioGroup rg_reg_sex;
     private ListView listView;
-    private List<String> data;
-    private List<Dep> dateDep;
+    private List<Dep> data;
     private DepDao dao;
-    private MyAdapter adapter;
+    private RegisterAdapter adapter;
     private User user = new User();
     UserDao userDao = new UserDao(this);
     //一个能显示View的窗体
@@ -58,14 +55,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         bindUI();
         //准备数据
         dao = new DepDao(this);
-        dateDep = dao.findAll();
+
         data = new ArrayList<>();
-        for (Dep dep : dateDep) {
-            data.add(dep.getName());
-        }
+        data = dao.findAll();
         listView = new ListView(this);
         listView.setBackgroundResource(R.mipmap.listview_background);
-        adapter = new MyAdapter();
+        adapter = new RegisterAdapter(this, data);
         listView.setAdapter(adapter);
         //给listView的项设置点击事件
         listView.setOnItemClickListener(this);
@@ -120,9 +115,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     //ListView点击事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String name = data.get(position);
-        user.setDepartment_id(position + 1);
-        tv_user_dep.setText(name);
+        Dep dep = data.get(position);
+        user.setDepartment_id(dep.get_id());
+        tv_user_dep.setText(dep.getName());
         //选择后取消
         if(popupWindow != null && popupWindow.isShowing()) {
             popupWindow.dismiss();
@@ -155,44 +150,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
         //设置显示在文本框下面以及位置
         popupWindow.showAsDropDown(tv_user_dep, 0, 0);
-    }
-
-    //适配器
-    class MyAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return data.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return data.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
-            if(convertView == null) {
-                holder = new ViewHolder();
-                convertView = View.inflate(RegisterActivity.this, R.layout.item_reg_dep, null);
-                holder.dep_name = convertView.findViewById(R.id.tv_reg_dep_name);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            String name = data.get(position);
-            holder.dep_name.setText(name);
-            return convertView;
-        }
-    }
-    class ViewHolder { //视图的容器
-        public TextView dep_name;
     }
 }
 
