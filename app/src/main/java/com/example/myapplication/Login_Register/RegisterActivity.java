@@ -155,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
      * post请求
      */
     public void getDataGetByOKHttpUtils() {
-        String url = BaseUrl.BASE_URL + "/dep/findAll.do";
+        String url = BaseUrl.BASE_URL + "dep/findAll.do";
         OkHttpUtils
                 .get()
                 .url(url)

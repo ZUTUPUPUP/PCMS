@@ -12,6 +12,10 @@ public class User {
     private int department_id;//学院
     private int status_id;//身份id
 
+
+    private Dep dep;
+    private Status status;
+
     public User() {
     }
 
@@ -23,6 +27,22 @@ public class User {
         this.gender = gender;
         this.department_id = department_id;
         this.status_id = status_id;
+    }
+
+    public Dep getDep() {
+        return dep;
+    }
+
+    public void setDep(Dep dep) {
+        this.dep = dep;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Integer get_id() {
@@ -91,6 +111,8 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", department_id=" + department_id +
                 ", status_id=" + status_id +
+                ", dep=" + dep +
+                ", status=" + status +
                 '}';
     }
 }
