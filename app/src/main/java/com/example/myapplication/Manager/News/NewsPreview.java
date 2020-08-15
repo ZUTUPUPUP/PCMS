@@ -19,16 +19,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Manager.ManagerActivity;
+import com.example.myapplication.Manager.Reply.ContactOneUserActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.NewsDao;
+import com.example.myapplication.domain.Contact;
 import com.example.myapplication.domain.News;
+import com.example.myapplication.utils.BaseUrl;
 import com.example.myapplication.utils.News.PermisionUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import okhttp3.Request;
 
 public class NewsPreview extends AppCompatActivity {
 
@@ -41,9 +48,10 @@ public class NewsPreview extends AppCompatActivity {
     private TextView headline;
     private String hl;
     private Button btn_setNews;
-    private NewsDao newsDao;
+   // private NewsDao newsDao;
     private TextView head;
     private TextView brief;
+    private TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +62,80 @@ public class NewsPreview extends AppCompatActivity {
         Build();
         ButtonBuild();
     }
+    /**
+     * post请求
+     */
+    public void postOKHttpUtils(News news) {
+        String url = BaseUrl.BASE_URL + "news/insertOne.do";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .id(1001)
+                .addParams("contestId",news.getContestId())
+                .addParams("head",news.getHead())
+                .addParams("date",news.getDate())
+                .addParams("brief",news.getBrief())
+                .addParams("t0",news.getT0())
+                .addParams("t1",news.getT1())
+                .addParams("t2",news.getT2())
+                .addParams("t3",news.getT3())
+                .addParams("t4",news.getT4())
+                .addParams("t5",news.getT5())
+                .addParams("t6",news.getT6())
+                .addParams("t7",news.getT7())
+                .addParams("t8",news.getT8())
+                .addParams("t9",news.getT9())
+                .addParams("t10",news.getT10())
+                .addParams("t11",news.getT11())
+                .addParams("t12",news.getT12())
+                .build()
+                .execute(new PostStringCallback());
+    }
 
+    public class  PostStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            //setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            ///setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(okhttp3.Call call, Exception e, int id) {
+            e.printStackTrace();
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            // Log.v(TAG, "onError:" + e.getMessage());
+        }
+        @Override
+        public void onResponse(String response, int id) {
+            Log.e("ContactOneUserUserAct", "onResponse：complete");
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
+            // Log.v(TAG, "onResponse:" + response);
+            switch (id) {
+                case 100:
+                    //  Toast.makeText(RegisterActivity.this, "http:数据请求成功",
+                    //          Toast.LENGTH_SHORT).show();
+                    break;
+                case 101:
+                    // Toast.makeText(RegisterActivity.this, "https:数据请求成功",
+                    //          Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            //Log.e(TAG, "inProgress:" + progress);
+        }
+    }
     private void ButtonBuild() {
         btn_setNews = (Button)findViewById(R.id.setNews);
-        newsDao = new NewsDao(this);
+       // newsDao = new NewsDao(this);
         btn_setNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +144,12 @@ public class NewsPreview extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                 String nowDate=(sdf.format(calendar.getTime()));
 
-                News news=new News(-1,getIntent.getStringExtra("contestId"),nowDate,head.getText().toString(),brief.getText().toString(),getIntent.getStringExtra("0"),
+                News news=new News(-1,getIntent.getStringExtra("contestId"),head.getText().toString(),nowDate,brief.getText().toString(),getIntent.getStringExtra("0"),
                         getIntent.getStringExtra("1"),getIntent.getStringExtra("2"),getIntent.getStringExtra("3"),
                         getIntent.getStringExtra("4"),getIntent.getStringExtra("5"),getIntent.getStringExtra("6"),
                         getIntent.getStringExtra("7"),getIntent.getStringExtra("8"),getIntent.getStringExtra("9"),
                         getIntent.getStringExtra("10"),getIntent.getStringExtra("11"),getIntent.getStringExtra("12"));
-                newsDao.insertOne(news);
+                postOKHttpUtils(news);
                 Toast.makeText(NewsPreview.this, "发布新闻成功", Toast.LENGTH_SHORT).show();
                 Intent nowIntent=new Intent(NewsPreview.this, ManagerActivity.class);
                 nowIntent.putExtra("cid",getIntent.getStringExtra("contestId"));
@@ -90,7 +168,8 @@ public class NewsPreview extends AppCompatActivity {
         head.setText(getIntent.getStringExtra("100"));
         brief =(TextView)findViewById(R.id.brief);
         brief.setText(getIntent.getStringExtra("101"));
-
+        date = (TextView)findViewById(R.id.date);
+        date.setText(getIntent.getStringExtra("0000-00-00 00:00"));
         headline = (TextView)findViewById(R.id.e0);
         hl = getIntent.getStringExtra("0");
         headline.setText(hl);

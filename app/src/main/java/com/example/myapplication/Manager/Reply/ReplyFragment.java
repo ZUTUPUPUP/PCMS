@@ -182,7 +182,7 @@ public class ReplyFragment extends Fragment {
                 .url(url)
                 .id(100)
                 .build()
-                .execute(new ReplyFragment.MyStringCallback());
+                .execute(new MyStringCallback());
     }
 
     public class MyStringCallback extends StringCallback {

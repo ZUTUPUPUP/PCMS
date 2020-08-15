@@ -14,11 +14,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.NewsDao;
 import com.example.myapplication.domain.News;
+import com.example.myapplication.utils.BaseUrl;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+import okhttp3.Request;
 
 public class NewsOne extends AppCompatActivity {
     private ImageView[] imageView;
@@ -28,7 +41,7 @@ public class NewsOne extends AppCompatActivity {
     private String[] content;
     private TextView headline;
     private TextView date;
-    private NewsDao newsDao;
+   // private NewsDao newsDao;
     private News news;
 
     @Override
@@ -36,13 +49,93 @@ public class NewsOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//去标题
         setContentView(R.layout.activity_news_one);
-        BuildUI();
+        getDataGetByOKHttpUtils();
     }
-    private void BuildUI() {
+    /**
+     * get请求
+     */
+    public void getDataGetByOKHttpUtils() {
+        String url = BaseUrl.BASE_URL + "news/findAll.do";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .id(100)
+                .build()
+                .execute(new MMyStringCallback());
+    }
+
+    public class MMyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            //setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            ///setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(okhttp3.Call call, Exception e, int id) {
+            e.printStackTrace();
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            // Log.v(TAG, "onError:" + e.getMessage());
+        }
+        @Override
+        public void onResponse(String response, int id) {
+            //  Log.e(TAG, "onResponse：complete");
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
+            // Log.v(TAG, "onResponse:" + response);
+            switch (id) {
+                case 100:
+                    //  Toast.makeText(RegisterActivity.this, "http:数据请求成功",
+                    //          Toast.LENGTH_SHORT).show();
+                    break;
+                case 101:
+                    // Toast.makeText(RegisterActivity.this, "https:数据请求成功",
+                    //          Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            if(response != null) {
+                //解析数据
+                BuildUI(response);
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            //Log.e(TAG, "inProgress:" + progress);
+        }
+    }
+    /*
+     *    get image from network
+     *    @param [String]imageURL
+     *    @return [BitMap]image
+     */
+    public static Bitmap getBitmap(String path) throws IOException {
+
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(5000);
+        conn.setRequestMethod("GET");
+        if (conn.getResponseCode() == 200){
+            InputStream inputStream = conn.getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }
+        return null;
+    }
+    private void BuildUI(String response) {
+        List<News> allNews = JSON.parseArray(response, News.class);
         getIntent = getIntent();
-        int id=getIntent.getIntExtra("id",1);
-        newsDao = new NewsDao(this);
-        news = newsDao.findById(id);
+        String d=getIntent.getStringExtra("date");
+        for(News nn:allNews){
+            if(nn.getDate().equals(d)) news=nn;
+        }
+       // newsDao = new NewsDao(this);
+           // news = newsDao.findById(id);
         headline = (TextView)findViewById(R.id.e0);
         headline.setText(news.getT0());
         date=(TextView)findViewById(R.id.date);
@@ -58,13 +151,17 @@ public class NewsOne extends AppCompatActivity {
         url[2]=news.getT7();
         url[3]=news.getT10();
         for(int i=0;i<4;i++){
-            String path =   url[i];
-            File mFile=new File(path);
+            //通过网络加载图片
+            Glide.with(this).load(url[i]).into(imageView[i]);
+
+           // String path =   url[i];
+           /* File mFile=new File(path);
             //若该文件存在
             if (mFile.exists()) {
                 Bitmap bitmap= BitmapFactory.decodeFile(path);
                 imageView[i].setImageBitmap(bitmap);
-            }
+            }*/
+           // imageView[i].setImageBitmap(returnBitMap(path));
         }
         textView = new TextView[4];
         textView[0]=(TextView)findViewById(R.id.e2);
