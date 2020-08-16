@@ -13,14 +13,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.alibaba.fastjson.JSON;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.NoticeDao;
+import com.example.myapplication.domain.AwardsInfo;
 import com.example.myapplication.domain.Notice;
+import com.example.myapplication.utils.BaseUrl;
 
+import java.io.IOException;
 import java.util.List;
 
-public class NoticeAdapter extends BaseAdapter {
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
+public class NoticeAdapter extends BaseAdapter {
+    private static final String TAG = "NoticeAdapter";
     private Context context;
     private List<Notice> list;
     private NoticeDao noticeDao;
@@ -83,10 +96,14 @@ public class NoticeAdapter extends BaseAdapter {
                 builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        noticeDao.deleteById(notice.get_id());
+                        /*noticeDao.deleteById(notice.get_id());
                         list = noticeDao.findAll();
-                        setList(list);
-                        notifyDataSetChanged();
+                        setList(list);*/
+                        try {
+                            delete(notice);
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
                     }
                 }).show();
@@ -107,5 +124,80 @@ public class NoticeAdapter extends BaseAdapter {
     class HUi {
         TextView title,content,receiver;
         Button send,delete;
+    }
+
+    public void delete(final Notice notice) throws IOException, InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = BaseUrl.BASE_URL + "notice/delete.do";
+                OkHttpClient client = new OkHttpClient();
+                //Log.v("MyInfo", JSON.toJSONString(json));
+                RequestBody body = new FormBody.Builder()
+                        .add("id", notice.get_id() + "")
+                        .build();
+                //System.out.println(body);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "<<<<e=" + e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            throw new IOException("Unexpected code " + response);
+                        } else {
+                            Log.d(TAG, notice.getTitle() + "已删");
+                        }
+                    }
+                });
+            }
+        });
+        thread.start();
+        thread.join();
+        while(thread.isAlive())continue;
+        if(!thread.isAlive())findAll();
+    }
+    public void findAll() throws IOException, InterruptedException {
+        Thread thread1 = new Thread(new Runnable() {
+            public void run() {
+                String url = BaseUrl.BASE_URL + "notice/findAll.do";
+                OkHttpClient client = new OkHttpClient();
+                //Log.v("MyInfo", JSON.toJSONString(json));
+                RequestBody body = new FormBody.Builder()
+                        .build();
+                //System.out.println(body);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "<<<<e=" + e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String d = response.body().string();
+                            Log.d(TAG, "<<<<d=" + d);
+                            list = JSON.parseArray(d, Notice.class);
+                        }
+                    }
+                });
+            }
+        });
+        thread1.start();
+        thread1.join();
+        while(thread1.isAlive()&&list==null)continue;
+        if(!thread1.isAlive())setList(list);
     }
 }

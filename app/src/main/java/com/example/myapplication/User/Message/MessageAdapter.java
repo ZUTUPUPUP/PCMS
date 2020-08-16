@@ -1,33 +1,21 @@
 package com.example.myapplication.User.Message;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
-import com.example.myapplication.Manager.Manage.Notice.NoticeAdapter;
-import com.example.myapplication.Manager.Manage.Notice.NoticeSendActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.MessageDao;
-import com.example.myapplication.dao.NoticeDao;
 import com.example.myapplication.domain.Message;
-import com.example.myapplication.domain.Notice;
 
 import java.util.List;
 
 public class MessageAdapter extends BaseAdapter {
     private Context context;
-    private List<Message> list;
+    private List<Message> list = null;
     private MessageDao messageDao;
     //适配器
     public MessageAdapter(Context context,List<Message> list){
