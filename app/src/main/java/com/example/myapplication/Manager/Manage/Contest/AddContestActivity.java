@@ -13,7 +13,8 @@ import com.example.myapplication.domain.Contest;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddContestActivity extends AppCompatActivity {
-
+    ContestDao contestDao=new ContestDao(this);
+    Contest contest;
     EditText et_contest_name,et_contest_introduction,et_contest_time,et_contest_note;
     private void bindUI() {
         //从activity_add_contest.xml 页面中获取对应的UI控件
@@ -30,9 +31,19 @@ public class AddContestActivity extends AppCompatActivity {
         bindUI();
     }
     public void AddContest(View view) {
-        Contest contest=new Contest(et_contest_name.getText().toString(),et_contest_introduction.getText().toString(),et_contest_time.getText().toString(),et_contest_note.getText().toString());
-        ContestDao contestDao=new ContestDao(this);
-        contestDao.add(contest);
+        contest=new Contest(et_contest_name.getText().toString(),et_contest_introduction.getText().toString(),et_contest_time.getText().toString(),et_contest_note.getText().toString());
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                contestDao.add(contest);
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Toast.makeText(this,"添加成功 ！",Toast.LENGTH_LONG).show();
         finish();
     }

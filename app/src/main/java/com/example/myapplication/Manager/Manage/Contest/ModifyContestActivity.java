@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ModifyContestActivity extends AppCompatActivity {
 
     EditText et_contest_name,et_contest_introduction,et_contest_time,et_contest_note;
+    ContestDao contestDao=new ContestDao(this);
+    Contest contest;
     private void bindUI() {
         //从activity_add_contest.xml 页面中获取对应的UI控件
         et_contest_name = findViewById(R.id.et_modify_contest_name);
@@ -36,19 +38,39 @@ public class ModifyContestActivity extends AppCompatActivity {
     }
 
     public void modifyContest(View view) {
-        ContestDao contestDao=new ContestDao(this);
         String idd=getIntent().getStringExtra("id");
         int id=Integer.parseInt(idd);
-        Contest contest=new Contest(id,et_contest_name.getText().toString(),et_contest_introduction.getText().toString(),et_contest_time.getText().toString(),et_contest_note.getText().toString());
-        contestDao.modifyContest(contest);
+        contest=new Contest(id,et_contest_name.getText().toString(),et_contest_introduction.getText().toString(),et_contest_time.getText().toString(),et_contest_note.getText().toString());
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                contestDao.modifyContest(contest);
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Toast.makeText(this,"修改成功！",Toast.LENGTH_LONG);
         finish();
     }
 
     public void deleteContest(View view) {
-        ContestDao contestDao=new ContestDao(this);
-        Contest contest=new Contest(Integer.parseInt(getIntent().getStringExtra("id")),et_contest_name.getText().toString(),et_contest_introduction.getText().toString(),et_contest_time.getText().toString(),et_contest_note.getText().toString());
-        contestDao.deleteContest(contest);
+        contest=new Contest(Integer.parseInt(getIntent().getStringExtra("id")),et_contest_name.getText().toString(),et_contest_introduction.getText().toString(),et_contest_time.getText().toString(),et_contest_note.getText().toString());
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                contestDao.deleteContest(contest);
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Toast.makeText(this,"删除成功！",Toast.LENGTH_LONG);
         finish();
     }

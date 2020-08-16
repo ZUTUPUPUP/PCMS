@@ -7,6 +7,10 @@ public class Contest {
     private String contestTime;
     private String contestNote;
 
+    public Contest(){
+
+    }
+
     public Contest(String contestName, String contestIntroduction, String contestTime, String contestNote) {
         this.contestName = contestName;
         this.contestIntroduction = contestIntroduction;
