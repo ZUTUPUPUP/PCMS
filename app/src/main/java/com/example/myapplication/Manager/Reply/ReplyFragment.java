@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextPaint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +17,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.example.myapplication.Login_Register.RegisterActivity;
+import com.example.myapplication.Login_Register.RegisterAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.ContactDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.Contact;
+import com.example.myapplication.domain.Dep;
 import com.example.myapplication.domain.User;
+import com.example.myapplication.utils.BaseUrl;
 import com.example.myapplication.utils.Contact.UserListItemAdapter;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import okhttp3.Request;
 
 
 public class ReplyFragment extends Fragment {
@@ -45,6 +56,7 @@ public class ReplyFragment extends Fragment {
     private ImageButton btn_reflash;
     private ImageButton btn_searchUser;
     private EditText input;
+    private List<Contact> data;
 
 
     public ReplyFragment() {
@@ -57,18 +69,20 @@ public class ReplyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_reply, container, false);
        // System.out.println(new String("ypy踩踩").length());
+
         initUI();
-        getUserList();//读取用户列表
+       // getUserList();//读取用户列表
+        UserListGetDataGetByOKHttpUtils();
         btn_reflash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getUserList();
+                UserListGetDataGetByOKHttpUtils();
             }
         });
         return view;
     }
 
-    public void getUserList() {
+   /* public void getUserList() {
 
         contactDao = new ContactDao(getContext());
         allContacts = contactDao.findAll();
@@ -103,7 +117,7 @@ public class ReplyFragment extends Fragment {
                 startActivity(intent);
             }
         });
-    }
+    }*/
 
     private void initUI() {
         btn_searchUser = (ImageButton)view.findViewById(R.id.btn_searchUser);
@@ -111,7 +125,7 @@ public class ReplyFragment extends Fragment {
 
         input = (EditText)view.findViewById(R.id.ed_input);
         final UserDao userDao=new UserDao(getContext());
-        btn_searchUser.setOnClickListener(new View.OnClickListener() {
+        btn_searchUser.setOnClickListener(new View.OnClickListener() {//查找用户
             @Override
             public void onClick(View v) {
                 String id=input.getText().toString();
@@ -158,4 +172,90 @@ public class ReplyFragment extends Fragment {
         }
         return str;
     }
+    /**
+     * post请求
+     */
+    public void UserListGetDataGetByOKHttpUtils() {
+        String url = BaseUrl.BASE_URL + "contact/findAll.do";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .id(100)
+                .build()
+                .execute(new MyStringCallback());
+    }
+
+    public class MyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            //setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            ///setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(okhttp3.Call call, Exception e, int id) {
+            e.printStackTrace();
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+           // Log.v("ReplyFragment", "onError:" + e.getMessage());
+        }
+        @Override
+        public void onResponse(String response, int id) {
+           // Log.e("ReplyFragment", "onResponse：complete");
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
+         //   Log.v("ReplyFragment", "onResponse:" + response);
+
+            if(response != null) {
+                //解析数据
+                UserListParseData(response);
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            //Log.e("ReplyFragment", "inProgress:" + progress);
+        }
+    }
+
+    private void UserListParseData(String json) { //得到所有聊天记录，加载user列表
+        data = JSON.parseArray(json, Contact.class);
+        Log.v("MyInfo", data.toString());
+        Collections.reverse(data);
+        contactList = new ArrayList<>();
+        Set hs = new HashSet();
+        for(Contact contact: data){
+            String uuuu=contact.getSenderId();
+            if(uuuu.equals("admin")) uuuu=contact.getReceiverId();
+            if(hs.contains(uuuu))continue;
+            hs.add(uuuu);
+            //超出部分删去
+            String mes=contact.getMas();
+            longer = false;
+            mes=substringForWidth(mes,mes.length(),new TextPaint());
+            if(longer) mes=mes+"...";
+            contact.setMas(mes);
+            contactList.add(contact);
+        }
+        adapter = new UserListItemAdapter(view.getContext(),R.layout.item_contactuserlist, contactList);
+        sshowListView.setAdapter(adapter);
+        //设置点击单个Item事件
+        sshowListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Contact contact = contactList.get(position);
+                //打开私聊页面
+                String userName = contact.getSenderId();
+                if(userName.equals("admin")) userName=contact.getReceiverId();
+                Intent intent=new Intent(view.getContext(), ContactOneUserActivity.class);
+                intent.putExtra("userName",userName);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

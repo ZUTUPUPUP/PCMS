@@ -69,7 +69,7 @@
                 style="@style/input_style"
                 android:id="@+id/e1"
                 android:layout_width="match_parent"
-                android:hint="图片1(本地存储路径,没有就不填写内容,下同)"
+                android:hint="图片1(网上图片,填入url,没有就不填写内容,下同)"
                 android:layout_height="wrap_content">
 
             </EditText>

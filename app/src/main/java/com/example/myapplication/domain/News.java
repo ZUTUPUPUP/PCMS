@@ -3,7 +3,7 @@ package com.example.myapplication.domain;
 import java.util.Arrays;
 
 public class News {
-    private int _id;
+    private Integer _id;
     private String contestId;
     private String head;//列表视图下的标题
     private String date;
@@ -12,7 +12,9 @@ public class News {
     private String t0;
     private String t1;private String t2;private String t3;private String t4;private String t5;private String t6;
     private String t7;private String t8;private String t9;private String t10;private String t11;private String t12;
+    public  News(){
 
+    }
     @Override
     public String toString() {
         return "News{" +
@@ -37,11 +39,11 @@ public class News {
                 '}';
     }
 
-    public int get_id() {
+    public Integer get_id() {
         return _id;
     }
 
-    public void set_id(int _id) {
+    public void set_id(Integer _id) {
         this._id = _id;
     }
 
@@ -181,7 +183,7 @@ public class News {
         this.t12 = t12;
     }
 
-    public News(int _id, String contestId, String head, String date, String brief, String t0, String t1, String t2, String t3, String t4, String t5, String t6, String t7, String t8, String t9, String t10, String t11, String t12) {
+    public News(Integer _id, String contestId, String head, String date, String brief, String t0, String t1, String t2, String t3, String t4, String t5, String t6, String t7, String t8, String t9, String t10, String t11, String t12) {
         this._id = _id;
         this.contestId = contestId;
         this.head = head;
