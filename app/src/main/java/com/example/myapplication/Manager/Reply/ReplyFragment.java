@@ -69,7 +69,7 @@ public class ReplyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_reply, container, false);
         // System.out.println(new String("ypy踩踩").length());
-
+        FselectListGetDataGetByOKHttpUtils();//加载userlist
         initUI();
         // getUserList();//读取用户列表
         UserListGetDataGetByOKHttpUtils();
@@ -80,6 +80,56 @@ public class ReplyFragment extends Fragment {
             }
         });
         return view;
+    }
+    public void FselectListGetDataGetByOKHttpUtils() {
+        String url = BaseUrl.BASE_URL + "user/findAll.do";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .id(100)
+                .build()
+                .execute(new FselectMyStringCallback());
+    }
+
+    public class FselectMyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            //setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            ///setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(okhttp3.Call call, Exception e, int id) {
+            e.printStackTrace();
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            // Log.v("ReplyFragment", "onError:" + e.getMessage());
+        }
+        @Override
+        public void onResponse(String response, int id) {
+            // Log.e("ReplyFragment", "onResponse：complete");
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
+            //   Log.v("ReplyFragment", "onResponse:" + response);
+
+            if(response != null) {
+                //解析数据
+                FSelectUserListParseData(response);
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            //Log.e("ReplyFragment", "inProgress:" + progress);
+        }
+    }
+
+    private void FSelectUserListParseData(String json) { //得到所有聊天记录，加载user列表
+        list = JSON.parseArray(json, User.class);
     }
 
    /* public void getUserList() {
@@ -118,6 +168,7 @@ public class ReplyFragment extends Fragment {
             }
         });
     }*/
+
     /**
      * get
      */
@@ -324,6 +375,10 @@ public class ReplyFragment extends Fragment {
             mes=substringForWidth(mes,mes.length(),new TextPaint());
             if(longer) mes=mes+"...";
             contact.setMas(mes);
+            String nickName="";
+            for(User user1:list)if(uuuu.equals(user1.getUserName())) nickName=user1.getNickName();
+            contact.setSenderId(uuuu);
+            contact.setReceiverId(nickName);
             contactList.add(contact);
         }
         adapter = new UserListItemAdapter(view.getContext(),R.layout.item_contactuserlist, contactList);
