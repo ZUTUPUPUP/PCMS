@@ -32,7 +32,7 @@ public class AwardsDao {
         values.put(AwardsTable.AWARDS_RELNAME, awardsInfo.getRelName());
         values.put(AwardsTable.AWARDS_CLASSNAME, awardsInfo.getClassName());
         values.put(AwardsTable.AWARDS_CONTESTNAME, awardsInfo.getContestName());
-        values.put(AwardsTable.AWARDS_AWARD, awardsInfo.getAwardLevel());
+        values.put(AwardsTable.AWARDS_LEVEL, awardsInfo.getAwardLevel());
         values.put(AwardsTable.AWARDS_DEPNAME, awardsInfo.getDepName());
         long id = database.insert(AwardsTable.TAB_NAME, null, values);
         Log.v("MyInfo", "id = " + id);
@@ -63,7 +63,7 @@ public class AwardsDao {
         values.put(AwardsTable.AWARDS_RELNAME, awardsInfo.getRelName());
         values.put(AwardsTable.AWARDS_CLASSNAME,awardsInfo.getClassName());
         values.put(AwardsTable.AWARDS_CONTESTNAME,awardsInfo.getContestName());
-        values.put(AwardsTable.AWARDS_AWARD,awardsInfo.getAwardLevel());
+        values.put(AwardsTable.AWARDS_LEVEL,awardsInfo.getAwardLevel());
         values.put(AwardsTable.AWARDS_DEPNAME,awardsInfo.getDepName());
         int updateCount = database.update(AwardsTable.TAB_NAME, values,  AwardsTable.AWARDS_ID + "=" + "'" + awardsInfo.get_id() + "'", null);
         Log.v("MyInfo", "updateCount = " + updateCount);
@@ -118,9 +118,9 @@ public class AwardsDao {
     }
 
 
-    public AwardsInfo findBySTNumberAndContestAndAward(String STNumber, String ContestName, String Award) {
+    public AwardsInfo findBySTNumberAndContestAndAward(String STNumber, String ContestName, String AwardLevel) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.query(AwardsTable.TAB_NAME, null,  AwardsTable.AWARDS_STNUMBER + "='" + STNumber + "' and " + AwardsTable.AWARDS_CONTESTNAME + "='" + ContestName + "' and " + AwardsTable.AWARDS_AWARD + "='" + Award + "'", null, null, null, null);
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null,  AwardsTable.AWARDS_STNUMBER + "='" + STNumber + "' and " + AwardsTable.AWARDS_CONTESTNAME + "='" + ContestName + "' and " + AwardsTable.AWARDS_LEVEL + "='" + AwardLevel + "'", null, null, null, null);
         AwardsInfo awardsInfo = null;
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);
@@ -137,10 +137,10 @@ public class AwardsDao {
         return awardsInfo;
     }
 
-    public List<AwardsInfo> findLikeByPrint(String STNumber, String ContestName, String Award) {
+    public List<AwardsInfo> findLikeByPrint(String STNumber, String ContestName, String AwardLevel) {
         List<AwardsInfo> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        String sql = "select * from awards where STNumber like '%" + STNumber + "%' and contestName like '%" + ContestName + "%' and awardLevel like '%" + Award + "%' order by _id desc;";
+        String sql = "select * from awards where STNumber like '%" + STNumber + "%' and contestName like '%" + ContestName + "%' and awardLevel like '%" + AwardLevel + "%' order by _id desc;";
         Cursor cursor = database.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int _id = cursor.getInt(0);

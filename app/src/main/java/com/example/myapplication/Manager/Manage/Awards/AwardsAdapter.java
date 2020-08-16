@@ -12,19 +12,31 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.AwardsDao;
 import com.example.myapplication.domain.AwardsInfo;
+import com.example.myapplication.utils.BaseUrl;
 
+import java.io.IOException;
 import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class AwardsAdapter extends BaseAdapter {
     private Context context;
     private List<AwardsInfo> list;
-    private AwardsDao awardsDao;
+    private static final String TAG = "AwardsAdapter";
+    //private AwardsDao awardsDao;
     //适配器
     public AwardsAdapter(Context context,List<AwardsInfo> list){
         this.context = context;
@@ -58,7 +70,7 @@ public class AwardsAdapter extends BaseAdapter {
         if(convertView == null){
             hui = new HUi();
             final int wo = position;
-            awardsDao = new AwardsDao(context);
+            //awardsDao = new AwardsDao(context);
             convertView = LayoutInflater.from(context).inflate(R.layout.item_listview_awards, null);
             hui.relName = convertView.findViewById(R.id.tv_item_query_award_relName);
             hui.award = convertView.findViewById(R.id.tv_item_query_award_award);
@@ -90,10 +102,14 @@ public class AwardsAdapter extends BaseAdapter {
                 builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        awardsDao.deleteByUserId(awardsInfo.get_id());
-                        list = awardsDao.findAll();
-                        setList(list);
-                        notifyDataSetChanged();
+                        //awardsDao.deleteByUserId(awardsInfo.get_id());
+                        try {
+                            delete(awardsInfo);
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        //list = awardsDao.findAll();
+                        //setList(list);
                         Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
                     }
                 }).show();
@@ -114,5 +130,84 @@ public class AwardsAdapter extends BaseAdapter {
     class HUi {
         TextView relName, award, STNumber, contestName, className, depName;
         Button update, delete;
+    }
+
+    public void delete(final AwardsInfo awardsInfo) throws IOException, InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = BaseUrl.BASE_URL + "awards/delete.do";
+                OkHttpClient client = new OkHttpClient();
+                //Log.v("MyInfo", JSON.toJSONString(json));
+                RequestBody body = new FormBody.Builder()
+                        .add("id", awardsInfo.get_id() + "")
+                        .build();
+                //System.out.println(body);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "<<<<e=" + e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            throw new IOException("Unexpected code " + response);
+                        } else {
+                            Log.d(TAG, awardsInfo.getRelName() + "已删");
+                        }
+                    }
+                });
+            }
+        });
+        thread.start();
+        thread.join();
+        while(thread.isAlive()) continue;
+        if(!thread.isAlive()){
+            findAll();
+        }
+    }
+    public void findAll() throws IOException {
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = BaseUrl.BASE_URL + "awards/findAll.do";
+                OkHttpClient client = new OkHttpClient();
+                //Log.v("MyInfo", JSON.toJSONString(json));
+                RequestBody body = new FormBody.Builder()
+                        .build();
+                //System.out.println(body);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "<<<<e=" + e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String d = response.body().string();
+                            Log.d(TAG, "<<<<d=" + d);
+                            list = JSON.parseArray(d, AwardsInfo.class);
+                        }
+                    }
+                });
+            }
+        });
+        thread1.start();
+        while(thread1.isAlive()) continue;
+        if(!thread1.isAlive()){
+            setList(list);
+        }
     }
 }
