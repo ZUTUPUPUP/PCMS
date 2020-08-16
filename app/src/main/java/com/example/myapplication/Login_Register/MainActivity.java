@@ -7,6 +7,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -42,8 +44,8 @@ import okhttp3.Response;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
     private EditText et_user_name, et_passWd;//编辑框
-    OkHttpClient client = new OkHttpClient();
     Boolean flag = false;
     //private UserDao dao;
     private User user;
@@ -52,6 +54,24 @@ public class MainActivity extends AppCompatActivity {
     String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.READ_EXTERNAL_STORAGE};
     //申请权限
     List<String> permissionsList = new ArrayList<>();
+
+    OkHttpClient client = new OkHttpClient();
+    private static final int GET = 1;
+    private static final int POST = 2;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case GET:
+                    Toast.makeText(MainActivity.this, "get数据请求成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case POST:
+                    Toast.makeText(MainActivity.this, "post数据请求成功", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -95,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode){
             case PERMISSION_REQUEST:
+                Toast.makeText(MainActivity.this, "http:数据请求成功", Toast.LENGTH_SHORT).show();
                 break;
             default:
+                Toast.makeText(MainActivity.this, "https:数据请求成功", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -142,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         if(response.isSuccessful()) {
                             String d = response.body().string();
-                            Log.d(TAG,"<<<<d="+d);
+                            Log.d(TAG,"<<<<d=" + d);
                             user = JSON.parseObject(d, User.class);
                             flag = true;
                         }
@@ -150,24 +172,23 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }).start();
-        if(flag) {
-            if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
-                Intent intent = null;
-                if (user.getStatus().get_id() == 1) {
-                    intent = new Intent(this, ManagerActivity.class);
-                    intent.putExtra("userName", user.getUserName());
-                } else if (user.getStatus().get_id() == 2) {
-                    intent = new Intent(this, UserActivity.class);
-                    intent.putExtra("userName", user.getUserName());
-                }
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
-                et_user_name.setText("");
-                et_passWd.setText("");
+        while(!flag) continue;
+        if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
+            Intent intent = null;
+            if (user.getStatus().get_id() == 1) {
+                intent = new Intent(this, ManagerActivity.class);
+                intent.putExtra("userName", user.getUserName());
+            } else if (user.getStatus().get_id() == 2) {
+                intent = new Intent(this, UserActivity.class);
+                intent.putExtra("userName", user.getUserName());
             }
+            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
+            et_user_name.setText("");
+            et_passWd.setText("");
         }
     }
 
@@ -217,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //用户测试需删掉
     public void LoginOnUser(View view) {
-        Intent intent=null;
+        Intent intent = null;
         intent = new Intent(this, UserActivity.class);
         intent.putExtra("userName", "user");
         startActivity(intent);

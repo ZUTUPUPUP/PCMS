@@ -20,16 +20,25 @@ import com.alibaba.fastjson.JSON;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.Dep;
+import com.example.myapplication.domain.Status;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
 import com.example.myapplication.utils.DensityUtil;
+import com.example.myapplication.utils.MD5Utils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.IOException;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -48,6 +57,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     //一个能显示View的窗体
     private PopupWindow popupWindow;
 
+
+    OkHttpClient client = new OkHttpClient();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +77,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         getDataGetByOKHttpUtils();
         //给listView的项设置点击事件
         listView.setOnItemClickListener(this);
-
-        user.setDepartment_id(1);
+        Dep dep = new Dep();
+        dep.set_id(1);
+        user.setDep(dep);
         user.setGender("女");
         rg_reg_sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -86,28 +101,77 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
     //注册按钮点击事件
     public void Register_reg(View v) {
-        String name = et_user_name.getText().toString().trim();
+        final String name = et_user_name.getText().toString().trim();
         String passWd = et_passWd.getText().toString().trim();
-        String passWdAgain = et_passsWd_again.getText().toString().trim();
-        User userDaoByUserName = userDao.findByUserName(name);
-        if(name.length() != 12) {
-            Toast.makeText(this, "请输入正确的学号", Toast.LENGTH_SHORT).show();
-        } else if (userDaoByUserName != null) {
-            Toast.makeText(this, "该学号已经存在,检查是否是自己的学号,如果是请联系管理员", Toast.LENGTH_SHORT).show();
-        } else if (passWd.length() < 6) {
-            Toast.makeText(this, "密码长度过短", Toast.LENGTH_SHORT).show();
-        } else if (!passWd.equals(passWdAgain)) {
-            Toast.makeText(this, "两次密码不一致,请检查", Toast.LENGTH_SHORT).show();
-        } else {
-            this.user.setUserName(name);
-            this.user.setPasswd(passWd);
-            this.user.setNickName(et_reg_nickname.getText().toString().trim());
-            userDao.add(this.user);
-            Intent data = new Intent();
-            data.putExtra("userName", name);
-            data.putExtra("passWd", passWd);
-            setResult(2, data);
-            finish();
+        final String passWdAgain = et_passsWd_again.getText().toString().trim();
+        user.setUserName(name);
+        user.setPasswd(MD5Utils.md5(passWd));
+        String nickName = et_reg_nickname.getText().toString().trim();
+        user.setNickName(nickName.isEmpty() ? nickName : user.getUserName());
+        Status status = new Status();
+        status.set_id(2);
+        user.setStatus(status);
+
+        if(!passWd.equals(passWdAgain)) {
+            Toast.makeText(this, "两次密码不一致,请检查!", Toast.LENGTH_SHORT).show();
+        } else if (user.getUserName().isEmpty()) {
+            Toast.makeText(this, "请输入学号!", Toast.LENGTH_SHORT).show();
+        }else {
+            final boolean[] flag = {false};
+
+            final String[] res = {""};
+            new Thread(new Runnable() {
+                @Override
+                public synchronized void run() {
+                    String url = BaseUrl.BASE_URL + "user/insert.do";
+                    //Log.v("MyInfo", JSON.toJSONString(json));
+                    String userJson = JSON.toJSONString(user);
+//                JSONObject json = new JSONObject();
+//                try {
+//                    json.put("user", userJson);
+//                    json.put("passWdAgain", JSON.toJSONString(passWdAgain));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+                    RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson);
+                    System.out.println(body);
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .build();
+                    Call call = client.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.d(TAG,"<<<<e="+e);
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            if(response.isSuccessful()) {
+                                res[0] = response.body().string();
+                                Log.d(TAG,"<<<<d=" + res[0]);
+                                //res[0] = JSON.parseObject(d, String.class);
+                                flag[0] = true;
+                            }
+                        }
+                    });
+                }
+            }).start();
+            while(res[0].equals("")) continue;
+            if (res[0].equals("STNumber Error")) {
+                Toast.makeText(this, "请输入正确的学号!", Toast.LENGTH_SHORT).show();
+            } else if (res[0].equals("STNumber Exist")) {
+                Toast.makeText(this, "该学号已经存在,请重新输入!", Toast.LENGTH_SHORT).show();
+            } else if (res[0].equals("passWd Short")) {
+                Toast.makeText(this, "密码长度不符合要求,请修改密码!", Toast.LENGTH_SHORT).show();
+            } else if(res[0].equals("Insert Success")) {
+                Intent data = new Intent();
+                data.putExtra("userName", name);
+                data.putExtra("passWd", passWd);
+                setResult(2, data);
+                finish();
+            }
         }
     }
 
@@ -115,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Dep dep = data.get(position);
-        user.setDepartment_id(dep.get_id());
+        user.setDep(dep);
         tv_user_dep.setText(dep.getName());
         //选择后取消
         if(popupWindow != null && popupWindow.isShowing()) {
@@ -152,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     /**
-     * post请求
+     * get请求
      */
     public void getDataGetByOKHttpUtils() {
         String url = BaseUrl.BASE_URL + "dep/findAll.do";
