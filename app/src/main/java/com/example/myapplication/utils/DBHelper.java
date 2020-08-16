@@ -17,7 +17,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         //身份表status:管理员,普通用户
         db.execSQL(UserStatusTable.CREATE_TAB);
         //insert into status values(null, '管理员');
