@@ -24,7 +24,6 @@ import com.example.myapplication.domain.Status;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
 import com.example.myapplication.utils.DensityUtil;
-import com.example.myapplication.utils.MD5Utils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -54,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private RegisterAdapter adapter;
     private User user = new User();
     UserDao userDao = new UserDao(this);
+
     //一个能显示View的窗体
     private PopupWindow popupWindow;
 
@@ -105,9 +105,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String passWd = et_passWd.getText().toString().trim();
         final String passWdAgain = et_passsWd_again.getText().toString().trim();
         user.setUserName(name);
-        user.setPasswd(MD5Utils.md5(passWd));
+        user.setPasswd(passWd);
         String nickName = et_reg_nickname.getText().toString().trim();
-        user.setNickName(nickName.isEmpty() ? nickName : user.getUserName());
+        user.setNickName(nickName.isEmpty() ? user.getUserName() : nickName);
         Status status = new Status();
         status.set_id(2);
         user.setStatus(status);
@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             final String[] res = {""};
             new Thread(new Runnable() {
                 @Override
-                public synchronized void run() {
+                public void run() {
                     String url = BaseUrl.BASE_URL + "user/insert.do";
                     //Log.v("MyInfo", JSON.toJSONString(json));
                     String userJson = JSON.toJSONString(user);
@@ -262,6 +262,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             Toast.LENGTH_SHORT).show();
                     break;
             }
+            System.out.println(response);
             if(response != null) {
                 //解析数据
                 parseData(response);

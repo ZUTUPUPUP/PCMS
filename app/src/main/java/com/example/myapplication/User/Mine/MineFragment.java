@@ -11,15 +11,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.example.myapplication.Login_Register.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User.Mine.Contact.UserContactActivity;
 import com.example.myapplication.dao.DepDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
+import com.example.myapplication.utils.BaseUrl;
+
+import java.io.IOException;
 
 import androidx.fragment.app.Fragment;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class MineFragment extends Fragment {
@@ -32,6 +44,9 @@ public class MineFragment extends Fragment {
     private Button btn_mine_update_msg;
     private TextView tv_mine_nickname, tv_mine_username, tv_mine_dep, tv_mine_gender;
     User user = null;
+    private boolean flagMineUser;
+    OkHttpClient client = new OkHttpClient();
+
 
     public MineFragment(){
         // Required empty public constructor
@@ -42,9 +57,45 @@ public class MineFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_mine, container, false);
         bindUI();
         initContact();
-        userDao = new UserDao(getActivity());
-        depDao = new DepDao(getActivity());
-        user = userDao.findByUserName(userName);
+        //userDao = new UserDao(getActivity());
+        //depDao = new DepDao(getActivity());
+        //user = userDao.findByUserName(userName);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = BaseUrl.BASE_URL + "user/findByUserName.do";
+                //Log.v("MyInfo", JSON.toJSONString(json));
+                RequestBody body = new FormBody.Builder()
+                        .add("userName", userName)
+                        .build();
+                System.out.println(body);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        //Log.d(TAG,"<<<<e="+e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if(response.isSuccessful()) {
+                            String d = response.body().string();
+                            //Log.d(TAG,"<<<<d=" + d);
+                            user = JSON.parseObject(d, User.class);
+                            flagMineUser = true;
+                        }
+                    }
+                });
+            }
+        }).start();
+        while (!flagMineUser) continue;
+        System.out.println(user);
+        Toast.makeText(getActivity(), "数据请求成功", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(, "", Toast.LENGTH_SHORT).show();
         //用户个人信息展示
         showUserMessage();
         //点击事件修改密码
@@ -129,7 +180,7 @@ public class MineFragment extends Fragment {
     private void showUserMessage() {
         tv_mine_username.setText("学号：" + user.getUserName());
         tv_mine_nickname.setText(user.getNickName());
-        tv_mine_dep.setText(depDao.findById(user.getDepartment_id()).getName());
+        tv_mine_dep.setText(user.getDep().getName());
         tv_mine_gender.setText(user.getGender());
     }
 

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private User user;
     private static final int PERMISSION_REQUEST = 1001; //申请权限
     //申请权限
-    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.READ_EXTERNAL_STORAGE};
+    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE,Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INTERNET}; //android.permission.INTERNET
     //申请权限
     List<String> permissionsList = new ArrayList<>();
 
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             String[] permissions = permissionsList.toArray(new String[permissionsList.size()]);//将List转为数组
             ActivityCompat.requestPermissions(MainActivity.this, permissions, PERMISSION_REQUEST);
         }
+
     }
 
     /**
