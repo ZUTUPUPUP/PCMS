@@ -47,17 +47,17 @@ public class ReplyFragment extends Fragment {
 
 
     private ListView sshowListView;
-    private ContactDao contactDao;
+    // private ContactDao contactDao;
     private View view;
     private List<Contact> contactList;
     private UserListItemAdapter adapter;
-    private List<Contact> allContacts;
+  //  private List<Contact> allContacts;
     private boolean longer;
     private ImageButton btn_reflash;
     private ImageButton btn_searchUser;
     private EditText input;
     private List<Contact> data;
-
+    private List<User> list;
 
     public ReplyFragment() {
         // Required empty public constructor
@@ -68,10 +68,10 @@ public class ReplyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_reply, container, false);
-       // System.out.println(new String("ypy踩踩").length());
+        // System.out.println(new String("ypy踩踩").length());
 
         initUI();
-       // getUserList();//读取用户列表
+        // getUserList();//读取用户列表
         UserListGetDataGetByOKHttpUtils();
         btn_reflash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,17 +118,102 @@ public class ReplyFragment extends Fragment {
             }
         });
     }*/
+    /**
+     * get
+     */
+    public void selectListGetDataGetByOKHttpUtils() {
+        String url = BaseUrl.BASE_URL + "user/findAll.do";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .id(100)
+                .build()
+                .execute(new selectMyStringCallback());
+    }
 
+    public class selectMyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            //setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            ///setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(okhttp3.Call call, Exception e, int id) {
+            e.printStackTrace();
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            // Log.v("ReplyFragment", "onError:" + e.getMessage());
+        }
+        @Override
+        public void onResponse(String response, int id) {
+            // Log.e("ReplyFragment", "onResponse：complete");
+//            tv_result.setText();
+//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
+            //   Log.v("ReplyFragment", "onResponse:" + response);
+
+            if(response != null) {
+                //解析数据
+                SelectUserListParseData(response);
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            //Log.e("ReplyFragment", "inProgress:" + progress);
+        }
+    }
+
+    private void SelectUserListParseData(String json) { //得到所有聊天记录，加载user列表
+        list = JSON.parseArray(json, User.class);
+        Log.v("MyInfo", data.toString());
+        String id=input.getText().toString();
+        Set<String> st = new HashSet();
+        for(User user: list){
+            if(user.getStatus_id()==1)continue;
+            if(user.getUserName().contains(id)==false)continue;
+            st.add(user.getUserName());
+        }
+        contactList.clear();
+        Set hs = new HashSet();
+        for(Contact contact: data){
+            String uuuu=contact.getSenderId();
+            if(uuuu.equals("admin")) uuuu=contact.getReceiverId();
+            if(hs.contains(uuuu))continue;
+            if(st.contains(uuuu)==false)continue;
+            st.remove(uuuu);
+            hs.add(uuuu);
+            //超出部分删去
+            String mes=contact.getMas();
+            longer = false;
+            mes=substringForWidth(mes,mes.length(),new TextPaint());
+            if(longer) mes=mes+"...";
+            contact.setMas(mes);
+            contactList.add(contact);
+        }
+        for(String user:st) {
+            String nickName="";
+            for(User user1:list)if(user.equals(user1.getUserName())) nickName=user1.getNickName();
+            contactList.add(new Contact(-1,"",user,nickName,""));
+        }
+        adapter = new UserListItemAdapter(view.getContext(),R.layout.item_contactuserlist, contactList);
+        sshowListView.setAdapter(adapter);
+    }
     private void initUI() {
         btn_searchUser = (ImageButton)view.findViewById(R.id.btn_searchUser);
         btn_reflash = (ImageButton)view.findViewById(R.id.btn_reflash);
 
         input = (EditText)view.findViewById(R.id.ed_input);
-        final UserDao userDao=new UserDao(getContext());
+        // final UserDao userDao=new UserDao(getContext());
         btn_searchUser.setOnClickListener(new View.OnClickListener() {//查找用户
             @Override
             public void onClick(View v) {
-                String id=input.getText().toString();
+                selectListGetDataGetByOKHttpUtils();
+              /*  String id=input.getText().toString();
                 List<User>list=userDao.findByLikeUserName(id);
                 Set<String> st = new HashSet();
                 for(User user:list){
@@ -156,7 +241,7 @@ public class ReplyFragment extends Fragment {
                     contactList.add(new Contact(-1,"",user,"admin",""));
                 }
                 adapter = new UserListItemAdapter(view.getContext(),R.layout.item_contactuserlist, contactList);
-                sshowListView.setAdapter(adapter);
+                sshowListView.setAdapter(adapter);*/
             }
         });
         sshowListView = (ListView) view.findViewById(R.id.sshow_listView);
@@ -173,7 +258,7 @@ public class ReplyFragment extends Fragment {
         return str;
     }
     /**
-     * post请求
+     * get
      */
     public void UserListGetDataGetByOKHttpUtils() {
         String url = BaseUrl.BASE_URL + "contact/findAll.do";
@@ -201,14 +286,14 @@ public class ReplyFragment extends Fragment {
             e.printStackTrace();
 //            tv_result.setText();
 //            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-           // Log.v("ReplyFragment", "onError:" + e.getMessage());
+            // Log.v("ReplyFragment", "onError:" + e.getMessage());
         }
         @Override
         public void onResponse(String response, int id) {
-           // Log.e("ReplyFragment", "onResponse：complete");
+            // Log.e("ReplyFragment", "onResponse：complete");
 //            tv_result.setText();
 //            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
-         //   Log.v("ReplyFragment", "onResponse:" + response);
+            //   Log.v("ReplyFragment", "onResponse:" + response);
 
             if(response != null) {
                 //解析数据

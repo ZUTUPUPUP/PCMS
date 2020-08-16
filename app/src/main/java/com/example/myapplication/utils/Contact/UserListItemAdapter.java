@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.text.TextPaint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +15,30 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.alibaba.fastjson.JSON;
+import com.example.myapplication.Manager.Reply.ReplyFragment;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.ContactDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.Contact;
 import com.example.myapplication.domain.User;
+import com.example.myapplication.utils.BaseUrl;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import okhttp3.Request;
+
 //消息ListView的适配器
 public class UserListItemAdapter extends ArrayAdapter {
 
     private final int resourceId;
+    private User user;
+    private String uName;
+
     public UserListItemAdapter(@NonNull Context context, int textViewResourceId, @NonNull List<Contact> objects) {
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
@@ -37,14 +52,17 @@ public class UserListItemAdapter extends ArrayAdapter {
         TextView R1 =(TextView) view.findViewById(R.id.R1);
         TextView B =(TextView) view.findViewById(R.id.B);
         //设置头像上的名字
-        UserDao userDao=new UserDao(view.getContext());
-        String uName=contact.getSenderId();
-        if(uName.equals("admin"))uName=contact.getReceiverId();
-        User user=userDao.findByUserName(uName);
-        System.out.println("aaaaaa"+user.getNickName());
+      //  UserDao userDao=new UserDao(view.getContext());
+        uName =contact.getSenderId();
+       /* System.out.println("aaaaaa"+ uName);
+        if(uName.equals("admin")) uName =contact.getReceiverId();
+
+        System.out.println("aaaaaa"+ user.getNickName());
         String realName;
-        if(user==null) realName="-1";
-        else  realName=userDao.findByUserName(uName).getNickName();
+        if(user ==null) realName="-1";
+        else  realName=user.getNickName();
+         */
+       String realName=contact.getReceiverId();
         realName=realName.substring(realName.length()-2);
         name.setText(realName);
         //配色表
@@ -68,6 +86,7 @@ public class UserListItemAdapter extends ArrayAdapter {
 
         return view;
     }
+
     /**
      * 获取字符串的长度，如果有中文，则每个中文字符计为2位
      * @param value 指定的字符串
