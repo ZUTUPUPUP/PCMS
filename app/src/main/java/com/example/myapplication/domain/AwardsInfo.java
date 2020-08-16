@@ -13,6 +13,7 @@ public class AwardsInfo {
     private String awardLevel;//获奖等级
     private String depName;
 
+    public AwardsInfo(){}
     public AwardsInfo(Integer _id, String STNumber, String relName, String className, String contestName, String awardLevel, String depName) {
         this._id = _id;
         this.STNumber = STNumber;
