@@ -43,7 +43,7 @@ import okhttp3.Response;
  *一个activity理解成是一个页面
  */
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+
 
     private EditText et_user_name, et_passWd;//编辑框
     Boolean flag = false;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     //申请权限
     List<String> permissionsList = new ArrayList<>();
 
+    private static final String TAG = "MainActivity";
     OkHttpClient client = new OkHttpClient();
     private static final int GET = 1;
     private static final int POST = 2;

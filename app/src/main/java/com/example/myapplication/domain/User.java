@@ -1,5 +1,7 @@
 package com.example.myapplication.domain;
 
+import java.util.List;
+
 /**
  * 用户信息类
  */
@@ -16,6 +18,8 @@ public class User {
     private Dep dep;
     private Status status;
 
+    private List<ContestRegistry> contestRegistries;
+
     public User() {
     }
 
@@ -27,6 +31,14 @@ public class User {
         this.gender = gender;
         this.department_id = department_id;
         this.status_id = status_id;
+    }
+
+    public List<ContestRegistry> getContestRegistries() {
+        return contestRegistries;
+    }
+
+    public void setContestRegistries(List<ContestRegistry> contestRegistries) {
+        this.contestRegistries = contestRegistries;
     }
 
     public Dep getDep() {

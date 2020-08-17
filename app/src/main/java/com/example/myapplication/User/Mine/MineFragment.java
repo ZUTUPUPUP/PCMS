@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.myapplication.Login_Register.MainActivity;
@@ -19,9 +22,20 @@ import com.example.myapplication.User.Mine.Contact.UserContactActivity;
 import com.example.myapplication.dao.DepDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
+import com.example.myapplication.utils.BaseUrl;
+import com.example.myapplication.utils.MD5Utils;
 
+import java.io.IOException;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class MineFragment extends Fragment {
@@ -37,6 +51,17 @@ public class MineFragment extends Fragment {
     private boolean flagMineUser;
     OkHttpClient client = new OkHttpClient();
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 2:
+                    Toast.makeText(getActivity(), "修改成功", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     public MineFragment(){
         // Required empty public constructor
@@ -49,7 +74,8 @@ public class MineFragment extends Fragment {
         Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
         String json = MainIntent.getStringExtra("user");
         user = JSON.parseObject(json, User.class);
-        initContact(user.getUserName());
+        userName = user.getUserName();
+        initContact();
         //userDao = new UserDao(getActivity());
         //depDao = new DepDao(getActivity());
         //user = userDao.findByUserName(userName);
@@ -119,7 +145,39 @@ public class MineFragment extends Fragment {
                                 String newNickName = editText.getText().toString();
                                 tv_mine_nickname.setText(newNickName);
                                 user.setNickName(newNickName);
-                                userDao.update(user);
+                                //userDao.update(user);
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String url = BaseUrl.BASE_URL + "user/update.do";
+                                        String userJson = JSON.toJSONString(user);
+                                        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson);
+                                        System.out.println(body);
+                                        Request request = new Request.Builder()
+                                                .url(url)
+                                                .post(body)
+                                                .build();
+                                        Call call = client.newCall(request);
+                                        call.enqueue(new Callback() {
+                                            @Override
+                                            public void onFailure(Call call, IOException e) {
+                                                // Log.d(TAG,"<<<<e="+e);
+                                            }
+
+                                            @Override
+                                            public void onResponse(Call call, Response response) throws IOException {
+                                                if(response.isSuccessful()) {
+                                                    //String d = response.body().string();
+                                                    //Log.d(TAG,"<<<<e="+e);
+                                                    //user = JSON.parseObject(d, User.class);
+                                                }
+                                            }
+                                        });
+                                    }
+                                }).start();
+                                Message msg = Message.obtain();
+                                msg.what = 2;
+                                handler.sendMessage(msg);
                             }
                         })
                         .setNegativeButton("取消", null)
@@ -162,8 +220,41 @@ public class MineFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String newPassWd = editText.getText().toString();
-                                user.setPasswd(newPassWd);
-                                userDao.update(user);
+                                user.setPasswd(MD5Utils.md5(newPassWd));
+                                //userDao.update(user);
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String url = BaseUrl.BASE_URL + "user/update.do";
+                                        String userJson = JSON.toJSONString(user);
+                                        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), userJson);
+                                        System.out.println(body);
+                                        Request request = new Request.Builder()
+                                                .url(url)
+                                                .post(body)
+                                                .build();
+                                        Call call = client.newCall(request);
+                                        call.enqueue(new Callback() {
+                                            @Override
+                                            public void onFailure(Call call, IOException e) {
+                                                // Log.d(TAG,"<<<<e="+e);
+                                            }
+
+                                            @Override
+                                            public void onResponse(Call call, Response response) throws IOException {
+                                                if(response.isSuccessful()) {
+                                                    //String d = response.body().string();
+                                                    //Log.d(TAG,"<<<<e="+e);
+                                                    //user = JSON.parseObject(d, User.class);
+                                                }
+                                            }
+                                        });
+                                    }
+                                }).start();
+                                Message msg = Message.obtain();
+                                msg.what = 2;
+                                handler.sendMessage(msg);
+
                             }
                         })
                         .setNegativeButton("取消", null)
@@ -172,8 +263,7 @@ public class MineFragment extends Fragment {
         });
     }
 
-    private void initContact(String name) {
-        userName = name;
+    private void initContact() {
         System.out.print(userName);
         btn_contact = (Button)view.findViewById(R.id.contact);
         btn_contact.setOnClickListener(new View.OnClickListener() {
