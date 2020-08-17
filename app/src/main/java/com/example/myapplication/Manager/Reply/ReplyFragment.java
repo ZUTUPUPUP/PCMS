@@ -57,7 +57,7 @@ public class ReplyFragment extends Fragment {
     private ImageButton btn_searchUser;
     private EditText input;
     private List<Contact> data;
-    private List<User> list;
+    private List<User> list;//所有用户信息
 
     public ReplyFragment() {
         // Required empty public constructor
@@ -72,7 +72,9 @@ public class ReplyFragment extends Fragment {
         FselectListGetDataGetByOKHttpUtils();//加载userlist
         initUI();
         // getUserList();//读取用户列表
+        //加载有聊天记录的user
         UserListGetDataGetByOKHttpUtils();
+        //刷新按钮的监听
         btn_reflash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +209,7 @@ public class ReplyFragment extends Fragment {
 //            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
             //   Log.v("ReplyFragment", "onResponse:" + response);
 
-            if(response != null) {
+            if(response != null) {//拿到数据
                 //解析数据
                 SelectUserListParseData(response);
             }
@@ -222,6 +224,7 @@ public class ReplyFragment extends Fragment {
     private void SelectUserListParseData(String json) { //得到所有聊天记录，加载user列表
         list = JSON.parseArray(json, User.class);
         Log.v("MyInfo", data.toString());
+        //输入的id，匹配用
         String id=input.getText().toString();
         Set<String> st = new HashSet();
         for(User user: list){
@@ -230,6 +233,7 @@ public class ReplyFragment extends Fragment {
             st.add(user.getUserName());
         }
         contactList.clear();
+        //筛选出每个用户的最后一条消息，并按时间顺序排序
         Set hs = new HashSet();
         for(Contact contact: data){
             String uuuu=contact.getSenderId();
@@ -255,12 +259,14 @@ public class ReplyFragment extends Fragment {
         sshowListView.setAdapter(adapter);
     }
     private void initUI() {
+        //找到搜索的按钮
         btn_searchUser = (ImageButton)view.findViewById(R.id.btn_searchUser);
+        //刷新按钮
         btn_reflash = (ImageButton)view.findViewById(R.id.btn_reflash);
-
+        //搜索输入框
         input = (EditText)view.findViewById(R.id.ed_input);
         // final UserDao userDao=new UserDao(getContext());
-        btn_searchUser.setOnClickListener(new View.OnClickListener() {//查找用户
+        btn_searchUser.setOnClickListener(new View.OnClickListener() {//查找用户的监听
             @Override
             public void onClick(View v) {
                 selectListGetDataGetByOKHttpUtils();
@@ -360,6 +366,7 @@ public class ReplyFragment extends Fragment {
 
     private void UserListParseData(String json) { //得到所有聊天记录，加载user列表
         data = JSON.parseArray(json, Contact.class);
+        if(list==null) return ;
         Log.v("MyInfo", data.toString());
         Collections.reverse(data);
         contactList = new ArrayList<>();

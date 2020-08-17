@@ -46,12 +46,13 @@ public class MessageDetialActivity extends AppCompatActivity {
         context = MessageDetialActivity.this;
        // messageDao = new MessageDao(context);
        //  message = messageDao.findById(userId);
+        bindUI();
         try {
             findById(userId);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        bindUI();
+
     }
 
     public void DeleteSubmit(View v) throws IOException, InterruptedException {
@@ -90,7 +91,7 @@ public class MessageDetialActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 //Log.v("MyInfo", JSON.toJSONString(json));
                 RequestBody body = new FormBody.Builder()
-                        .add("id", message.get_id() + "")
+                        .add("_id", message.get_id() + "")
                         .build();
                 //System.out.println(body);
                 Request request = new Request.Builder()
@@ -131,7 +132,7 @@ public class MessageDetialActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 //Log.v("MyInfo", JSON.toJSONString(json));
                 RequestBody body = new FormBody.Builder()
-                        .add("id", id + "")
+                        .add("_id", id + "")
                         .build();
                 //System.out.println(body);
                 Request request = new Request.Builder()
@@ -149,7 +150,7 @@ public class MessageDetialActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         if (response.isSuccessful()) {
                             String d = response.body().string();
-                            Log.d("d=", d);
+                            Log.d("message =", d);
                             message = JSON.parseObject(d, Message.class);
                         } else throw new IOException("Unexpected code " + response);
                     }
@@ -158,7 +159,7 @@ public class MessageDetialActivity extends AppCompatActivity {
         });
         thread1.start();
         thread1.join();
-        while(thread1.isAlive()&&message==null)continue;
+        while(thread1.isAlive()||message==null)continue;
         if(!thread1.isAlive()){
             showUI();
         }

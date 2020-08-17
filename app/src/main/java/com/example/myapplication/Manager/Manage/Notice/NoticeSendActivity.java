@@ -84,7 +84,7 @@ public class NoticeSendActivity extends AppCompatActivity {
         } else {
             //noticeDao.update(new Notice(notice.get_id(), title1, content1, null, receiver1));
             // notice = noticeDao.findByNoticeId(notice.get_id());
-            notice = new Notice(notice.get_id(), title1, content1, null, receiver1);
+            notice = new Notice(notice.get_id(), title1, content1, "", receiver1);
             update(notice);
             Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show();
         }
@@ -245,7 +245,7 @@ public class NoticeSendActivity extends AppCompatActivity {
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = BaseUrl.BASE_URL + "user/findAll.do";
+                String url = BaseUrl.BASE_URL + "user/findAllUsers.do";
                 OkHttpClient client = new OkHttpClient();
                 //Log.v("MyInfo", JSON.toJSONString(json));
                 RequestBody body = new FormBody.Builder()
@@ -275,7 +275,8 @@ public class NoticeSendActivity extends AppCompatActivity {
         thread2.start();
         thread2.join();
         while(thread2.isAlive()&&users==null){ continue; }
-        if(!thread2.isAlive()){
+        if(!thread2.isAlive()&&users!=null){
+            Log.d("users->",users.toString());
             if (title1.length() <= 0) {
                 Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
             } else if (content1.length() <= 0) {

@@ -50,21 +50,25 @@ public class ContestDao {
         database.close();
     }
 
-    public List<Contest> queryByName(String Name){
+    public List<Contest> queryByName(String contestName){
         url= BaseUrl.BASE_URL + "contest/queryByName.do";
         List<Contest> testList = null;
         try {
             testList=JSON.parseArray(OkHttpUtils.get()
                     .url(url)
-                    .id(1001)
-                    .addParams("Name", Name)
-                    .build().execute().body().string(),Contest.class);
+                    .id(100)
+                    .addParams("contestName", contestName)
+                    .build()
+                    .execute()
+                    .body()
+                    .string()
+                    ,Contest.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
         List<Contest> contestList=new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor=database.rawQuery("select * from "+ContestTable.TAB_NAME+" where "+ContestTable.CONTEST_NAME+" like ?",new String[]{"%"+Name+"%"});
+        Cursor cursor=database.rawQuery("select * from "+ContestTable.TAB_NAME+" where "+ContestTable.CONTEST_NAME+" like ?",new String[]{"%"+contestName+"%"});
         while(cursor.moveToNext()){
             int id=cursor.getInt(0);
             String name=cursor.getString(1);

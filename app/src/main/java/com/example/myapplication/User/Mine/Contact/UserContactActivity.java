@@ -138,7 +138,7 @@ public class UserContactActivity extends AppCompatActivity {
     }
     private void getHistoryContact() {
         //开延迟，使得可以先显示底部最新消息
-        scrollView.post(new Runnable() {
+        scrollView.post(new Runnable() { //强制到底
             public void run() {
                 scrollView.fullScroll(View.FOCUS_DOWN);
             }

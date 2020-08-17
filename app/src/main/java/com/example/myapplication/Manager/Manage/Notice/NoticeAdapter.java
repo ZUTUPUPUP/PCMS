@@ -134,7 +134,7 @@ public class NoticeAdapter extends BaseAdapter {
                 OkHttpClient client = new OkHttpClient();
                 //Log.v("MyInfo", JSON.toJSONString(json));
                 RequestBody body = new FormBody.Builder()
-                        .add("id", notice.get_id() + "")
+                        .add("_id", notice.get_id() + "")
                         .build();
                 //System.out.println(body);
                 Request request = new Request.Builder()
@@ -198,6 +198,6 @@ public class NoticeAdapter extends BaseAdapter {
         thread1.start();
         thread1.join();
         while(thread1.isAlive()&&list==null)continue;
-        if(!thread1.isAlive())setList(list);
+        if(!thread1.isAlive()&&list!=null)setList(list);
     }
 }

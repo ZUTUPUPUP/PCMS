@@ -37,6 +37,7 @@ public class MassageItemAdapter extends ArrayAdapter {
      //   GradientDrawable drawable = (GradientDrawable) getContext().getResources().getDrawable(R.drawable.shape_round_textview);
         if(contact.getSenderId().equals("admin")){
             v1.setText("管理"); //发送人id
+            //设置背景色工具
             GradientDrawable gradientDrawable = (GradientDrawable) v1.getBackground();
             gradientDrawable.setColor(Color.parseColor("#FF6666"));
 
