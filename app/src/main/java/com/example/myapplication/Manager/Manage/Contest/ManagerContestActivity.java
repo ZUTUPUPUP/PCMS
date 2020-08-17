@@ -64,6 +64,19 @@ public class ManagerContestActivity extends AppCompatActivity {
                 contextList.addAll(contextTemp);
             }
         });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        while(thread.isAlive()){
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         ContestAdapter contestAdapter=new ContestAdapter(this,R.layout.item_listview_contest,contextList);
         ListView listView=(ListView)findViewById(R.id.manager_contest_list_view);
         listView.setAdapter(contestAdapter);
