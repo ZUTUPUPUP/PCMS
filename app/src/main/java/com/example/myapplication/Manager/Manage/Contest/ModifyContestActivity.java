@@ -25,9 +25,9 @@ public class ModifyContestActivity extends AppCompatActivity {
         et_contest_introduction.setText(getIntent().getStringExtra("introduction"));
         et_contest_time = findViewById(R.id.et_modify_contest_time);
         et_contest_time.setText(getIntent().getStringExtra("time"));
-        et_contest_note = findViewById(R.id.et_modify_contest_note);
+    et_contest_note = findViewById(R.id.et_modify_contest_note);
         et_contest_note.setText(getIntent().getStringExtra("note"));
-    }
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

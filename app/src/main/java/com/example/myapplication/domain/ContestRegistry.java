@@ -10,6 +10,12 @@ public class ContestRegistry {
     private String email;
     private String relName;
 
+    private User user;
+    private Contest contest;
+
+    public ContestRegistry() {
+    }
+
     public ContestRegistry(Integer _id, int contestId, int STNumberId, int depId, String classAndGrade, String gender, String email, String relName) {
         this._id = _id;
         this.contestId = contestId;
@@ -35,6 +41,23 @@ public class ContestRegistry {
                 '}';
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Contest getContest() {
+        return contest;
+    }
+
+    public void setContest(Contest contest) {
+        this.contest = contest;
+    }
+
+
     public Integer get_id() {
         return _id;
     }
@@ -59,9 +82,7 @@ public class ContestRegistry {
         this.STNumberId = STNumberId;
     }
 
-    public int getDepId() {
-        return depId;
-    }
+    public int getDepId() { return depId; }
 
     public void setDepId(int depId) {
         this.depId = depId;
