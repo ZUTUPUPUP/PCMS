@@ -34,7 +34,7 @@ import java.util.List;
 
 import okhttp3.Request;
 
-//用户界面下，用户联系管理员
+//用户界面下，管理员和一个用户聊天
 public class ContactOneUserActivity extends AppCompatActivity {
 
     private String userName;
@@ -58,7 +58,7 @@ public class ContactOneUserActivity extends AppCompatActivity {
         setBtnSendMes();//设置发送信息
     }
     /**
-     * post请求
+     * get请求
      */
     public void getDataGetByOKHttpUtils() {
         String url = BaseUrl.BASE_URL + "contact/findAll.do";
@@ -119,17 +119,17 @@ public class ContactOneUserActivity extends AppCompatActivity {
     private void parseData(String json) {
         contactList = JSON.parseArray(json, Contact.class);
         adContactList = new ArrayList<>();
-        for(Contact contact:contactList){
-            if(contact.getSenderId().equals(userName)||contact.getReceiverId().equals(userName)){
-                adContactList.add(contact);
-            }
-        }
         //开延迟，使得可以先显示底部最新消息
         scrollView.post(new Runnable() {
             public void run() {
                 scrollView.fullScroll(View.FOCUS_DOWN);
             }
         });
+        for(Contact contact:contactList){
+            if(contact.getSenderId().equals(userName)||contact.getReceiverId().equals(userName)){
+                adContactList.add(contact);
+            }
+        }
         //筛选出admin和user的对话
         adapter = new MassageItemAdapter(this,R.layout.item_contactmessage, adContactList);
         showListView.setAdapter(adapter);
@@ -217,6 +217,7 @@ public class ContactOneUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Contact contact= new Contact(-1,null,"admin",userName,ed_input.getText().toString());
+                //得到当前日期
                 Calendar calendar= Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                 String nowDate=(sdf.format(calendar.getTime()));
