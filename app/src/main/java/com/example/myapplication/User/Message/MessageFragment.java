@@ -19,6 +19,7 @@ import com.example.myapplication.Manager.Manage.UserManage.QueryAllUsersActivity
 import com.example.myapplication.R;
 import com.example.myapplication.dao.MessageDao;
 import com.example.myapplication.domain.Message;
+import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
 
 import java.io.IOException;
@@ -83,7 +84,8 @@ public class MessageFragment extends Fragment {
 
     private void getMessage() {
         Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
-        userName = MainIntent.getStringExtra("userName");
+        String json= MainIntent.getStringExtra("user");
+        userName = JSON.parseObject(json, User.class).getUserName();
         //list = messageDao.findByUserId(userName);
         findByUserId(userName);
         Log.v("用户名：",userName);
