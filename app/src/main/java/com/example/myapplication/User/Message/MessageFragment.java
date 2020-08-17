@@ -2,24 +2,28 @@ package com.example.myapplication.User.Message;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.fastjson.JSON;
+import com.example.myapplication.Manager.Manage.UserManage.QueryAllUsersActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.MessageDao;
 import com.example.myapplication.domain.Message;
-import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
 
 import java.io.IOException;
 import java.util.List;
 
-import androidx.fragment.app.Fragment;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -34,40 +38,55 @@ public class MessageFragment extends Fragment {
     private static String TAG = "MessageFragment";
     private View view;
     private ListView listView;
-    private MessageDao messageDao;
+   // private MessageDao messageDao;
     private List<Message> list = null;
     private MessageAdapter adapter;
     private String userName;
-    private User user;
     public MessageFragment() {
         // Required empty public constructor
     }
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    adapter = new MessageAdapter(view.getContext(),list);
+                    listView.setAdapter(adapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Message message = list.get(position);
+                            //打开私聊页面
+                            int _id = message.get_id();
+                            Intent intent=new Intent(view.getContext(), MessageDetialActivity.class);
+                            intent.putExtra("userId",_id+"");
+                            startActivity(intent);
+                        }
+                    });
+                    break;
+                case 2:
+                    adapter.setList(list);
+                    break;
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_message, container, false);
-        messageDao = new MessageDao(getContext());
+       // messageDao = new MessageDao(getContext());
         initUI();
-        try {
-            getMessage();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        getMessage();
         return view;
     }
 
-    private void getMessage() throws IOException, InterruptedException {
+    private void getMessage() {
         Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
-        String json = MainIntent.getStringExtra("user");
-        user = JSON.parseObject(json, User.class);
-        userName = user.getUserName();
+        userName = MainIntent.getStringExtra("userName");
         //list = messageDao.findByUserId(userName);
         findByUserId(userName);
         Log.v("用户名：",userName);
-        /*for(int i=0;i<list.size();++i){
-            int id = list.get(i).get_id();
-            String userId = list.get(i).getUserId();
-        }*/
     }
 
     private void initUI(){
@@ -78,19 +97,15 @@ public class MessageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        try {
-            findAll(userName);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
         //重新获取list数据
+        findAll(userName);
         /*list = messageDao.findByUserId(userName);
         adapter.setList(list);*/
 
     }
 
-    public void findByUserId(final String userId) throws IOException, InterruptedException {
-        Thread thread = new Thread(new Runnable() {
+    public void findByUserId(final String userId) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "message/findByUserId.do";
@@ -117,32 +132,17 @@ public class MessageFragment extends Fragment {
                             String d = response.body().string();
                             Log.d("d=", d);
                             list = JSON.parseArray(d, Message.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
                         } else throw new IOException("Unexpected code " + response);
                     }
                 });
             }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive()||list==null)continue;
-        if(!thread.isAlive()){
-            adapter = new MessageAdapter(view.getContext(),list);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Message message = list.get(position);
-                    //打开私聊页面
-                    int _id = message.get_id();
-                    Intent intent=new Intent(view.getContext(), MessageDetialActivity.class);
-                    intent.putExtra("userId",_id+"");
-                    startActivity(intent);
-                }
-            });
-        }
+        }).start();
     }
-    public void findAll(final String userId) throws IOException, InterruptedException {
-        Thread thread = new Thread(new Runnable() {
+    public void findAll(final String userId) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "message/findByUserId.do";
@@ -169,16 +169,13 @@ public class MessageFragment extends Fragment {
                             String d = response.body().string();
                             Log.d("d=", d);
                             list = JSON.parseArray(d, Message.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 2;
+                            handler.sendMessage(msg);
                         } else throw new IOException("Unexpected code " + response);
                     }
                 });
             }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive()||list==null)continue;
-        if(!thread.isAlive()){
-            adapter.setList(list);
-        }
+        }).start();
     }
 }

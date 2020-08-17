@@ -1,13 +1,16 @@
 package com.example.myapplication.User.Message;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,21 @@ public class MessageDetialActivity extends AppCompatActivity {
     private MessageDao messageDao;
     private Context context;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    Toast.makeText(MessageDetialActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 2:
+                    showUI();
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +65,10 @@ public class MessageDetialActivity extends AppCompatActivity {
        // messageDao = new MessageDao(context);
        //  message = messageDao.findById(userId);
         bindUI();
-        try {
-            findById(userId);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        findById(userId);
     }
 
-    public void DeleteSubmit(View v) throws IOException, InterruptedException {
+    public void DeleteSubmit(View v){
         //messageDao.deleteById(message.get_id());
         delete(message);
     }
@@ -83,8 +96,8 @@ public class MessageDetialActivity extends AppCompatActivity {
         content = findViewById(R.id.et_message_delete_content);
         time = findViewById(R.id.et_message_delete_time);
     }
-    public void delete(final Message message) throws IOException, InterruptedException {
-        Thread thread = new Thread(new Runnable() {
+    public void delete(final Message message) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "message/delete.do";
@@ -111,21 +124,17 @@ public class MessageDetialActivity extends AppCompatActivity {
                             throw new IOException("Unexpected code " + response);
                         } else {
                             Log.d(TAG, message.getTitle() + "已删");
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
                         }
                     }
                 });
             }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive())continue;
-        if(!thread.isAlive()){
-            Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        }).start();
     }
-    public void findById(final int id) throws IOException, InterruptedException {
-        Thread thread1 = new Thread(new Runnable() {
+    public void findById(final int id) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "message/findById.do";
@@ -152,16 +161,13 @@ public class MessageDetialActivity extends AppCompatActivity {
                             String d = response.body().string();
                             Log.d("message =", d);
                             message = JSON.parseObject(d, Message.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 2;
+                            handler.sendMessage(msg);
                         } else throw new IOException("Unexpected code " + response);
                     }
                 });
             }
-        });
-        thread1.start();
-        thread1.join();
-        while(thread1.isAlive()||message==null)continue;
-        if(!thread1.isAlive()){
-            showUI();
-        }
+        }).start();
     }
 }

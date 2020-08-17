@@ -1,29 +1,24 @@
 package com.example.myapplication.Manager.Manage.Awards;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.myapplication.R;
-import com.example.myapplication.dao.AwardsDao;
 import com.example.myapplication.domain.AwardsInfo;
-import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.IOException;
 import java.util.List;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import okhttp3.Call;
@@ -41,9 +36,27 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
     private EditText et_award_query_contestName, et_award_query_username, et_award_query_award;
     private AwardsAdapter awardsAdapter;
     private List<AwardsInfo> list = null;
-    private AwardsDao awardsDao= new AwardsDao(this);;
+    //private AwardsDao awardsDao= new AwardsDao(this);;
     ListView listView;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    awardsAdapter = new AwardsAdapter(AwardsActivity.this, list);
+                    listView.setAdapter(awardsAdapter);
+                    break;
+                case 2:
+                    awardsAdapter.setList(list);
+                    et_award_query_username.setText("");
+                    et_award_query_contestName.setText("");
+                    et_award_query_award.setText("");
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,16 +71,15 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
 
         bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
-        getDataGetByOKHttpUtils();
+        findAll();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void findAllAwardMessageByPrint(View v) throws IOException, InterruptedException {
+    public void findAllAwardMessageByPrint(View v) {
         final String STNumber = et_award_query_username.getText().toString().trim();
         final String contestName = et_award_query_contestName.getText().toString().trim();
         final String awardLevel = et_award_query_award.getText().toString().trim();
 
-        Thread thread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "awards/findLikeByPrint.do";
@@ -95,20 +107,14 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
                             String d = response.body().string();
                             Log.d(TAG, "<<<<d=" + d);
                             list = JSON.parseArray(d, AwardsInfo.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 2;
+                            handler.sendMessage(msg);
                         }
                     }
                 });
             }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive()&&list==null) continue;
-        if(!thread.isAlive()&&list!=null){
-            awardsAdapter.setList(list);
-            et_award_query_username.setText("");
-            et_award_query_contestName.setText("");
-            et_award_query_award.setText("");
-        }
+        }).start();
     }
     /*public void findAllAwardMessageByPrint(View v) {
         String STNumber = et_award_query_username.getText().toString().trim();
@@ -126,14 +132,11 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
         //重新获取list数据
-        try {
-            findAll();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        Log.v("Process", "->onResume");
+        findAll();
         /*
         list = awardsDao.findAll();
-        Log.v("MyInfo", list.toString());
+
         awardsAdapter.setList(list);
         */
     }
@@ -149,74 +152,9 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
-    /**
-     * post请求
-     */
-    public void getDataGetByOKHttpUtils() {
-        String url = BaseUrl.BASE_URL + "awards/findAll.do";
-        OkHttpUtils
-                .get()
-                .url(url)
-                .id(100)
-                .build()
-                .execute(new AwardsActivity.MyStringCallback());
-    }
 
-    public class MyStringCallback extends StringCallback {
-        @Override
-        public void onBefore(Request request, int id) {
-            setTitle("loading...");
-        }
-
-        @Override
-        public void onAfter(int id) {
-            setTitle("Sample-okHttp");
-        }
-
-        @Override
-        public void onError(okhttp3.Call call, Exception e, int id) {
-            e.printStackTrace();
-//            tv_result.setText();
-//            Toast.makeText(RegisterActivity.this, "onError:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.v(TAG, "onError:" + e.getMessage());
-        }
-        @Override
-        public void onResponse(String response, int id) {
-            Log.e(TAG, "onResponse：complete");
-//            tv_result.setText();
-//            Toast.makeText(RegisterActivity.this, "onResponse:" + response, Toast.LENGTH_SHORT).show();
-            Log.v(TAG, "onResponse:" + response);
-            switch (id) {
-                case 100:
-                    Toast.makeText(AwardsActivity.this, "http:数据请求成功",
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 101:
-                    Toast.makeText(AwardsActivity.this, "https:数据请求成功",
-                            Toast.LENGTH_SHORT).show();
-                    break;
-            }
-            if(response != null) {
-                //解析数据
-                parseData(response);
-            }
-        }
-
-        @Override
-        public void inProgress(float progress, long total, int id) {
-            Log.e(TAG, "inProgress:" + progress);
-        }
-    }
-
-    private void parseData(String json) {
-        list = JSON.parseArray(json, AwardsInfo.class);
-        Log.v("MyInfo", list.toString());
-        awardsAdapter = new AwardsAdapter(this, list);
-        listView.setAdapter(awardsAdapter);
-    }
-
-    public void findAll() throws IOException, InterruptedException {
-        Thread thread1 = new Thread(new Runnable() {
+    public void findAll() {
+        new Thread(new Runnable() {
             public void run() {
                 String url = BaseUrl.BASE_URL + "awards/findAll.do";
                 OkHttpClient client = new OkHttpClient();
@@ -241,17 +179,13 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
                             String d = response.body().string();
                             Log.d(TAG, "<<<<d=" + d);
                             list = JSON.parseArray(d, AwardsInfo.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
                         }
                     }
                 });
             }
-        });
-        thread1.start();
-        thread1.join();
-        while(thread1.isAlive()&&list==null)continue;
-        if(!thread1.isAlive()){
-            awardsAdapter = new AwardsAdapter(this, list);
-            awardsAdapter.notifyDataSetChanged();
-        }
+        }).start();
     }
 }

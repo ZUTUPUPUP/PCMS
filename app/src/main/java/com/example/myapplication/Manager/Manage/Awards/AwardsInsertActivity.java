@@ -1,17 +1,21 @@
 package com.example.myapplication.Manager.Manage.Awards;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.example.myapplication.Manager.Manage.Notice.NoticeInsertActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.AwardsDao;
 import com.example.myapplication.domain.AwardsInfo;
 import com.example.myapplication.utils.BaseUrl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -26,11 +30,35 @@ import okhttp3.Response;
 
 public class AwardsInsertActivity extends AppCompatActivity {
     private String dd = null;
-    private boolean flag = false;
-    private boolean flag1 = false;
     private static final String TAG = "AwardsInsertActivity";
+    private AwardsInfo awardsInfo = null;
    // private AwardsDao awardsDao;
     private TextView STNumber, relName, depName, className, contestName, awardLevel;
+    private String STNumber1, relName1, depName1, className1, contestName1, awardLevel1;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    Toast.makeText(AwardsInsertActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 2:
+                    if(awardsInfo != null){
+                        Toast.makeText(AwardsInsertActivity.this, "当前奖项已添加,请添加未添加的奖项", Toast.LENGTH_SHORT).show();
+                        STNumber.setText("");
+                        contestName.setText("");
+                        awardLevel.setText("");
+                    }
+                    else {
+                        AwardsInfo awardsInfo=new AwardsInfo(null, STNumber1, relName1, className1, contestName1, awardLevel1, depName1);
+                        add(awardsInfo);
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,26 +69,21 @@ public class AwardsInsertActivity extends AppCompatActivity {
         bindUI();
     }
 
-    public void updateInsertSubmit(View v) throws IOException, InterruptedException {
-        String STNumber1 = STNumber.getText().toString().trim();
-        String relName1 = relName.getText().toString().trim();
-        String depName1 = depName.getText().toString().trim();
-        String className1 = className.getText().toString().trim();
-        String contestName1 = contestName.getText().toString().trim();
-        String awardLevel1 = awardLevel.getText().toString().trim();
+    public void updateInsertSubmit(View v) {
+        STNumber1 = STNumber.getText().toString().trim();
+        relName1 = relName.getText().toString().trim();
+        depName1 = depName.getText().toString().trim();
+        className1 = className.getText().toString().trim();
+        contestName1 = contestName.getText().toString().trim();
+        awardLevel1 = awardLevel.getText().toString().trim();
         if (STNumber1.length() != 12) {
             Toast.makeText(this, "请输入正确的学号", Toast.LENGTH_SHORT).show();
         } else if (contestName1.length() <= 0) {
             Toast.makeText(this, "请输入比赛名称", Toast.LENGTH_SHORT).show();
         } else if (awardLevel1.length() <= 0) {
             Toast.makeText(this, "请输入奖项", Toast.LENGTH_SHORT).show();
-        } else if (findBySTNumberAndContestAndAward(STNumber1, contestName1, awardLevel1)!=null) {
-            Toast.makeText(this, "当前奖项已经添加,请添加未添加的奖项", Toast.LENGTH_SHORT).show();
         } else {
-            AwardsInfo awardsInfo=new AwardsInfo(null, STNumber1, relName1, className1, contestName1, awardLevel1, depName1);
-            add(awardsInfo);
-            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
-            finish();
+             findRepeatAwards(STNumber1, contestName1, awardLevel1);
         }
     }
 
@@ -97,8 +120,8 @@ public class AwardsInsertActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void add(final AwardsInfo awardsInfo) throws IOException, InterruptedException {
-        Thread thread = new Thread(new Runnable() {
+    public void add(final AwardsInfo awardsInfo) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "awards/add.do";
@@ -129,19 +152,18 @@ public class AwardsInsertActivity extends AppCompatActivity {
                         if (!response.isSuccessful()) {
                             throw new IOException("Unexpected code " + response);
                         } else {
-                            flag = true;
                             Log.d(TAG, "添加成功");
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
                         }
                     }
                 });
             }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive())continue;
+        }).start();
     }
-    public String findBySTNumberAndContestAndAward(final String STNumber1, final String contestName1, final String awardLevel1) throws IOException, InterruptedException {
-        Thread thread1 = new Thread(new Runnable() {
+    public void findRepeatAwards(final String STNumber1, final String contestName1, final String awardLevel1) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "awards/findBySTNumberAndContestAndAward.do";
@@ -168,16 +190,17 @@ public class AwardsInsertActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         if (response.isSuccessful()) {
                             dd = response.body().string();
+                            Log.d("dd-----",dd);
+                            awardsInfo = JSON.parseObject(dd,AwardsInfo.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 2;
+                            handler.sendMessage(msg);
                         } else {
                             throw new IOException("Unexpected code " + response);
                         }
                     }
                 });
             }
-        });
-        thread1.start();
-        thread1.join();
-        while(thread1.isAlive())continue;
-        return dd;
+        }).start();
     }
 }

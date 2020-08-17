@@ -1,5 +1,6 @@
 package com.example.myapplication.Manager.Manage.Notice;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Notification;
@@ -8,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -47,9 +49,28 @@ public class NoticeSendActivity extends AppCompatActivity {
     private UserDao userDao;
     private ContestRegistryDao contestRegistryDao;
     private TextView title, content, receiver;
+    private String Title, Content, Receiver;
     private Notice notice = null;
     private Context context;
     private List<User> users = null;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    showUI();
+                    break;
+                case 2:
+                    Toast.makeText(NoticeSendActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    sent();
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,16 +85,11 @@ public class NoticeSendActivity extends AppCompatActivity {
         //messageDao = new MessageDao(context);
         //contestRegistryDao = new ContestRegistryDao(context);
         bindUI();
-        try {
-            assert id != null;
-            findByNoticeId(Integer.parseInt(id));
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        assert id != null;
+        findByNoticeId(Integer.parseInt(id));
     }
     //修改通知
-    public void UpdateSubmit(View view) throws IOException, InterruptedException {
+    public void UpdateSubmit(View view) {
         String title1 = title.getText().toString().trim();
         String content1 = content.getText().toString().trim();
         String receiver1 = receiver.getText().toString().trim();
@@ -86,13 +102,46 @@ public class NoticeSendActivity extends AppCompatActivity {
             // notice = noticeDao.findByNoticeId(notice.get_id());
             notice = new Notice(notice.get_id(), title1, content1, "", receiver1);
             update(notice);
-            Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show();
         }
     }
     //发送通知
-    public void SentSubmit(View view) throws IOException, InterruptedException {
+    public void SentSubmit(View view) {
         findAllUsers();
     }
+    public void sent() {
+        if (Title.length() <= 0) {
+            Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
+        } else if (Content.length() <= 0) {
+            Toast.makeText(this, "请输入内容", Toast.LENGTH_SHORT).show();
+        } else if (Receiver.length() != 0 && Receiver.length() != 12 && (Receiver.charAt(0)>='0'&&Receiver.charAt(0)<='9')) {
+            Toast.makeText(this, "请输入正确的接收者学号", Toast.LENGTH_SHORT).show();
+        } else if (Receiver.length() == 0){
+            //List<User> users = userDao.findAll();
+            String time = getTime();
+            SendMsg();
+            for(int i=0;i<users.size();++i){
+                String userId = users.get(i).getUserName();
+                //messageDao.add(new Message(messageDao.findEmptyMessageId(),userId,title1,content1,time));
+                addMessage(new Message(0,userId,Title,Content,time));
+            }
+            Toast.makeText(this, "通知已发送至所有用户", Toast.LENGTH_SHORT).show();
+        } /*else if (receiver1.charAt(0)<'0'||receiver1.charAt(0)>'9'){
+                List<String> list = contestRegistryDao.findAllUserIdByContestName(receiver1);
+                for(int i=0;i<list.size();++i){
+                    String userId = list.get(i);
+                    SendMsg(userId);
+                }
+                Toast.makeText(this, "通知已发送至部分用户", Toast.LENGTH_SHORT).show();
+            } */
+        else {
+            SendMsg();
+            String time = getTime();
+            //messageDao.add(new Message(0,receiver1,title1,content1,time));
+            addMessage(new Message(0,Receiver,Title,Content,time));
+            Toast.makeText(this, "通知已发送至指定用户", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void showUI() {
         title.setText(notice.getTitle());
         content.setText(notice.getContent());
@@ -159,8 +208,8 @@ public class NoticeSendActivity extends AppCompatActivity {
         String time1 = format.format(date);
         return time1;
     }
-    public void findByNoticeId(final int _id) throws IOException, InterruptedException {
-        Thread thread = new Thread(new Runnable() {
+    public void findByNoticeId(final int _id) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "notice/findByNoticeId.do";
@@ -187,20 +236,17 @@ public class NoticeSendActivity extends AppCompatActivity {
                             String d = response.body().string();
                             Log.d("d=", d);
                             notice = JSON.parseObject(d, Notice.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
                         } else throw new IOException("Unexpected code " + response);
                     }
                 });
             }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive()||notice==null)continue;
-        if(!thread.isAlive()){
-            showUI();
-        }
+        }).start();
     }
-    public void update(final Notice notice) throws IOException, InterruptedException {
-        Thread thread1 = new Thread(new Runnable() {
+    public void update(final Notice notice) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "notice/update.do";
@@ -229,20 +275,22 @@ public class NoticeSendActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         if (!response.isSuccessful()) {
                             throw new IOException("Unexpected code " + response);
-                        } else Log.d(TAG, "更新成功");
+                        } else {
+                            Log.d(TAG, "更新成功");
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 2;
+                            handler.sendMessage(msg);
+                        }
                     }
                 });
             }
-        });
-        thread1.start();
-        thread1.join();
-        while(thread1.isAlive())continue;
+        }).start();
     }
-    public void findAllUsers() throws IOException, InterruptedException {
-        String title1 = title.getText().toString().trim();
-        String content1 = content.getText().toString().trim();
-        String receiver1 = receiver.getText().toString().trim();
-        Thread thread2 = new Thread(new Runnable() {
+    public void findAllUsers()  {
+        Title = title.getText().toString().trim();
+        Content = content.getText().toString().trim();
+        Receiver = receiver.getText().toString().trim();
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "user/findAllUsers.do";
@@ -267,50 +315,17 @@ public class NoticeSendActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             String d = response.body().string();
                             users = JSON.parseArray(d,User.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 3;
+                            handler.sendMessage(msg);
                         } else throw new IOException("Unexpected code " + response);
                     }
                 });
             }
-        });
-        thread2.start();
-        thread2.join();
-        while(thread2.isAlive()&&users==null){ continue; }
-        if(!thread2.isAlive()&&users!=null){
-            Log.d("users->",users.toString());
-            if (title1.length() <= 0) {
-                Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
-            } else if (content1.length() <= 0) {
-                Toast.makeText(this, "请输入内容", Toast.LENGTH_SHORT).show();
-            } else if (receiver1.length() != 0 && receiver1.length() != 12 && (receiver1.charAt(0)>='0'&&receiver1.charAt(0)<='9')) {
-                Toast.makeText(this, "请输入正确的接收者学号", Toast.LENGTH_SHORT).show();
-            } else if (receiver1.length() == 0){
-                //List<User> users = userDao.findAll();
-                String time = getTime();
-                SendMsg();
-                for(int i=0;i<users.size();++i){
-                    String userId = users.get(i).getUserName();
-                    //messageDao.add(new Message(messageDao.findEmptyMessageId(),userId,title1,content1,time));
-                    addMessage(new Message(0,userId,title1,content1,time));
-                }
-                Toast.makeText(this, "通知已发送至所有用户", Toast.LENGTH_SHORT).show();
-            } /*else if (receiver1.charAt(0)<'0'||receiver1.charAt(0)>'9'){
-                List<String> list = contestRegistryDao.findAllUserIdByContestName(receiver1);
-                for(int i=0;i<list.size();++i){
-                    String userId = list.get(i);
-                    SendMsg(userId);
-                }
-                Toast.makeText(this, "通知已发送至部分用户", Toast.LENGTH_SHORT).show();
-            } */else {
-                SendMsg();
-                String time = getTime();
-                //messageDao.add(new Message(0,receiver1,title1,content1,time));
-                addMessage(new Message(0,receiver1,title1,content1,time));
-                Toast.makeText(this, "通知已发送至指定用户", Toast.LENGTH_SHORT).show();
-            }
-        }
+        }).start();
     }
-    public void addMessage(final Message message) throws IOException, InterruptedException {
-        Thread thread3 = new Thread(new Runnable() {
+    public void addMessage(final Message message) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 String url = BaseUrl.BASE_URL + "message/add.do";
@@ -338,13 +353,10 @@ public class NoticeSendActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         if (!response.isSuccessful()) {
                             throw new IOException("Unexpected code " + response);
-                        } else Log.d(TAG, "添加成功");
+                        }
                     }
                 });
             }
-        });
-        thread3.start();
-        thread3.join();
-        while(thread3.isAlive())continue;
+        }).start();
     }
 }

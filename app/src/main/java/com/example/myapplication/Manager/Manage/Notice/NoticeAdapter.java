@@ -3,6 +3,8 @@ package com.example.myapplication.Manager.Manage.Notice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.alibaba.fastjson.JSON;
@@ -63,6 +66,20 @@ public class NoticeAdapter extends BaseAdapter {
         return position;
     }
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    list.remove((int)msg.obj);
+                    notifyDataSetChanged();
+                    Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final NoticeAdapter.HUi hui;
@@ -99,12 +116,42 @@ public class NoticeAdapter extends BaseAdapter {
                         /*noticeDao.deleteById(notice.get_id());
                         list = noticeDao.findAll();
                         setList(list);*/
-                        try {
-                            delete(notice);
-                        } catch (IOException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String url = BaseUrl.BASE_URL + "notice/delete.do";
+                                OkHttpClient client = new OkHttpClient();
+                                //Log.v("MyInfo", JSON.toJSONString(json));
+                                RequestBody body = new FormBody.Builder()
+                                        .add("_id", notice.get_id() + "")
+                                        .build();
+                                //System.out.println(body);
+                                Request request = new Request.Builder()
+                                        .url(url)
+                                        .post(body)
+                                        .build();
+                                Call call = client.newCall(request);
+                                call.enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        Log.d(TAG, "<<<<e=" + e);
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if (!response.isSuccessful()) {
+                                            throw new IOException("Unexpected code " + response);
+                                        } else {
+                                            Log.d(TAG, notice.getTitle() + "已删");
+                                            Message msg = Message.obtain();
+                                            msg.what = 1;
+                                            msg.obj = position;
+                                            handler.sendMessage(msg);
+                                        }
+                                    }
+                                });
+                            }
+                        }).start();
                     }
                 }).show();
             }
@@ -124,80 +171,5 @@ public class NoticeAdapter extends BaseAdapter {
     class HUi {
         TextView title,content,receiver;
         Button send,delete;
-    }
-
-    public void delete(final Notice notice) throws IOException, InterruptedException {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = BaseUrl.BASE_URL + "notice/delete.do";
-                OkHttpClient client = new OkHttpClient();
-                //Log.v("MyInfo", JSON.toJSONString(json));
-                RequestBody body = new FormBody.Builder()
-                        .add("_id", notice.get_id() + "")
-                        .build();
-                //System.out.println(body);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Call call = client.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.d(TAG, "<<<<e=" + e);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            throw new IOException("Unexpected code " + response);
-                        } else {
-                            Log.d(TAG, notice.getTitle() + "已删");
-                        }
-                    }
-                });
-            }
-        });
-        thread.start();
-        thread.join();
-        while(thread.isAlive())continue;
-        if(!thread.isAlive())findAll();
-    }
-    public void findAll() throws IOException, InterruptedException {
-        Thread thread1 = new Thread(new Runnable() {
-            public void run() {
-                String url = BaseUrl.BASE_URL + "notice/findAll.do";
-                OkHttpClient client = new OkHttpClient();
-                //Log.v("MyInfo", JSON.toJSONString(json));
-                RequestBody body = new FormBody.Builder()
-                        .build();
-                //System.out.println(body);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Call call = client.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.d(TAG, "<<<<e=" + e);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            String d = response.body().string();
-                            Log.d(TAG, "<<<<d=" + d);
-                            list = JSON.parseArray(d, Notice.class);
-                        }
-                    }
-                });
-            }
-        });
-        thread1.start();
-        thread1.join();
-        while(thread1.isAlive()&&list==null)continue;
-        if(!thread1.isAlive()&&list!=null)setList(list);
     }
 }
