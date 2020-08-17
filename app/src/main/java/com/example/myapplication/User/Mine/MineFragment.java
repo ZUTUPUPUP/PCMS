@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.myapplication.Login_Register.MainActivity;
@@ -20,18 +19,9 @@ import com.example.myapplication.User.Mine.Contact.UserContactActivity;
 import com.example.myapplication.dao.DepDao;
 import com.example.myapplication.dao.UserDao;
 import com.example.myapplication.domain.User;
-import com.example.myapplication.utils.BaseUrl;
-
-import java.io.IOException;
 
 import androidx.fragment.app.Fragment;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class MineFragment extends Fragment {
@@ -56,45 +46,15 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine, container, false);
         bindUI();
-        initContact();
+        Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
+        String json = MainIntent.getStringExtra("user");
+        user = JSON.parseObject(json, User.class);
+        initContact(user.getUserName());
         //userDao = new UserDao(getActivity());
         //depDao = new DepDao(getActivity());
         //user = userDao.findByUserName(userName);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = BaseUrl.BASE_URL + "user/findByUserName.do";
-                //Log.v("MyInfo", JSON.toJSONString(json));
-                RequestBody body = new FormBody.Builder()
-                        .add("userName", userName)
-                        .build();
-                System.out.println(body);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Call call = client.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        //Log.d(TAG,"<<<<e="+e);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if(response.isSuccessful()) {
-                            String d = response.body().string();
-                            //Log.d(TAG,"<<<<d=" + d);
-                            user = JSON.parseObject(d, User.class);
-                            flagMineUser = true;
-                        }
-                    }
-                });
-            }
-        }).start();
-        while (!flagMineUser) continue;
         System.out.println(user);
-        Toast.makeText(getActivity(), "数据请求成功", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
         //Toast.makeText(, "", Toast.LENGTH_SHORT).show();
         //用户个人信息展示
         showUserMessage();
@@ -212,10 +172,8 @@ public class MineFragment extends Fragment {
         });
     }
 
-    private void initContact() {
-
-        Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
-        userName = MainIntent.getStringExtra("userName");
+    private void initContact(String name) {
+        userName = name;
         System.out.print(userName);
         btn_contact = (Button)view.findViewById(R.id.contact);
         btn_contact.setOnClickListener(new View.OnClickListener() {

@@ -181,8 +181,9 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, ManagerActivity.class);
                 intent.putExtra("user", json);
             } else if (user.getStatus().get_id() == 2) {
+                String json = JSON.toJSONString(user);
                 intent = new Intent(this, UserActivity.class);
-                intent.putExtra("userName", user.getUserName());
+                intent.putExtra("user", json);
             }
             //Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             finish();
@@ -243,8 +244,10 @@ public class MainActivity extends AppCompatActivity {
     public void LoginOnUser(View view) {
         Intent intent = null;
         intent = new Intent(this, UserActivity.class);
-        intent.putExtra("userName", "user");
+        String json = "{\"_id\":5,\"userName\":\"user\",\"passwd\":\"e15015a3b9df6b0da040e2e557a7150c\",\"nickName\":\"用户\",\"gender\":\"女\",\"dep\":{\"_id\":1,\"name\":\"计算机学院\"},\"status\":{\"_id\":2,\"name\":\"普通用户\"}}";
+        intent.putExtra("user", json);
         startActivity(intent);
+        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
         this.finish();
     }
 }

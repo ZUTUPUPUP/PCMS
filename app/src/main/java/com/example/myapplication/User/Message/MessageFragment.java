@@ -9,17 +9,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.fragment.app.Fragment;
-
 import com.alibaba.fastjson.JSON;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.MessageDao;
 import com.example.myapplication.domain.Message;
+import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
 
 import java.io.IOException;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -38,6 +38,7 @@ public class MessageFragment extends Fragment {
     private List<Message> list = null;
     private MessageAdapter adapter;
     private String userName;
+    private User user;
     public MessageFragment() {
         // Required empty public constructor
     }
@@ -57,7 +58,9 @@ public class MessageFragment extends Fragment {
 
     private void getMessage() throws IOException, InterruptedException {
         Intent MainIntent=getActivity().getIntent();//得到main里传进来的intent
-        userName = MainIntent.getStringExtra("userName");
+        String json = MainIntent.getStringExtra("user");
+        user = JSON.parseObject(json, User.class);
+        userName = user.getUserName();
         //list = messageDao.findByUserId(userName);
         findByUserId(userName);
         Log.v("用户名：",userName);
