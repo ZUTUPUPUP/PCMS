@@ -50,7 +50,7 @@ public class NoticeInsertActivity extends AppCompatActivity {
             Toast.makeText(this, "请输入内容", Toast.LENGTH_SHORT).show();
         } else {
             //noticeDao.add(new Notice(id, title1, content1, null, receiver1));
-            add(new Notice(1,title1,content1,null,receiver1));
+            add(new Notice(1,title1,content1,"",receiver1));
         }
     }
 

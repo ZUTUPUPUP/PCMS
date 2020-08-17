@@ -158,7 +158,7 @@ public class AwardsUpdateActivity extends AppCompatActivity {
         });
         thread.start();
         thread.join();
-        while(thread.isAlive()&&awardsInfo==null)continue;
+        while(thread.isAlive()||awardsInfo==null)continue;
         Log.d("findById->",thread.getName()+thread.getState()+" "+thread.isAlive());
         if(!thread.isAlive()){
             showUI();

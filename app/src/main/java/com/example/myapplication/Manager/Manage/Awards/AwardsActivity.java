@@ -103,7 +103,7 @@ public class AwardsActivity extends AppCompatActivity implements View.OnClickLis
         thread.start();
         thread.join();
         while(thread.isAlive()&&list==null) continue;
-        if(!thread.isAlive()){
+        if(!thread.isAlive()&&list!=null){
             awardsAdapter.setList(list);
             et_award_query_username.setText("");
             et_award_query_contestName.setText("");
