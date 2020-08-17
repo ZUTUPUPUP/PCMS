@@ -177,13 +177,14 @@ public class MainActivity extends AppCompatActivity {
         if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
             Intent intent = null;
             if (user.getStatus().get_id() == 1) {
+                String json = JSON.toJSONString(user);
                 intent = new Intent(this, ManagerActivity.class);
-                intent.putExtra("userName", user.getUserName());
+                intent.putExtra("user", json);
             } else if (user.getStatus().get_id() == 2) {
                 intent = new Intent(this, UserActivity.class);
                 intent.putExtra("userName", user.getUserName());
             }
-            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             finish();
             startActivity(intent);
         } else {
@@ -233,7 +234,8 @@ public class MainActivity extends AppCompatActivity {
     public void LoginOnAdmin(View view) {
         Intent intent=null;
         intent = new Intent(this, ManagerActivity.class);
-        intent.putExtra("userName", "admin");
+        String json = "{\"_id\":1,\"userName\":\"admin\",\"passwd\":\"e15015a3b9df6b0da040e2e557a7150c\",\"nickName\":\"管理员\",\"gender\":\"女\",\"dep\":{\"_id\":1,\"name\":\"计算机学院\"},\"status\":{\"_id\":1,\"name\":\"管理员\"}}";
+        intent.putExtra("user", json);
         startActivity(intent);
         this.finish();
     }

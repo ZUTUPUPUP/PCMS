@@ -36,7 +36,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -87,46 +86,47 @@ public class ManageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_manage, container, false);
         Intent MainIntent = getActivity().getIntent();//得到main里传进来的intent
-        userName = MainIntent.getStringExtra("userName");
+        String json = MainIntent.getStringExtra("user");
+        user = JSON.parseObject(json, User.class);
         bindUI();
         //userDao = new UserDao(getActivity());
         //depDao = new DepDao(getActivity());
         //user = userDao.findByUserName(userName);
-        final boolean[] flag = {false};
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = BaseUrl.BASE_URL + "user/findByUserName.do";
-                //Log.v("MyInfo", JSON.toJSONString(json));
-                RequestBody body = new FormBody.Builder()
-                        .add("userName", userName)
-                        .build();
-                System.out.println(body);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Call call = client.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        //Log.d(getActivity(),"<<<<e="+e);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if(response.isSuccessful()) {
-                            String d = response.body().string();
-                            //Log.d(getActivity(),"<<<<d=" + d);
-                            user = JSON.parseObject(d, User.class);
-                            flag[0] = true;
-                        }
-                    }
-                });
-            }
-        }).start();
-        while (!flag[0]) continue;
-        Toast.makeText(getActivity(), "ManageFragment数据请求成功", Toast.LENGTH_SHORT).show();
+//        final boolean[] flag = {false};
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                String url = BaseUrl.BASE_URL + "user/findByUserName.do";
+//                //Log.v("MyInfo", JSON.toJSONString(json));
+//                RequestBody body = new FormBody.Builder()
+//                        .add("userName", userName)
+//                        .build();
+//                System.out.println(body);
+//                Request request = new Request.Builder()
+//                        .url(url)
+//                        .post(body)
+//                        .build();
+//                Call call = client.newCall(request);
+//                call.enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        //Log.d(getActivity(),"<<<<e="+e);
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//                        if(response.isSuccessful()) {
+//                            String d = response.body().string();
+//                            //Log.d(getActivity(),"<<<<d=" + d);
+//                            user = JSON.parseObject(d, User.class);
+//                            flag[0] = true;
+//                        }
+//                    }
+//                });
+//            }
+//        }).start();
+//        while (!flag[0]) continue;
+        Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
         //管理员信息展示
         showManageMessage();
         //点击事件修改密码
