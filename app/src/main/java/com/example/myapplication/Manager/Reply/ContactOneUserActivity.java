@@ -42,7 +42,7 @@ public class ContactOneUserActivity extends AppCompatActivity {
     private ScrollView scrollView;
     private Button btn_sendmes;
     private EditText ed_input;
-    private ContactDao contactDao;
+   // private ContactDao contactDao;
     private MassageItemAdapter adapter;
     private List<Contact> contactList;
     private TextView userNameView;
@@ -199,10 +199,10 @@ public class ContactOneUserActivity extends AppCompatActivity {
         Intent getIntent = getIntent();
         userName = getIntent.getStringExtra("userName");  //System.out.println(userName);
         userNameView = (TextView)findViewById(R.id.tv);
-        UserDao userDao =new UserDao(this);
-        String realName=userDao.findByUserName(userName).getNickName();
+    //    UserDao userDao =new UserDao(this);
+        String realName=getIntent.getStringExtra("nickName");
         userNameView.setText(realName+'\n'+userName);
-        contactDao = new ContactDao(this);
+    //    contactDao = new ContactDao(this);
         scrollView = (ScrollView)findViewById(R.id.sv);
         showListView = (ListView) findViewById(R.id.show_listView);
     }

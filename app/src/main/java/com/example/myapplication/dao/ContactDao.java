@@ -22,7 +22,7 @@ public class ContactDao {
     public ContactDao(Context context) {
         dbHelper = new ContactDBHelper(context);
     }
-    public void insertOneContact(Contact contact){
+   /* public void insertOneContact(Contact contact){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put("date",contact.getTimestamp());
@@ -32,8 +32,8 @@ public class ContactDao {
         long id = database.insert(ContactTable.TAB_NAME, null, values);
         Log.v("INSERTCONTACT", "id = " + id);
         database.close();
-    }
-    public List<Contact> findById(String userName){
+    }*/
+   /* public List<Contact> findById(String userName){
         List<Contact> list = new ArrayList<>();
         //得到连接
         SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -62,8 +62,8 @@ public class ContactDao {
         }
         return contactList;
 
-    }
-    public List<Contact> findAll() {
+    }*/
+    /*public List<Contact> findAll() {
         List<Contact> list = new ArrayList<>();
         //得到连接
         SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -82,7 +82,7 @@ public class ContactDao {
         cursor.close();
         database.close();
         return list;
-    }
+    }*/
 
 
 }

@@ -400,6 +400,13 @@ public class ReplyFragment extends Fragment {
                 if(userName.equals("admin")) userName=contact.getReceiverId();
                 Intent intent=new Intent(view.getContext(), ContactOneUserActivity.class);
                 intent.putExtra("userName",userName);
+                String nickname="";
+                if(list!=null){
+                    for(User user:list){
+                        if(user.getUserName().equals(userName)) nickname=user.getNickName();
+                    }
+                }
+                intent.putExtra("nickName",nickname);
                 startActivity(intent);
             }
         });

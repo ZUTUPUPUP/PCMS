@@ -23,7 +23,7 @@ public class NewsDao {
     public NewsDao(Context context) {
         dbHelper = new NewsDBHelper(context);
     }
-    public List<News> findAll() {
+   /* public List<News> findAll() {
         List<News> list = new ArrayList<>();
         //得到连接
         SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -56,7 +56,8 @@ public class NewsDao {
         long id = database.insert(NewsTable.TAB_NAME, null, values);
         Log.v("INSERTNEWS", "id = " + id);
         database.close();
-    }
+    }*/
+   /*
     public  News findById(int id){
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         Cursor cursor = database.query(NewsTable.TAB_NAME, null,  NewsTable._id + "=" + id, null, null, null, null);
@@ -72,5 +73,5 @@ public class NewsDao {
         cursor.close();
         database.close();
         return news;
-    }
+    }*/
 }

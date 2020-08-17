@@ -38,7 +38,7 @@ public class UserContactActivity extends AppCompatActivity {
     private ScrollView scrollView;
     private Button btn_sendmes;
     private EditText ed_input;
-    private ContactDao contactDao;
+ //   private ContactDao contactDao;
     private MassageItemAdapter adapter;
     private List<Contact> contactList;
     private List<Contact> adContactList;
@@ -132,7 +132,7 @@ public class UserContactActivity extends AppCompatActivity {
     public  void init(){
         Intent getIntent = getIntent();
         userName = getIntent.getStringExtra("userName");  //System.out.println(userName);
-        contactDao = new ContactDao(this);
+      //  contactDao = new ContactDao(this);
         scrollView = (ScrollView)findViewById(R.id.sv);
         showListView = (ListView) findViewById(R.id.uc_show_listView);
     }

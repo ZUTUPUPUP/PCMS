@@ -38,7 +38,7 @@ public class NewsOne extends AppCompatActivity {
     private String[] content;
     private TextView headline;
     private TextView date;
-    private NewsDao newsDao;
+    //private NewsDao newsDao;
     private News news;
 
     @Override
