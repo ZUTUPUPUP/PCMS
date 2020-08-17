@@ -32,11 +32,10 @@ import okhttp3.Response;
 public class MessageFragment extends Fragment {
 
     private static String TAG = "MessageFragment";
-    private int flag = 0;
     private View view;
     private ListView listView;
     private MessageDao messageDao;
-    private List<Message> list;
+    private List<Message> list = null;
     private MessageAdapter adapter;
     private String userName;
     public MessageFragment() {
@@ -76,9 +75,8 @@ public class MessageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        flag = 1;
         try {
-            findByUserId(userName);
+            findAll(userName);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -116,7 +114,6 @@ public class MessageFragment extends Fragment {
                             String d = response.body().string();
                             Log.d("d=", d);
                             list = JSON.parseArray(d, Message.class);
-                            flag++;
                         } else throw new IOException("Unexpected code " + response);
                     }
                 });
@@ -124,9 +121,8 @@ public class MessageFragment extends Fragment {
         });
         thread.start();
         thread.join();
-        while(thread.isAlive())continue;
-        if(!thread.isAlive()&&flag==1){
-            flag = 0;
+        while(thread.isAlive()||list==null)continue;
+        if(!thread.isAlive()){
             adapter = new MessageAdapter(view.getContext(),list);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,8 +137,44 @@ public class MessageFragment extends Fragment {
                 }
             });
         }
-        else if(!thread.isAlive()&&flag==2){
-            flag = 0;
+    }
+    public void findAll(final String userId) throws IOException, InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = BaseUrl.BASE_URL + "message/findByUserId.do";
+                OkHttpClient client = new OkHttpClient();
+                //Log.v("MyInfo", JSON.toJSONString(json));
+                RequestBody body = new FormBody.Builder()
+                        .add("userId", userId)
+                        .build();
+                //System.out.println(body);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "<<<<e=" + e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String d = response.body().string();
+                            Log.d("d=", d);
+                            list = JSON.parseArray(d, Message.class);
+                        } else throw new IOException("Unexpected code " + response);
+                    }
+                });
+            }
+        });
+        thread.start();
+        thread.join();
+        while(thread.isAlive()||list==null)continue;
+        if(!thread.isAlive()){
             adapter.setList(list);
         }
     }

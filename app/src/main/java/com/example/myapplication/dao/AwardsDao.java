@@ -209,5 +209,69 @@ public class AwardsDao {
         database.close();
         return list;
     }
+    /**
+     * 根据比赛和奖项查询获奖信息
+     * @param ContestName 比赛名称
+     * @param Award 奖项
+     * @return 获奖信息
+     */
+    public List<AwardsInfo> findByContestAndAward(String ContestName, String Award) {
+        List<AwardsInfo> list = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null,   AwardsTable.AWARDS_CONTESTNAME + " =?  and " + AwardsTable.AWARDS_LEVEL + " = ? ", new String[]{ContestName,Award}, null, null, AwardsTable.AWARDS_CLASSNAME );
+        AwardsInfo awardsInfo = null;
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String id1 = cursor.getString(1);
+            String name  = cursor.getString(2);
+            String college = cursor.getString(3);
+            String competitionType = cursor.getString(4);
+            String awardLevel = cursor.getString(5);
+            String depName = cursor.getString(6);
+            list.add(new AwardsInfo(_id, id1, name, college, competitionType, awardLevel, depName));
+        }
+        cursor.close();
+        database.close();
+        return list;
+    }
+
+    public List<AwardsInfo> findByContestAndAward() {
+        List<AwardsInfo> list = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null, null, null, null, null,  AwardsTable.AWARDS_CLASSNAME);
+        AwardsInfo awardsInfo = null;
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String id1 = cursor.getString(1);
+            String name  = cursor.getString(2);
+            String college = cursor.getString(3);
+            String competitionType = cursor.getString(4);
+            String awardLevel = cursor.getString(5);
+            String depName = cursor.getString(6);
+            list.add(new AwardsInfo(_id, id1, name, college, competitionType, awardLevel, depName));
+        }
+        cursor.close();
+        database.close();
+        return list;
+    }
+
+    public List<AwardsInfo> findByAward(String award) {
+        List<AwardsInfo> list = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.query(AwardsTable.TAB_NAME, null, AwardsTable.AWARDS_CONTESTNAME + "='" + award + "'", null, null, null, AwardsTable.AWARDS_ID + " desc");
+        while (cursor.moveToNext()) {
+            int _id = cursor.getInt(0);
+            String id = cursor.getString(1);
+            String name  = cursor.getString(2);
+            String college = cursor.getString(3);
+            String competitionType = cursor.getString(4);
+            String awardLevel = cursor.getString(5);
+            String depName = cursor.getString(6);
+            list.add(new AwardsInfo(_id, id, name, college, competitionType, awardLevel, depName));
+        }
+        cursor.close();
+        database.close();
+        return list;
+    }
 
 }
