@@ -1,28 +1,59 @@
 package com.example.myapplication.User.Mine;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.example.myapplication.Manager.Manage.UserManage.QueryAllUsersActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.dao.AwardsDao;
 import com.example.myapplication.domain.AwardsInfo;
+import com.example.myapplication.utils.BaseUrl;
 
+import java.io.IOException;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MineAwardActivity extends AppCompatActivity {
 
-    private AwardsDao awardsDao;
+    //private AwardsDao awardsDao;
     private List<AwardsInfo> data;
     private String userName;
     private MyAdapter adapter;
     private ListView lv_mine_award;
+    private static final String TAG = "MineAwardActivity";
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    adapter = new MyAdapter();
+                    lv_mine_award.setAdapter(adapter);
+                    Toast.makeText(MineAwardActivity.this, "查询成功,共"+data.size()+"条获奖信息", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +62,7 @@ public class MineAwardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mine_award);
         lv_mine_award = findViewById(R.id.lv_mine_award);
         userName = getIntent().getStringExtra("userName");
-        //Log.v("MyInfo1", userName);
-        awardsDao = new AwardsDao(this);
-        data = awardsDao.findBySTNumber(userName);
-//        Log.v("MyInfo1", data.toString());
-        adapter = new MyAdapter();
-        lv_mine_award.setAdapter(adapter);
+        findAwardsBySTNumber(userName);
     }
 
     class MyAdapter extends BaseAdapter {
@@ -76,5 +102,39 @@ public class MineAwardActivity extends AppCompatActivity {
     }
     class ViewHolder { //视图的容器
         public TextView contestName, awardLevel;
+    }
+
+    public void findAwardsBySTNumber(final String userName) {
+        new Thread(new Runnable() {
+            public void run() {
+                String url = BaseUrl.BASE_URL + "awards/findBySTNumber.do";
+                OkHttpClient client = new OkHttpClient();
+                RequestBody body = new FormBody.Builder()
+                        .add("STNumber", userName)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "<<<<e=" + e);
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String d = response.body().string();
+                            Log.d(TAG, "<<<<d=" + d);
+                            data = JSON.parseArray(d, AwardsInfo.class);
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 1;
+                            handler.sendMessage(msg);
+                        }
+                    }
+                });
+            }
+        }).start();
     }
 }
