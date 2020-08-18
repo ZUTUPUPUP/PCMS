@@ -23,7 +23,6 @@ import com.example.myapplication.dao.ContestRegistryDao;
 import com.example.myapplication.dao.MessageDao;
 import com.example.myapplication.dao.NoticeDao;
 import com.example.myapplication.dao.UserDao;
-import com.example.myapplication.domain.AwardsInfo;
 import com.example.myapplication.domain.Message;
 import com.example.myapplication.domain.Notice;
 import com.example.myapplication.domain.User;
@@ -118,26 +117,16 @@ public class NoticeSendActivity extends AppCompatActivity {
         } else if (Receiver.length() == 0){
             //List<User> users = userDao.findAll();
             String time = getTime();
-            SendMsg();
             for(int i=0;i<users.size();++i){
                 String userId = users.get(i).getUserName();
                 //messageDao.add(new Message(messageDao.findEmptyMessageId(),userId,title1,content1,time));
-                addMessage(new Message(0,userId,Title,Content,time));
+                addMessage(new Message(0,userId,Title,Content,time,"0"));
             }
             Toast.makeText(this, "通知已发送至所有用户", Toast.LENGTH_SHORT).show();
-        } /*else if (receiver1.charAt(0)<'0'||receiver1.charAt(0)>'9'){
-                List<String> list = contestRegistryDao.findAllUserIdByContestName(receiver1);
-                for(int i=0;i<list.size();++i){
-                    String userId = list.get(i);
-                    SendMsg(userId);
-                }
-                Toast.makeText(this, "通知已发送至部分用户", Toast.LENGTH_SHORT).show();
-            } */
-        else {
-            SendMsg();
+        } else {
             String time = getTime();
             //messageDao.add(new Message(0,receiver1,title1,content1,time));
-            addMessage(new Message(0,Receiver,Title,Content,time));
+            addMessage(new Message(0,Receiver,Title,Content,time,"0"));
             Toast.makeText(this, "通知已发送至指定用户", Toast.LENGTH_SHORT).show();
         }
     }
@@ -168,32 +157,6 @@ public class NoticeSendActivity extends AppCompatActivity {
             default:
                 break;
         }
-    }
-
-    //发送通知
-    private void SendMsg(){
-        String title1 = title.getText().toString().trim();
-        String content1 = content.getText().toString().trim();
-        String time = getTime();
-        //1 获取系统通知管理员
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        //2 获取通知构造者
-        Notification.Builder builder = new Notification.Builder(context);
-        //3 添加自定义通知视图
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.item_listview_message);
-        //4 设置主要参数 给自定义布局的控件赋值
-        remoteViews.setTextViewText(R.id.tv_message_title,title1);
-        remoteViews.setTextViewText(R.id.tv_message_content,content1);
-        remoteViews.setTextViewText(R.id.tv_message_time,time);
-        builder.setContent(remoteViews);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setAutoCancel(true); //点击取消通知
-        //关闭通知
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,new Intent(),0);
-        builder.setContentIntent(pendingIntent);
-
-        //更新通知，发送通知
-        notificationManager.notify(1,builder.build());
     }
 
 
@@ -258,6 +221,7 @@ public class NoticeSendActivity extends AppCompatActivity {
                         .add("content", notice.getContent())
                         .add("time", notice.getTime())
                         .add("receiver", notice.getReceiver())
+                        .add("vis","0")
                         .build();
                 //System.out.println(body);
                 Request request = new Request.Builder()
@@ -336,6 +300,7 @@ public class NoticeSendActivity extends AppCompatActivity {
                         .add("title", message.getTitle())
                         .add("content", message.getContent())
                         .add("time", message.getTime())
+                        .add("vis",message.getVis())
                         .build();
                 //System.out.println(body);
                 Request request = new Request.Builder()

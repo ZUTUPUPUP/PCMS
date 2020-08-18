@@ -32,6 +32,7 @@ public class MessageDao {
         values.put(MessageTable.MESSAGE_TITLE, message.getTitle());
         values.put(MessageTable.MESSAGE_CONTENT, message.getContent());
         values.put(MessageTable.MESSAGE_TIME, message.getTime());
+        values.put(MessageTable.MESSAGE_VIS, message.getVis());
         long id = database.insert(MessageTable.TAB_NAME, null, values);
         Log.v("MyInfo", "id = " + id);
         database.close();
@@ -63,7 +64,8 @@ public class MessageDao {
             String title = cursor.getString(2);
             String content = cursor.getString(3);
             String time = cursor.getString(4);
-            message = new Message(_id, userId, title, content, time);
+            String vis = cursor.getString(5);
+            message = new Message(_id, userId, title, content, time, vis);
         }
         cursor.close();
         database.close();
@@ -85,33 +87,12 @@ public class MessageDao {
             String title = cursor.getString(2);
             String content  = cursor.getString(3);
             String time = cursor.getString(4);
-            list.add(new Message(id, _userId, title, content, time));
+            String vis = cursor.getString(5);
+            list.add(new Message(id, _userId, title, content, time, vis));
         }
         cursor.close();
         database.close();
         return list;
     }
 
-    /**
-     * 查询空缺id
-     */
-    public int findEmptyMessageId() {
-        //得到连接
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        //执行query select * from message
-        Cursor cursor = database.query(MessageTable.TAB_NAME, null, null, null, null, null, MessageTable.MESSAGE_ID);
-        //从cursor取出所有数据,并且封装到List中
-        int id=-1,sum=1;
-        while (cursor.moveToNext()) {
-            int _id = cursor.getInt(0);
-            if(_id!=sum){
-                id=sum;break;
-            }
-            ++sum;
-        }
-        //关闭连接
-        cursor.close();
-        database.close();
-        return id==-1?sum:id;
-    }
 }

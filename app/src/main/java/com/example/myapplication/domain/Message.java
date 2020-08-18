@@ -6,17 +6,17 @@ public class Message {
     private String title; //标题
     private String content; //内容
     private String time; //时间
+    private String vis; //是否发送过通知
 
 
-    public Message() {
-
-    }
-    public Message(int _id, String userId, String title, String content, String time) {
+    public Message() { }
+    public Message(int _id, String userId, String title, String content, String time,String vis) {
         this._id = _id;
         this.userId = userId;
         this.title = title;
         this.content = content;
         this.time = time;
+        this.vis = vis;
     }
 
     public int get_id() {
@@ -59,14 +59,23 @@ public class Message {
         this.time = time;
     }
 
+    public String getVis() {
+        return vis;
+    }
+
+    public void setVis(String vis) {
+        this.vis = vis;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
-                "_id='" + _id + '\'' +
+                "_id=" + _id +
                 ", userId='" + userId + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", time='" + time + '\'' +
+                ", vis=" + vis +
                 '}';
     }
 }

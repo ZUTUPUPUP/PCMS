@@ -9,15 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.fastjson.JSON;
-import com.example.myapplication.Manager.Manage.UserManage.QueryAllUsersActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.dao.MessageDao;
 import com.example.myapplication.domain.Message;
 import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
