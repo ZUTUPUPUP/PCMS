@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
@@ -23,12 +24,14 @@ public class ManagerContestActivity extends AppCompatActivity {
     ContestDao contestDao=new ContestDao(this);
     ContestAdapter contestAdapter;
     ListView listView;
+    private LinearLayout ll_loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_contest);
         editText=findViewById(R.id.et_contestName);
+        ll_loading = findViewById(R.id.ll_loading);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

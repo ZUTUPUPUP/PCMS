@@ -389,6 +389,7 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
     private void parseData(String json) {
         data = JSON.parseArray(json, ContestRegistry.class);
         Log.v("MyInfo", data.toString());
+
         adapter = new Myadapter();
         lv_contestreg_query_listview.setAdapter(adapter);
     }

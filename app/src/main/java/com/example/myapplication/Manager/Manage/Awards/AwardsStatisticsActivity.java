@@ -1,13 +1,9 @@
 package com.example.myapplication.Manager.Manage.Awards;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TabHost;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dao.AwardsDao;
@@ -82,11 +78,11 @@ public class AwardsStatisticsActivity extends AppCompatActivity {
                     Snackbar.make(et_awards, "请输入竞赛名", 5000).show();
                 } else if(et_awards.getText().toString().trim().equals("")){
                     List<AwardsInfo> classInfo = awardsDao.findByContestName(et_contestname.getText().toString().trim());
-                    if(classInfo.size()==0) Snackbar.make(et_awards, "请输入正确比赛名称", 5000).show();
+                    if(classInfo.size() == 0) Snackbar.make(et_awards, "请输入正确比赛名称", 5000).show();
                     setData(classInfo);
                 } else {
                     List<AwardsInfo> classInfo = awardsDao.findByContestAndAward(et_contestname.getText().toString().trim(), et_awards.getText().toString().trim());
-                    if(classInfo.size()==0) Snackbar.make(et_awards, "请输入正确比赛名称与奖项", 5000).show();
+                    if(classInfo.size() == 0) Snackbar.make(et_awards, "请输入正确比赛名称与奖项", 5000).show();
                     setData(classInfo);
                 }
             }
