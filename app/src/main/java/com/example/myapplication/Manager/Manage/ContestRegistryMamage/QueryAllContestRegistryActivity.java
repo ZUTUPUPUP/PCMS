@@ -72,6 +72,10 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
                     break;
                 case  3:
                     adapter.notifyDataSetChanged();
+                    et_contestreg_query_contestname.setText("");
+                    et_contestreg_query_username.setText("");
+                    et_contestreg_query_depname.setText("");
+                    et_contestreg_query_class.setText("");
                     Toast.makeText(QueryAllContestRegistryActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     break;
             }
@@ -259,10 +263,6 @@ public class QueryAllContestRegistryActivity extends AppCompatActivity {
                 });
             }
         }).start();
-        et_contestreg_query_contestname.setText("");
-        et_contestreg_query_username.setText("");
-        et_contestreg_query_depname.setText("");
-        et_contestreg_query_class.setText("");
     }
 
 

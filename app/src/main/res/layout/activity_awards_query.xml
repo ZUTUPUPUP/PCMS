@@ -12,87 +12,125 @@
         android:layout_height="45dp"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="添加获奖信息"
+        android:text="数据观星"
         android:textColor="@color/white"
         android:textSize="17dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
             android:layout_weight="5"
-            android:orientation="vertical"
-            android:background="@color/white">
-            <LinearLayout
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/tv_select_contest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="竞赛名称："
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp"/>
                 <EditText
                     android:id="@+id/et_contestname"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"/>
-                <Spinner
-                    android:id="@+id/spinner_select_contest"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"/>
-            </LinearLayout>
-            <LinearLayout
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+
+                    android:layout_gravity="center"
+
+                    android:background="@drawable/et_manage_search"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="32dp"
+                    android:hint="竞赛,空值统计所有"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:onClick="click"
+                    android:background="@mipmap/search" />
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp">
-                <TextView
-                    android:id="@+id/tv_select_awards"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="奖        项："
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp"/>
                 <EditText
                     android:id="@+id/et_awards"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"/>
-                <Spinner
-                    android:id="@+id/spinner_select_awards"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"/>
-            </LinearLayout>
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+
+                    android:layout_gravity="center"
+
+                    android:background="@drawable/et_manage_search"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="32dp"
+                    android:hint="奖项,空值统计所有"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:onClick="click"
+                    android:background="@mipmap/search" />
+            </RelativeLayout>
 
         </LinearLayout>
-        <Button
-            android:id="@+id/but_StatisticsClassOk"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/btn_main_login"
-            android:textColor="#ffffff"
-            android:text="确    定"
-            android:textSize="20sp"/>
+        <!--<LinearLayout-->
+        <!--    android:layout_width="wrap_content"-->
+        <!--    android:layout_height="wrap_content"-->
+        <!--    android:layout_gravity="center">-->
+        <!--    <Button-->
+        <!--        android:id="@+id/but_StatisticsClassOk"-->
+        <!--        android:layout_width="0dp"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_weight="1"-->
+        <!--        android:layout_marginTop="15dp"-->
+        <!--        android:layout_marginLeft="10dp"-->
+        <!--        android:layout_marginRight="10dp"-->
+        <!--        android:background="@drawable/btn_main_login"-->
+        <!--        android:textColor="#ffffff"-->
+        <!--        android:text="确定"-->
+        <!--        android:textSize="20sp"/>-->
+        <!--</LinearLayout>-->
+
     </LinearLayout>
-
-    <com.example.myapplication.views.PieChart
-        android:id="@+id/piechart"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <com.example.myapplication.views.PieChart
+                android:id="@+id/piechart1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <com.example.myapplication.views.PieChart
+                android:id="@+id/piechart2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
 
+    </LinearLayout>
 </LinearLayout>
