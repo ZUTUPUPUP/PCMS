@@ -47,8 +47,8 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
 
+    String passWd = null;
     private EditText et_user_name, et_passWd;//编辑框
-    Boolean flag = false;
     //private UserDao dao;
     private User user;
     private static final int PERMISSION_REQUEST = 1001; //申请权限
@@ -71,6 +71,27 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case POST:
                     Toast.makeText(MainActivity.this, "post数据请求成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
+                        Intent intent = null;
+                        if (user.getStatus().get_id() == 1) {
+                            String json = JSON.toJSONString(user);
+                            intent = new Intent(MainActivity.this, ManagerActivity.class);
+                            intent.putExtra("user", json);
+                        } else if (user.getStatus().get_id() == 2) {
+                            String json = JSON.toJSONString(user);
+                            intent = new Intent(MainActivity.this, UserActivity.class);
+                            intent.putExtra("user", json);
+                        }
+                        //Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
+                        et_user_name.setText("");
+                        et_passWd.setText("");
+                    }
                     break;
             }
         }
@@ -145,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void Login(View v) throws IOException {
         final String userName = et_user_name.getText().toString();
-        String passWd = et_passWd.getText().toString();
+        passWd = et_passWd.getText().toString();
         //User user = dao.findByUserName(userName);
        // Log.v("MyInfo", user.toString());
 
@@ -175,32 +196,14 @@ public class MainActivity extends AppCompatActivity {
                             String d = response.body().string();
                             Log.d(TAG,"<<<<d=" + d);
                             user = JSON.parseObject(d, User.class);
-                            flag = true;
+                            Message msg = Message.obtain();
+                            msg.what = 3;
+                            handler.sendMessage(msg);
                         }
                     }
                 });
             }
         }).start();
-        while(!flag) continue;
-        if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
-            Intent intent = null;
-            if (user.getStatus().get_id() == 1) {
-                String json = JSON.toJSONString(user);
-                intent = new Intent(this, ManagerActivity.class);
-                intent.putExtra("user", json);
-            } else if (user.getStatus().get_id() == 2) {
-                String json = JSON.toJSONString(user);
-                intent = new Intent(this, UserActivity.class);
-                intent.putExtra("user", json);
-            }
-            //Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-            finish();
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
-            et_user_name.setText("");
-            et_passWd.setText("");
-        }
     }
 
 
