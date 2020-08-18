@@ -3,6 +3,8 @@ package com.example.myapplication.Login_Register;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -30,6 +32,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.io.IOException;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -54,12 +57,39 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private User user = new User();
     UserDao userDao = new UserDao(this);
 
+    String name = null;
+    String passWd = null;
+
     //一个能显示View的窗体
     private PopupWindow popupWindow;
 
 
     OkHttpClient client = new OkHttpClient();
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    String res = (String) msg.obj;
+                    if (res.equals("STNumber Error")) {
+                        Toast.makeText(RegisterActivity.this, "请输入正确的学号!", Toast.LENGTH_SHORT).show();
+                    } else if (res.equals("STNumber Exist")) {
+                        Toast.makeText(RegisterActivity.this, "该学号已经存在,请重新输入!", Toast.LENGTH_SHORT).show();
+                    } else if (res.equals("passWd Short")) {
+                        Toast.makeText(RegisterActivity.this, "密码长度不符合要求,请修改密码!", Toast.LENGTH_SHORT).show();
+                    } else if(res.equals("Insert Success")) {
+                        Intent data = new Intent();
+                        data.putExtra("userName", name);
+                        data.putExtra("passWd", passWd);
+                        setResult(2, data);
+                        finish();
+                    }
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -101,8 +131,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
     //注册按钮点击事件
     public void Register_reg(View v) {
-        final String name = et_user_name.getText().toString().trim();
-        String passWd = et_passWd.getText().toString().trim();
+        name = et_user_name.getText().toString().trim();
+        passWd = et_passWd.getText().toString().trim();
         final String passWdAgain = et_passsWd_again.getText().toString().trim();
         user.setUserName(name);
         user.setPasswd(passWd);
@@ -117,9 +147,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         } else if (user.getUserName().isEmpty()) {
             Toast.makeText(this, "请输入学号!", Toast.LENGTH_SHORT).show();
         }else {
-            final boolean[] flag = {false};
 
-            final String[] res = {""};
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -149,29 +177,18 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             if(response.isSuccessful()) {
-                                res[0] = response.body().string();
-                                Log.d(TAG,"<<<<d=" + res[0]);
+                                String d = response.body().string();
+                                Log.d(TAG,"<<<<d=" + d);
+                                Message msg = Message.obtain();
+                                msg.what = 1;
+                                msg.obj = d;
+                                handler.sendMessage(msg);
                                 //res[0] = JSON.parseObject(d, String.class);
-                                flag[0] = true;
                             }
                         }
                     });
                 }
             }).start();
-            while(res[0].equals("")) continue;
-            if (res[0].equals("STNumber Error")) {
-                Toast.makeText(this, "请输入正确的学号!", Toast.LENGTH_SHORT).show();
-            } else if (res[0].equals("STNumber Exist")) {
-                Toast.makeText(this, "该学号已经存在,请重新输入!", Toast.LENGTH_SHORT).show();
-            } else if (res[0].equals("passWd Short")) {
-                Toast.makeText(this, "密码长度不符合要求,请修改密码!", Toast.LENGTH_SHORT).show();
-            } else if(res[0].equals("Insert Success")) {
-                Intent data = new Intent();
-                data.putExtra("userName", name);
-                data.putExtra("passWd", passWd);
-                setResult(2, data);
-                finish();
-            }
         }
     }
 
