@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-//import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -25,8 +24,8 @@ import com.alibaba.fastjson.JSON;
 import com.example.myapplication.Manager.ManagerActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.User.UserActivity;
-import com.example.myapplication.domain.User;
 import com.example.myapplication.domain.Message;
+import com.example.myapplication.domain.User;
 import com.example.myapplication.utils.BaseUrl;
 import com.example.myapplication.utils.MD5Utils;
 
@@ -45,6 +44,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+//import android.os.Message;
 
 
 /**
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int GET = 1;
     private static final int POST = 2;
     private static final int SEND = 3;
+    String userName = null;
+    String passWd = null;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull android.os.Message msg) {
@@ -85,6 +88,28 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0;i<messages.size();i++){
                         Message message = messages.get(i);
                         SendMsg(message);
+                    }
+                    break;
+                case 4:
+                    if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
+                        Intent intent = null;
+                        if (user.getStatus().get_id() == 1) {
+                            String json = JSON.toJSONString(user);
+                            intent = new Intent(MainActivity.this, ManagerActivity.class);
+                            intent.putExtra("user", json);
+                        } else if (user.getStatus().get_id() == 2) {
+                            String json = JSON.toJSONString(user);
+                            intent = new Intent(MainActivity.this, UserActivity.class);
+                            intent.putExtra("user", json);
+                            findAllMessageByUserId(userName);
+                        }
+                        //Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
+                        et_user_name.setText("");
+                        et_passWd.setText("");
                     }
                     break;
             }
@@ -159,8 +184,8 @@ public class MainActivity extends AppCompatActivity {
     //登录点击事件
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void Login(View v) throws IOException {
-        final String userName = et_user_name.getText().toString();
-        String passWd = et_passWd.getText().toString();
+        userName = et_user_name.getText().toString();
+        passWd = et_passWd.getText().toString();
         //User user = dao.findByUserName(userName);
        // Log.v("MyInfo", user.toString());
 
@@ -190,33 +215,14 @@ public class MainActivity extends AppCompatActivity {
                             String d = response.body().string();
                             Log.d(TAG,"<<<<d=" + d);
                             user = JSON.parseObject(d, User.class);
-                            flag = true;
+                            android.os.Message msg = android.os.Message.obtain();
+                            msg.what = 4;
+                            handler.sendMessage(msg);
                         }
                     }
                 });
             }
         }).start();
-        while(!flag) continue;
-        if (user != null && MD5Utils.md5(passWd).equals(user.getPasswd())) {
-            Intent intent = null;
-            if (user.getStatus().get_id() == 1) {
-                String json = JSON.toJSONString(user);
-                intent = new Intent(this, ManagerActivity.class);
-                intent.putExtra("user", json);
-            } else if (user.getStatus().get_id() == 2) {
-                String json = JSON.toJSONString(user);
-                intent = new Intent(this, UserActivity.class);
-                intent.putExtra("user", json);
-                findAllMessageByUserId(userName);
-            }
-            //Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-            finish();
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "用户名或者密码错误,请重新输入!", Toast.LENGTH_SHORT).show();
-            et_user_name.setText("");
-            et_passWd.setText("");
-        }
     }
 
 
