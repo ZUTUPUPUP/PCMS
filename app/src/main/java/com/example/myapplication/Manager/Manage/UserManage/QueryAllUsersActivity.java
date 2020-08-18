@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +53,10 @@ public class QueryAllUsersActivity extends AppCompatActivity {
     private DepDao depDao;
     private List<User> data;
     private MyAdapter adapter;
+    private LinearLayout ll_loading;
+
+    private int offset = 0;
+    private int maxNumber = 10;
 
     OkHttpClient client = new OkHttpClient();
     private Handler handler = new Handler() {
@@ -70,6 +76,10 @@ public class QueryAllUsersActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                     et_user_query_username.setText("");
                     Toast.makeText(QueryAllUsersActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    ll_loading.setVisibility(View.INVISIBLE);
+                    System.out.println("进度条隐藏");
                     break;
             }
         }
@@ -149,6 +159,31 @@ public class QueryAllUsersActivity extends AppCompatActivity {
             }
         });
 
+        lv_user_query_listview.setOnScrollListener(new AbsListView.OnScrollListener() {
+            //滚动状态发生变化
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                switch (scrollState) {
+                    case SCROLL_STATE_IDLE://空闲状态
+                        int lastPos = lv_user_query_listview.getLastVisiblePosition();//获取最后一个可见条目的位置
+                        if(lastPos == data.size() - 1) {
+                            offset += maxNumber;
+                            getDataGetByOKHttpUtils();
+                        }
+                        break;
+                    case SCROLL_STATE_TOUCH_SCROLL://手指触摸
+                        break;
+                    case SCROLL_STATE_FLING://惯性滑行
+                        break;
+                }
+            }
+
+            //滚动时调用
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
     }
     //根据学号模糊查询用户信息,后创建的展示在上面
     public void UsersFindByUserName(View v) {
@@ -195,6 +230,7 @@ public class QueryAllUsersActivity extends AppCompatActivity {
     private void bindUI() {
         et_user_query_username = findViewById(R.id.et_user_query_username);
         lv_user_query_listview = findViewById(R.id.lv_user_query_listview);
+        ll_loading = findViewById(R.id.ll_loading);
     }
 
 
@@ -284,7 +320,6 @@ public class QueryAllUsersActivity extends AppCompatActivity {
                                     Message msg = Message.obtain();
                                     msg.what = 1;
                                     handler.sendMessage(msg);
-
                                 }
                             })
                             .setNegativeButton("取消", null)
@@ -306,10 +341,14 @@ public class QueryAllUsersActivity extends AppCompatActivity {
      * get请求
      */
     public void getDataGetByOKHttpUtils() {
-        String url = BaseUrl.BASE_URL + "user/findAll.do";
+        ll_loading.setVisibility(View.VISIBLE);
+        System.out.println("进度条展示");
+        String url = BaseUrl.BASE_URL + "user/findPart.do";
         OkHttpUtils
-                .get()
+                .post()
                 .url(url)
+                .addParams("offset", String.valueOf(offset))
+                .addParams("maxNumber", String.valueOf(maxNumber))
                 .id(100)
                 .build()
                 .execute(new QueryAllUsersActivity.MyStringCallback());
@@ -341,8 +380,17 @@ public class QueryAllUsersActivity extends AppCompatActivity {
             Log.v(TAG, "onResponse:" + response);
             switch (id) {
                 case 100:
+                    //ll_loading.setVisibility(View.INVISIBLE);
+                    Message msg = Message.obtain();
+                    msg.what = 4;
+                    handler.sendMessage(msg);
                     Toast.makeText(QueryAllUsersActivity.this, "http:数据请求成功",
                             Toast.LENGTH_SHORT).show();
+//                    try {
+//                        Thread.sleep(2000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
                     break;
                 case 101:
                     Toast.makeText(QueryAllUsersActivity.this, "https:数据请求成功",
@@ -363,9 +411,22 @@ public class QueryAllUsersActivity extends AppCompatActivity {
     }
 
     private void parseData(String json) {
-        data = JSON.parseArray(json, User.class);
+        if(data == null) {
+            data = JSON.parseArray(json, User.class);
+            System.out.println(data);
+        } else {
+            data.addAll(JSON.parseArray(json, User.class));
+            System.out.println(data);
+        }
+
         Log.v("MyInfo", data.toString());
-        adapter = new MyAdapter();
-        lv_user_query_listview.setAdapter(adapter);
+        if(adapter == null) {
+            adapter = new MyAdapter();
+            lv_user_query_listview.setAdapter(adapter);
+            System.out.println("填充数据...");
+        } else {
+            adapter.notifyDataSetChanged();
+            System.out.println("填充数据...");
+        }
     }
 }
