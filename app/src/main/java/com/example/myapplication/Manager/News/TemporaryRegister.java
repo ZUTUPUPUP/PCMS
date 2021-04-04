@@ -1,12 +1,38 @@
 package com.example.myapplication.Manager.News;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.example.myapplication.Manager.Manage.ContestRegistryMamage.UpdateContestRegistryMessage;
 import com.example.myapplication.R;
+import com.example.myapplication.dao.ContestRegistryDao;
+import com.example.myapplication.domain.ContestRegistry;
+import com.example.myapplication.domain.ContestRegistryMessage;
+import com.example.myapplication.utils.BaseUrl;
+
+import java.io.IOException;
+
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 //跳转的注册页面
 /*public class TemporaryRegister extends AppCompatActivity {
 
@@ -38,7 +64,7 @@ public class TemporaryRegister extends AppCompatActivity{
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    Toast.makeText(UpdateContestRegistryMessage.this, "报名成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "报名成功", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -59,7 +85,6 @@ public class TemporaryRegister extends AppCompatActivity{
         //contestRegistryMessage  = contestRegistryDao.findById(Integer.parseInt(ids));
         //Log.v("MyInfo", contestRegistryMessage.toString());
         showUI();
-        delMessage();
     }
 
     //确定信息并进行传输
